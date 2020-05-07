@@ -1,0 +1,53 @@
+drop table if exists Books;
+drop table if exists Users;
+drop table if exists Admins;
+drop table if exists Publishers;
+drop table if exists Orders;
+drop table if exists Comissions;
+
+create table Users (
+    username varchar(20) primary key,
+    password_hash varchar(100) not null,
+    privilege_type int not null
+);
+
+create table Admins (
+
+) inherits(Users);
+
+create table Publishers (
+    username varchar(20) primary key references Users(username),
+    name varchar(20) not null,
+    tin varchar(20) not null unique
+) inherits (Users);
+
+create table Category (
+    name varchar(20) primary key,
+    description text not null
+);
+
+create table Books (
+    title varchar(30) not null,
+    isbn char(13) primary key,
+    category varchar(30) not null,
+    author varchar(30) not null,
+    description text,
+    publisher_name varchar(20) not null references Publishers(username),
+    price numeric check (price > 0) not null
+);
+
+create table Orders (
+    id serial primary key,
+    reference varchar(20) unique not null,
+    buyer varchar(20) references Users(username) not null,
+    isbn char(13) references Books(isbn) not null,
+    total int not null default 1
+);
+
+create table Commissions(
+    id serial primary key,
+    amount numeric check(amount > 0) not null,
+    order_id serial references Orders(id) not null
+);
+
+-- inserts

@@ -1,0 +1,57 @@
+version: '3'
+
+networks:
+    book_store_default:
+      driver: bridge
+      driver_opts:
+        com.docker.network.enable_ipv6: "false"
+      ipam:
+        driver: default
+        config:
+          - subnet: "172.19.0.0/24"
+
+services:
+    postgres:
+        image: postgres
+        container_name: postgresql
+        networks:
+            book_store_default:
+                ipv4_address: 172.19.0.2
+        environment: 
+            POSTGRES_USER: "user"
+            POSTGRES_PASSWORD: "user"
+            POSTGRES_DB: "book_store"
+            PGDATA: /var/lib/postgres
+        ports:
+            - '5432:5432'
+        volumes:
+            - ./rdb/init.psql:/docker-entrypoint-initdb.d/init.sql
+            - postgres:/var/lib/postgres
+    sonarqube:
+        image: harbur/sonarqube:latest
+        container_name: sonarqube
+        depends_on:
+            - postgres
+            - main_application
+        networks:
+            book_store_default:
+                ipv4_address: 172.19.0.3
+        environment:
+            - DB_USER=sonar
+            - DB_PASS=sonar
+            - DB_NAME=sonar
+        ports:
+            - "9000:9000"
+            - "443"
+    main_application:
+        build: ./bestofbooks
+        container_name: main_application
+        depends_on:
+            - postgres
+        networks:
+            book_store_default:
+                ipv4_address: 172.19.0.4
+        ports:
+            - "8080:8080"
+volumes:
+    postgres:
