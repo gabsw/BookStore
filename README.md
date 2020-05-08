@@ -11,10 +11,10 @@ The promoter will make money from all the transactions that are being conducted 
  4. Commission collecting for the promoter.
 
 ## Team
-Team Manager - Gabriela Santos
-Product Owner - Edgar Morais
-QA Engineer - Carolina Marques
-DevOps Master - Diogo Silveira
+* Team Manager - Gabriela Santos
+* Product Owner - Edgar Morais
+* QA Engineer - Carolina Marques
+* DevOps Master - Diogo Silveira
 
 
 ## Resources
