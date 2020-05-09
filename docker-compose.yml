@@ -27,22 +27,6 @@ services:
         volumes:
             - ./rdb/init.psql:/docker-entrypoint-initdb.d/init.sql
             - postgres:/var/lib/postgres
-    sonarqube:
-        image: harbur/sonarqube:latest
-        container_name: sonarqube
-        depends_on:
-            - postgres
-            - main_application
-        networks:
-            book_store_default:
-                ipv4_address: 172.19.0.3
-        environment:
-            - DB_USER=sonar
-            - DB_PASS=sonar
-            - DB_NAME=sonar
-        ports:
-            - "9000:9000"
-            - "443"
     main_application:
         build: ./bestofbooks
         container_name: main_application
