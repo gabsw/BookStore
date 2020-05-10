@@ -1,0 +1,142 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Air Quality</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="../css/index.css" rel="stylesheet" />
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="adminIndex.html">
+            <img src="../Images/Logo-removebg-preview.png" alt="" width="100" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <div class="pull-right">
+                <ul class="nav pull-right">
+                   
+                    <li class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, Admin
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="login.html">LogOut</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="card">
+            <div class="card-header">
+                Order #1
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-sm-6">
+                        <h6 class="mb-3"> <strong>Billed To:</strong></h6>
+                        <div>BobMart</div>
+                        <div>43-190 Mikolow, Poland</div>
+                    </div>
+                    <div class="col-sm-6 text-md-right">
+                        <h6 class="mb-3"> <strong>From:</strong></h6>
+                        <div>
+                            Publisher #1
+                        </div>
+                        <div>43-190 Mikolow, Poland</div>
+
+                    </div>
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-sm-6 ">
+                        <address>
+                            <strong>Order Date:</strong><br>
+                            March 7, 2014<br><br>
+                        </address>
+                    </div>
+                </div>
+
+                <p></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><strong>Order summary</strong></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <td><strong>Item</strong></td>
+                                                <td class="text-center"><strong>Price</strong></td>
+                                                <td class="text-center"><strong>Quantity</strong></td>
+                                                <td class="text-right"><strong>Totals</strong></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                            <tr>
+                                                <td>Awesome Product</td>
+                                                <td class="text-center">$10.99</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">$10.99</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Awesome Product</td>
+                                                <td class="text-center">$20.00</td>
+                                                <td class="text-center">3</td>
+                                                <td class="text-right">$60.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Awesome Product</td>
+                                                <td class="text-center">$600.00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">$600.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="thick-line"></td>
+                                                <td class="thick-line"></td>
+                                                <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                                <td class="thick-line text-right">$670.99</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-line"></td>
+                                                <td class="no-line"></td>
+                                                <td class="no-line text-center"><strong>Commmision</strong></td>
+                                                <td class="no-line text-right">$15</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-line"></td>
+                                                <td class="no-line"></td>
+                                                <td class="no-line text-center"><strong>Total</strong></td>
+                                                <td class="no-line text-right">$685.99</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <a href="adminIndex.html" class="btn btn-info btn-sm" role="button">Go Back</a>
+    </div>
+   
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
