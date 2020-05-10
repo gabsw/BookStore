@@ -1,5 +1,8 @@
 package tqs.group4.bestofbooks.model;
 
+import org.hibernate.annotations.NaturalId;
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,6 +11,7 @@ import java.util.Objects;
 @Table(name = "Books")
 public class Book implements Serializable {
     @Id
+    @NaturalId
     @Column(name = "isbn", nullable = false)
     private String isbn;
     @Column(name = "title", nullable = false)
@@ -52,10 +56,6 @@ public class Book implements Serializable {
         return author;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -77,18 +77,11 @@ public class Book implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Double.compare(book.price, price) == 0 &&
-                quantity == book.quantity &&
-                Objects.equals(isbn, book.isbn) &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(description, book.description) &&
-                Objects.equals(category, book.category) &&
-                Objects.equals(publisherName, book.publisherName);
+        return Objects.equals(isbn, book.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isbn, title, author, description, price, quantity, category, publisherName);
+        return Objects.hash(isbn);
     }
 }

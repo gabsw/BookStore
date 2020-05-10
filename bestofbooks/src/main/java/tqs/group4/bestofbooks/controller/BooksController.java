@@ -9,7 +9,7 @@ import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.service.BookService;
 
 @RestController
-@RequestMapping("books")
+@RequestMapping("/api/books")
 public class BooksController {
     @Autowired
     private BookService bookService;
@@ -19,7 +19,7 @@ public class BooksController {
         return bookService.getAvailableBooks(pageable);
     }
 
-    @GetMapping("/isbn/{isbn}")
+    @GetMapping("/isbn/{isbn:[0-9]{13}}")
     public Book getBookByIsbn(@PathVariable String isbn) throws BookNotFoundException {
         return bookService.getBookByIsbn(isbn);
     }
