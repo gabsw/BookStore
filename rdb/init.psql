@@ -16,8 +16,8 @@ create table Admin (
 );
 
 create table Publishers (
-    username varchar(20) primary key,
-    name varchar(20) not null unique,
+    name varchar(20) primary key,
+    username varchar(20) not null unique,
     tin varchar(20) not null unique,
     password_hash varchar(100) not null
 );
