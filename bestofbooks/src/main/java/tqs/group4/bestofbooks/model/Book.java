@@ -1,7 +1,6 @@
 package tqs.group4.bestofbooks.model;
 
 import org.hibernate.annotations.NaturalId;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;

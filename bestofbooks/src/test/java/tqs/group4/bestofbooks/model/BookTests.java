@@ -42,7 +42,7 @@ public class BookTests {
 
     @Test
     void checkGetAuthor() {
-        assertEquals("David Foster Wallace", BookMocks.infiniteJest.getIsbn());
+        assertEquals("David Foster Wallace", BookMocks.infiniteJest.getAuthor());
     }
 
     @Test
