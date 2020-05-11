@@ -32,6 +32,8 @@ services:
         container_name: main_application
         depends_on:
             - postgres
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/book_store
         networks:
             book_store_default:
                 ipv4_address: 172.19.0.4
