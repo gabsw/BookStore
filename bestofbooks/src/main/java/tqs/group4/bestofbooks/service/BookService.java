@@ -17,7 +17,6 @@ public class BookService {
     private BookRepository bookRepository;
 
     public Page<Book> getAvailableBooks(Pageable pageable) {
-//        For testing: Pageable p = PageRequest.of(0, 10);
         return bookRepository.findByQuantityGreaterThan(0, pageable);
     }
 
