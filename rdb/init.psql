@@ -4,6 +4,8 @@ drop table if exists Admins;
 drop table if exists Publishers;
 drop table if exists Orders;
 drop table if exists Comissions;
+drop table if exists SPRING_SESSION_ATTRIBUTES;
+drop table if exists SPRING_SESSION;
 
 create table Buyers (
     username varchar(20) primary key,
@@ -16,8 +18,8 @@ create table Admin (
 );
 
 create table Publishers (
-    username varchar(20) primary key,
-    name varchar(20) not null,
+    name varchar(20) primary key,
+    username varchar(20) not null unique,
     tin varchar(20) not null unique,
     password_hash varchar(100) not null
 );
@@ -33,7 +35,7 @@ create table Books (
     category varchar(30) not null references Categories(name),
     author varchar(30) not null,
     description text,
-    publisher_name varchar(20) not null references Publishers(username),
+    publisher_name varchar(20) not null references Publishers(name),
     price numeric check (price > 0) not null,
     quantity int check (quantity > 0) not null
 );
@@ -53,6 +55,32 @@ create table Commissions(
     order_id serial references Orders(id) not null
 );
 
+CREATE TABLE SPRING_SESSION (
+    SESSION_ID CHAR(36) NOT NULL,
+    CREATION_TIME BIGINT ,
+    LAST_ACCESS_TIME BIGINT ,
+    MAX_INACTIVE_INTERVAL INT ,
+    EXPIRY_TIME BIGINT ,
+    PRINCIPAL_NAME VARCHAR(100),
+    CONSTRAINT SPRING_SESSION_PK PRIMARY KEY (SESSION_ID)
+);
+
+
+CREATE UNIQUE INDEX SPRING_SESSION_IX1 ON SPRING_SESSION (SESSION_ID);
+CREATE INDEX SPRING_SESSION_IX2 ON SPRING_SESSION (EXPIRY_TIME);
+CREATE INDEX SPRING_SESSION_IX3 ON SPRING_SESSION (PRINCIPAL_NAME);
+
+
+
+CREATE TABLE SPRING_SESSION_ATTRIBUTES (
+    SESSION_ID CHAR(36) NOT NULL,
+    ATTRIBUTE_NAME VARCHAR(200) NOT NULL,
+    ATTRIBUTE_BYTES bytea NOT NULL,
+    CONSTRAINT SPRING_SESSION_ATTRIBUTES_PK PRIMARY KEY (SESSION_ID, ATTRIBUTE_NAME),
+    CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_ID) REFERENCES SPRING_SESSION(SESSION_ID) ON DELETE CASCADE
+);
+
+
 -- inserts
 insert into Buyers (username, password_hash) values ('buyer1', 'efg54er5g4w84w35e1fw8e4f3w5e1f68e4g65we1g68e4g65er');
 insert into Buyers (username, password_hash) values ('buyer2', 'v6w84te74ryg15w454bq5er156qf38r4g51q365478g6q45g5q');
@@ -65,8 +93,8 @@ insert into Publishers (username, name, tin, password_hash) values ('pub2', 'Pub
 insert into Categories (name, description) values ('horror', 'scary stories');
 insert into Categories (name, description) values ('SciFi', 'stories about science fiction');
 
-insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book1', '1111111111111', 'SciFi', 'someauthor', 'A very ice book', 'pub1', 10.00, 50);
-insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book2', '1111111111112', 'horror', 'someauthor2', 'A very bad book', 'pub2', 15.00, 100);
+insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book1', '1111111111111', 'SciFi', 'someauthor', 'A very ice book', 'Publisher 1', 10.00, 50);
+insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book2', '1111111111112', 'horror', 'someauthor2', 'A very bad book', 'Publisher 2', 15.00, 100);
 
 insert into Orders (id, payment_reference, username_buyer, isbn, address, final_price) values (1, 'w65r46wr842', 'buyer1', '1111111111112', 'Rua3, Espinho', 17.00);
 insert into Orders (id, payment_reference, username_buyer, isbn, address, final_price) values (2, 'e8rg4r5g4e6', 'buyer2', '1111111111111', 'Rua4, Espinho', 12.00);
