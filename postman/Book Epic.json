@@ -1,0 +1,95 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Book Epic",
+		"_postman_id": "f91b81e3-eca6-c054-8914-92c8fbf3d35d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get available books",
+			"request": {
+				"url": "{{url}}/api/books/available",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "search books",
+			"request": {
+				"url": {
+					"raw": "{{url}}/api/books/search?title=Book1&author=someauthor&category=SciFi",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"search"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Book1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "author",
+							"value": "someauthor",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "category",
+							"value": "SciFi",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get book by isbn",
+			"request": {
+				"url": {
+					"raw": "{{url}}/api/books/isbn/?isbn=1111111111111",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"books",
+						"isbn",
+						""
+					],
+					"query": [
+						{
+							"key": "isbn",
+							"value": "1111111111111",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
