@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,11 @@ public class BuyerRepositoryTest {
 
     @Autowired
     private BuyerRepository buyerRepository;
+    
+    @BeforeEach
+    public void before() {
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, buyers").executeUpdate();
+    }
     
     @Test
     void givenExistentUsername_whenFindById_returnBuyer() {
