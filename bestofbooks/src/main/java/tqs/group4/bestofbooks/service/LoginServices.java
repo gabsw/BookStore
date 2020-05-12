@@ -1,5 +1,6 @@
 package tqs.group4.bestofbooks.service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
@@ -31,11 +34,14 @@ public class LoginServices {
 	@Autowired
 	BuyerRepository buyerRepository;
 	
-	public UserDto loginUser(String username, String passwordHash) throws LoginFailedException, UserNotFoundException {
+	public UserDto loginUser(String username, String password) throws LoginFailedException, UserNotFoundException {
 		String loginFailedMessage = "Login failed.";
-		if (username == null || passwordHash == null) {
+		if (username == null || password == null) {
             throw new IllegalArgumentException("User (password or username) is not defined.");
         }
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
         Optional<Buyer> optBuyer = buyerRepository.findById(username);
         if (optBuyer.isPresent()) {
         	if (!optBuyer.get().getPasswordHash().equals(passwordHash)) {

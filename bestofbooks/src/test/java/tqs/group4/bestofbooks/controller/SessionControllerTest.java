@@ -49,9 +49,9 @@ public class SessionControllerTest {
     void givenValidUsernameAndPassword_whenLogin_thenReturnDto() throws JsonProcessingException, Exception {
         String url = "/api/session/login";
         UserDto dto = new UserDto("username", "Buyer");
-        given(loginService.loginUser("username", "passwordHash")).willReturn(dto);
+        given(loginService.loginUser("username", "password")).willReturn(dto);
         
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = "Basic " + new String( encodedAuth );
@@ -63,16 +63,16 @@ public class SessionControllerTest {
                 .isOk())
            .andExpect(content().json(toJson(dto)));
     	
-    	verify(loginService, VerificationModeFactory.times(1)).loginUser("username", "passwordHash");
+    	verify(loginService, VerificationModeFactory.times(1)).loginUser("username", "password");
     }
     
     @Test
     void givenInvalidUsernamePassword_whenLogin_thenHttpStatusForbidden() throws Exception {
     	String url = "/api/session/login";
     	
-        given(loginService.loginUser("username", "passwordHash")).willThrow(new LoginFailedException("Login failed."));
+        given(loginService.loginUser("username", "password")).willThrow(new LoginFailedException("Login failed."));
     	
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = "Basic " + new String( encodedAuth );
@@ -83,14 +83,14 @@ public class SessionControllerTest {
         ).andExpect(status()
                 .isForbidden());
     	
-    	verify(loginService, VerificationModeFactory.times(1)).loginUser("username", "passwordHash");
+    	verify(loginService, VerificationModeFactory.times(1)).loginUser("username", "password");
     }
 	
     @Test
     void givenInvalidAuthorizationHeader_whenLogin_thenHttpStatusForbidden() throws Exception {
     	String url = "/api/session/login";
 
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = new String( encodedAuth );
@@ -101,14 +101,14 @@ public class SessionControllerTest {
         ).andExpect(status()
                 .isForbidden());
     	
-    	verify(loginService, VerificationModeFactory.times(0)).loginUser("username", "passwordHash");
+    	verify(loginService, VerificationModeFactory.times(0)).loginUser("username", "password");
     }
     
     @Test
     void givenInvalidAuthorizationHeaderNotBasic_whenLogin_thenHttpStatusForbidden() throws Exception {
     	String url = "/api/session/login";
 
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header ="NotBasic " +new String( encodedAuth );
@@ -119,14 +119,14 @@ public class SessionControllerTest {
         ).andExpect(status()
                 .isForbidden());
     	
-    	verify(loginService, VerificationModeFactory.times(0)).loginUser("username", "passwordHash");
+    	verify(loginService, VerificationModeFactory.times(0)).loginUser("username", "password");
     }
     
     @Test
     void givenInvalidAuthorizationHeaderNoSeparaetionUsernamePasswrod_whenLogin_thenHttpStatusForbidden() throws Exception {
     	String url = "/api/session/login";
 
-    	String auth = "usernamepasswordHash";
+    	String auth = "usernamepassword";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header ="Basic " +new String( encodedAuth );
@@ -137,7 +137,7 @@ public class SessionControllerTest {
         ).andExpect(status()
                 .isForbidden());
     	
-    	verify(loginService, VerificationModeFactory.times(0)).loginUser("username", "passwordHash");
+    	verify(loginService, VerificationModeFactory.times(0)).loginUser("username", "password");
     }
     
     @Test

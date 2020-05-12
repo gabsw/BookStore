@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.dto.UserDto;
@@ -31,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static tqs.group4.bestofbooks.utils.Json.toJson;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import javax.persistence.EntityManager;
@@ -59,12 +61,16 @@ public class SessionControllerIT {
     @Test
     void givenValidUsernameAndPassword_whenLogin_thenReturnDto() throws JsonProcessingException, Exception {
         String url = "/api/session/login";
-        Buyer b = new Buyer("username", "passwordHash");
+        String password = "password";
+        String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
+        Buyer b = new Buyer("username", passwordHash);
         
         entityManager.persist(b);
         entityManager.flush();
         
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = "Basic " + new String( encodedAuth );
@@ -84,12 +90,16 @@ public class SessionControllerIT {
     @Test
     void givenInvalidUsernamePassword_whenLogin_thenHttpStatusForbidden() throws Exception {
     	String url = "/api/session/login";
-    	Buyer b = new Buyer("username", "passwordHash123");
+    	String password = "password123";
+        String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
+    	Buyer b = new Buyer("username", passwordHash);
     	
     	entityManager.persist(b);
         entityManager.flush();
     	
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = "Basic " + new String( encodedAuth );
@@ -127,12 +137,16 @@ public class SessionControllerIT {
     	String url1 = "/api/session/login";
     	String url2 = "/api/session/user-info";
     	
-    	Buyer b = new Buyer("username", "passwordHash");
+    	String password = "password";
+        String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
+    	Buyer b = new Buyer("username", passwordHash);
     	
     	entityManager.persist(b);
         entityManager.flush();
     	
-    	String auth = "username:passwordHash";
+    	String auth = "username:password";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = "Basic " + new String( encodedAuth );

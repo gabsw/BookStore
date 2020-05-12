@@ -33,7 +33,7 @@ public class PublisherRepositoryTest {
     
     @Test
     void givenExistentUsername_whenFindByUsername_returnBuyer() {
-    	Publisher b = new Publisher("username","passwordHash","name", "tin");
+    	Publisher b = new Publisher("username","password","name", "tin");
     	entityManager.persist(b);
         entityManager.flush();
 
@@ -52,7 +52,7 @@ public class PublisherRepositoryTest {
     
     @Test
     void givenExistentName_whenFindById_returnBuyer() {
-    	Publisher b = new Publisher("username","passwordHash","name", "tin");
+    	Publisher b = new Publisher("username","password","name", "tin");
     	entityManager.persist(b);
         entityManager.flush();
 
@@ -71,9 +71,9 @@ public class PublisherRepositoryTest {
     
     @Test
     void given3Buyers_whenFindAll_return3Buyers() {
-    	Publisher b1 = new Publisher("username1","passwordHash1","name1", "tin1");
-    	Publisher b2 = new Publisher("username2","passwordHash2","name2", "tin2");
-    	Publisher b3 = new Publisher("username3","passwordHash3","name3", "tin3");
+    	Publisher b1 = new Publisher("username1","password1","name1", "tin1");
+    	Publisher b2 = new Publisher("username2","password2","name2", "tin2");
+    	Publisher b3 = new Publisher("username3","password3","name3", "tin3");
     	
     	entityManager.persist(b1);
     	entityManager.persist(b2);
@@ -90,7 +90,7 @@ public class PublisherRepositoryTest {
     
     @Test
     void givenExistentUsername_whenExistsById_thenReturnTrue() {
-    	Publisher b = new Publisher("username","passwordHash", "name", "tin");
+    	Publisher b = new Publisher("username","password", "name", "tin");
     	entityManager.persist(b);
         entityManager.flush();
 
@@ -109,7 +109,7 @@ public class PublisherRepositoryTest {
     
     @Test
     void givenExistentName_whenExistsById_thenReturnTrue() {
-    	Publisher b = new Publisher("username","passwordHash", "name", "tin");
+    	Publisher b = new Publisher("username","password", "name", "tin");
     	entityManager.persist(b);
         entityManager.flush();
 

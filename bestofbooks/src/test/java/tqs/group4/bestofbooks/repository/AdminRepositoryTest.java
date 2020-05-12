@@ -33,7 +33,7 @@ public class AdminRepositoryTest {
     
     @Test
     void givenExistentUsername_whenFindById_returnBuyer() {
-    	Admin b = new Admin("username","passwordHash");
+    	Admin b = new Admin("username","password");
     	entityManager.persist(b);
         entityManager.flush();
 
@@ -52,9 +52,9 @@ public class AdminRepositoryTest {
     
     @Test
     void given3Buyers_whenFindAll_return3Buyers() {
-    	Admin b1 = new Admin("username1","passwordHash1");
-    	Admin b2 = new Admin("username2","passwordHash2");
-    	Admin b3 = new Admin("username3","passwordHash3");
+    	Admin b1 = new Admin("username1","password1");
+    	Admin b2 = new Admin("username2","password2");
+    	Admin b3 = new Admin("username3","password3");
     	
     	entityManager.persist(b1);
     	entityManager.persist(b2);
@@ -71,7 +71,7 @@ public class AdminRepositoryTest {
     
     @Test
     void givenExistentUsername_whenExistsById_thenReturnTrue() {
-    	Admin b = new Admin("username","passwordHash");
+    	Admin b = new Admin("username","password");
     	entityManager.persist(b);
         entityManager.flush();
 

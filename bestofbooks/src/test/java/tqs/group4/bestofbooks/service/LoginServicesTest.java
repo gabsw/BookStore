@@ -1,5 +1,6 @@
 package tqs.group4.bestofbooks.service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.verification.VerificationModeFactory;
+
+import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
@@ -45,11 +48,15 @@ public class LoginServicesTest {
 	
 	@Test
 	void givenValidBuyerAccount_whenLogin_thenReturnBuyerUserDto() throws LoginFailedException, UserNotFoundException {
-		when(buyerRepository.findById("username")).thenReturn(Optional.of(new Buyer("username", "passwordHash")));
+		String password = "password";
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString(); 
+		when(buyerRepository.findById("username")).thenReturn(Optional.of(new Buyer("username", passwordHash)));
 		when(adminRepository.findById("username")).thenReturn(Optional.empty());
 		when(publisherRepository.findByUsername("username")).thenReturn(Optional.empty());
 		
-		UserDto dto = loginService.loginUser("username","passwordHash");
+		UserDto dto = loginService.loginUser("username",password);
 		
 		assertEquals("username", dto.getUsername());
 		assertEquals("Buyer", dto.getUserType());
@@ -61,11 +68,15 @@ public class LoginServicesTest {
 	
 	@Test
 	void givenValidAdminAccount_whenLogin_thenReturnAdminUserDto() throws LoginFailedException, UserNotFoundException {
+		String password = "password";
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
 		when(buyerRepository.findById("username")).thenReturn(Optional.empty());
-		when(adminRepository.findById("username")).thenReturn(Optional.of(new Admin("username", "passwordHash")));
+		when(adminRepository.findById("username")).thenReturn(Optional.of(new Admin("username", passwordHash)));
 		when(publisherRepository.findByUsername("username")).thenReturn(Optional.empty());
 		
-		UserDto dto = loginService.loginUser("username","passwordHash");
+		UserDto dto = loginService.loginUser("username",password);
 		
 		assertEquals("username", dto.getUsername());
 		assertEquals("Admin", dto.getUserType());
@@ -77,11 +88,15 @@ public class LoginServicesTest {
 	
 	@Test
 	void givenValidPublisherAccount_whenLogin_thenReturnPublisherUserDto() throws LoginFailedException, UserNotFoundException {
+		String password = "password";
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
 		when(buyerRepository.findById("username")).thenReturn(Optional.empty());
 		when(adminRepository.findById("username")).thenReturn(Optional.empty());
-		when(publisherRepository.findByUsername("username")).thenReturn(Optional.of(new Publisher("username", "passwordHash", "name", "tin")));
+		when(publisherRepository.findByUsername("username")).thenReturn(Optional.of(new Publisher("username", passwordHash, "name", "tin")));
 		
-		UserDto dto = loginService.loginUser("username","passwordHash");
+		UserDto dto = loginService.loginUser("username",password);
 		
 		assertEquals("username", dto.getUsername());
 		assertEquals("Publisher", dto.getUserType());
@@ -95,12 +110,16 @@ public class LoginServicesTest {
 	
 	@Test
 	void givenInvalidBuyerAccount_whenLogin_thenThrowLoginFailedException() {
-		when(buyerRepository.findById("username")).thenReturn(Optional.of(new Buyer("username", "passwordHash123")));
+		String password = "password123";
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
+		when(buyerRepository.findById("username")).thenReturn(Optional.of(new Buyer("username", passwordHash)));
 		when(adminRepository.findById("username")).thenReturn(Optional.empty());
 		when(publisherRepository.findByUsername("username")).thenReturn(Optional.empty());
 		
 		assertThrows(LoginFailedException.class,
-                () -> loginService.loginUser("username","passwordHash"));
+                () -> loginService.loginUser("username","password"));
 		
 		verify(buyerRepository, VerificationModeFactory.times(1)).findById("username");
 		verify(adminRepository, VerificationModeFactory.times(0)).findById("username");
@@ -109,12 +128,16 @@ public class LoginServicesTest {
 	
 	@Test
 	void givenInvalidAdminAccount_whenLogin_thenThrowLoginFailedException() {
+		String password = "password123";
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
 		when(buyerRepository.findById("username")).thenReturn(Optional.empty());
-		when(adminRepository.findById("username")).thenReturn(Optional.of(new Admin("username", "passwordHash123")));
+		when(adminRepository.findById("username")).thenReturn(Optional.of(new Admin("username", passwordHash)));
 		when(publisherRepository.findByUsername("username")).thenReturn(Optional.empty());
 		
 		assertThrows(LoginFailedException.class,
-                () -> loginService.loginUser("username","passwordHash"));
+                () -> loginService.loginUser("username","password"));
 		
 		verify(buyerRepository, VerificationModeFactory.times(1)).findById("username");
 		verify(adminRepository, VerificationModeFactory.times(1)).findById("username");
@@ -123,12 +146,16 @@ public class LoginServicesTest {
 	
 	@Test
 	void givenInvalidPublisherAccount_whenLogin_thenThrowLoginFailedException() {
+		String password = "password123";
+		String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
 		when(buyerRepository.findById("username")).thenReturn(Optional.empty());
 		when(adminRepository.findById("username")).thenReturn(Optional.empty());
-		when(publisherRepository.findByUsername("username")).thenReturn(Optional.of(new Publisher("username", "passwordHash123", "name", "tin")));
+		when(publisherRepository.findByUsername("username")).thenReturn(Optional.of(new Publisher("username", passwordHash, "name", "tin")));
 		
 		assertThrows(LoginFailedException.class,
-                () -> loginService.loginUser("username","passwordHash"));
+                () -> loginService.loginUser("username","password"));
 		
 		verify(buyerRepository, VerificationModeFactory.times(1)).findById("username");
 		verify(adminRepository, VerificationModeFactory.times(1)).findById("username");
@@ -142,7 +169,7 @@ public class LoginServicesTest {
 		when(publisherRepository.findByUsername("username")).thenReturn(Optional.empty());
 		
 		assertThrows(UserNotFoundException.class,
-                () -> loginService.loginUser("username","passwordHash"));
+                () -> loginService.loginUser("username","password"));
 		
 		verify(buyerRepository, VerificationModeFactory.times(1)).findById("username");
 		verify(adminRepository, VerificationModeFactory.times(1)).findById("username");
@@ -184,7 +211,7 @@ public class LoginServicesTest {
 		when(buyerRepository.existsById("username")).thenReturn(false);
 		when(adminRepository.existsById("username")).thenReturn(false);
 		when(publisherRepository.existsByUsername("username")).thenReturn(true);
-		when(publisherRepository.findByUsername("username")).thenReturn(Optional.of(new Publisher("username", "passwordHash123", "name", "tin")));
+		when(publisherRepository.findByUsername("username")).thenReturn(Optional.of(new Publisher("username", "passwordHash", "name", "tin")));
 		
 		UserDto dto = loginService.getUserDtoByUsername("username");
 		

@@ -32,7 +32,7 @@ public class BuyerRepositoryTest {
     
     @Test
     void givenExistentUsername_whenFindById_returnBuyer() {
-    	Buyer b = new Buyer("username","passwordHash");
+    	Buyer b = new Buyer("username","password");
     	entityManager.persist(b);
         entityManager.flush();
 
@@ -51,9 +51,9 @@ public class BuyerRepositoryTest {
     
     @Test
     void given3Buyers_whenFindAll_return3Buyers() {
-    	Buyer b1 = new Buyer("username1","passwordHash1");
-    	Buyer b2 = new Buyer("username2","passwordHash2");
-    	Buyer b3 = new Buyer("username3","passwordHash3");
+    	Buyer b1 = new Buyer("username1","password1");
+    	Buyer b2 = new Buyer("username2","password2");
+    	Buyer b3 = new Buyer("username3","password3");
     	
     	entityManager.persist(b1);
     	entityManager.persist(b2);
@@ -70,7 +70,7 @@ public class BuyerRepositoryTest {
     
     @Test
     void givenExistentUsername_whenExistsById_thenReturnTrue() {
-    	Buyer b = new Buyer("username","passwordHash");
+    	Buyer b = new Buyer("username","password");
     	entityManager.persist(b);
         entityManager.flush();
 
