@@ -89,15 +89,18 @@ insert into Admin (username, password_hash) values('admin', 'ae5f4g38er4g3q5er4g
 
 insert into Publishers (username, name, tin, password_hash) values ('pub1', 'Publisher 1', 'tin', '872u6g3d47i35ter8347rbco2873tcr2874wbyr28oct4o28r7c');
 insert into Publishers (username, name, tin, password_hash) values ('pub2', 'Publisher 2', 'tin2', '6sf5h46e5r4h5wr4th68w4r8w4rh54wr25th4wr54hwr4th5e4r');
+INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('little_brown', 'Little, Brown', 'tin3', '6sf5h46e5r4h5wr4th68w4r8w4rh54wr25th4wr54hwr4th5e4r');
+INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('viking', 'Viking Press', 'tin4', '6sf5h46e5r4h5wr4th68w4r8w4rh54wr25th4wr54hwr4th5e4r');
 
 insert into Categories (name, description) values ('horror', 'scary stories');
 insert into Categories (name, description) values ('SciFi', 'stories about science fiction');
+INSERT INTO categories (name, description) VALUES ('Postmodernism', 'something');
+INSERT INTO categories (name, description) VALUES ('Travelogue', 'another something');
 
 insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book1', '1111111111111', 'SciFi', 'someauthor', 'A very ice book', 'Publisher 1', 10.00, 50);
 insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book2', '1111111111112', 'horror', 'someauthor2', 'A very bad book', 'Publisher 2', 15.00, 100);
 
 insert into Orders (id, payment_reference, username_buyer, isbn, address, final_price) values (1, 'w65r46wr842', 'buyer1', '1111111111112', 'Rua3, Espinho', 17.00);
 insert into Orders (id, payment_reference, username_buyer, isbn, address, final_price) values (2, 'e8rg4r5g4e6', 'buyer2', '1111111111111', 'Rua4, Espinho', 12.00);
-
 insert into Commissions (id, amount, order_id) values (1, 2.00, 1);
 insert into Commissions (id, amount, order_id) values (2, 2.00, 2);
