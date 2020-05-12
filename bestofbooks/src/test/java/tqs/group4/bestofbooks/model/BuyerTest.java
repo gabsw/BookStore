@@ -21,7 +21,7 @@ public class BuyerTest {
 	
 	@Test
 	public void checkGetPasswordHash() {
-		assertEquals("passwordHash", buyer.getPassword_hash());
+		assertEquals("passwordHash", buyer.getPasswordHash());
 	}
 	
 	@Test
@@ -32,8 +32,8 @@ public class BuyerTest {
 	
 	@Test
 	public void checkSetPasswordHash() {
-		buyer.setPassword_hash("newHash");
-		assertEquals("newHash", buyer.getPassword_hash());
+		buyer.setPasswordHash("newHash");
+		assertEquals("newHash", buyer.getPasswordHash());
 	}
 
 }

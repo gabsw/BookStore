@@ -14,11 +14,11 @@ public class Admin {
     private String username;
 	
 	@Column(name= "password_hash", nullable = false)
-	private String password_hash;
+	private String passwordHash;
 	
-	public Admin(String username, String password_hash) {
+	public Admin(String username, String passwordHash) {
 		this.username = username;
-		this.password_hash = password_hash;
+		this.passwordHash = passwordHash;
 	}
 
 	public Admin() {
@@ -32,12 +32,12 @@ public class Admin {
 		this.username = username;
 	}
 
-	public String getPassword_hash() {
-		return password_hash;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword_hash(String password_hash) {
-		this.password_hash = password_hash;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 }

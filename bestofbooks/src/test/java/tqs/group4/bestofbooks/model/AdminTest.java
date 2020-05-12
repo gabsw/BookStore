@@ -21,7 +21,7 @@ public class AdminTest {
 	
 	@Test
 	public void checkGetPasswordHash() {
-		assertEquals("passwordHash", admin.getPassword_hash());
+		assertEquals("passwordHash", admin.getPasswordHash());
 	}
 	
 	@Test
@@ -32,8 +32,8 @@ public class AdminTest {
 	
 	@Test
 	public void checkSetPasswordHash() {
-		admin.setPassword_hash("newHash");
-		assertEquals("newHash", admin.getPassword_hash());
+		admin.setPasswordHash("newHash");
+		assertEquals("newHash", admin.getPasswordHash());
 	}
 
 }

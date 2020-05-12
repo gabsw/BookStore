@@ -17,7 +17,7 @@ public class Publisher {
     private String username;
 	
 	@Column(name= "password_hash", nullable = false)
-	private String password_hash;
+	private String passwordHash;
 	
 	@Column(name= "tin", nullable = false)
 	private String tin;
@@ -25,9 +25,9 @@ public class Publisher {
 	public Publisher() {
 	}
 
-	public Publisher(String username, String password_hash, String name, String tin) {
+	public Publisher(String username, String passwordHash, String name, String tin) {
 		this.username = username;
-		this.password_hash = password_hash;
+		this.passwordHash = passwordHash;
 		this.name = name;
 		this.tin = tin;
 	}
@@ -40,12 +40,12 @@ public class Publisher {
 		this.username = username;
 	}
 
-	public String getPassword_hash() {
-		return password_hash;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword_hash(String password_hash) {
-		this.password_hash = password_hash;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 	public String getName() {

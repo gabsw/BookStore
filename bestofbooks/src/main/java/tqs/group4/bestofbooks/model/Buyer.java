@@ -14,12 +14,12 @@ public class Buyer {
     private String username;
 	
 	@Column(name= "password_hash", nullable = false)
-	private String password_hash;
+	private String passwordHash;
 
 	
-	public Buyer(String username, String password_hash) {
+	public Buyer(String username, String passwordHash) {
 		this.username = username;
-		this.password_hash = password_hash;
+		this.passwordHash = passwordHash;
 	}
 
 	public Buyer() {
@@ -33,12 +33,12 @@ public class Buyer {
 		this.username = username;
 	}
 
-	public String getPassword_hash() {
-		return password_hash;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword_hash(String password_hash) {
-		this.password_hash = password_hash;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 	
 

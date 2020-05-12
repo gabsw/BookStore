@@ -2,6 +2,7 @@ package tqs.group4.bestofbooks.service;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,33 +32,34 @@ public class LoginServices {
 	BuyerRepository buyerRepository;
 	
 	public UserDto loginUser(String username, String passwordHash) throws LoginFailedException, UserNotFoundException {
+		String loginFailedMessage = "Login failed.";
 		if (username == null || passwordHash == null) {
             throw new IllegalArgumentException("User (password or username) is not defined.");
         }
-        Optional<Buyer> opt_buyer = buyerRepository.findById(username);
-        if (opt_buyer.isPresent()) {
-        	if (!opt_buyer.get().getPassword_hash().equals(passwordHash)) {
-        		throw new LoginFailedException("Login failed.");
+        Optional<Buyer> optBuyer = buyerRepository.findById(username);
+        if (optBuyer.isPresent()) {
+        	if (!optBuyer.get().getPasswordHash().equals(passwordHash)) {
+        		throw new LoginFailedException(loginFailedMessage);
         	}
-        	Buyer b = opt_buyer.get();
+        	Buyer b = optBuyer.get();
         	return new UserDto(b.getUsername(),"Buyer");
         }
         
-        Optional<Admin> opt_admin = adminRepository.findById(username);
-        if (opt_admin.isPresent()) {
-        	if (!opt_admin.get().getPassword_hash().equals(passwordHash)) {
-        		throw new LoginFailedException("Login failed.");
+        Optional<Admin> optAdmin = adminRepository.findById(username);
+        if (optAdmin.isPresent()) {
+        	if (!optAdmin.get().getPasswordHash().equals(passwordHash)) {
+        		throw new LoginFailedException(loginFailedMessage);
         	}
-        	Admin a = opt_admin.get();
+        	Admin a = optAdmin.get();
         	return new UserDto(a.getUsername(),"Admin");
         }
         
-        Optional<Publisher> opt_publisher = publisherRepository.findByUsername(username);
-        if (opt_publisher.isPresent()) {
-        	if (!opt_publisher.get().getPassword_hash().equals(passwordHash)) {
-        		throw new LoginFailedException("Login failed.");
+        Optional<Publisher> optPublisher = publisherRepository.findByUsername(username);
+        if (optPublisher.isPresent()) {
+        	if (!optPublisher.get().getPasswordHash().equals(passwordHash)) {
+        		throw new LoginFailedException(loginFailedMessage);
         	}
-        	Publisher p = opt_publisher.get();
+        	Publisher p = optPublisher.get();
         	UserDto dto = new UserDto(p.getUsername(),"Publisher");
         	dto.addAttribute("name", p.getName());
         	dto.addAttribute("tin", p.getTin());
@@ -78,15 +80,26 @@ public class LoginServices {
 	            	return new UserDto(username,"Admin");
 	            }
 	            else if (publisherRepository.existsByUsername(username)) {
-	            	Publisher p = publisherRepository.findByUsername(username).get();
-	            	UserDto dto = new UserDto(p.getUsername(),"Publisher");
-	            	dto.addAttribute("name", p.getName());
-	            	dto.addAttribute("tin", p.getTin());
-	            	return dto;
+	            	Optional<Publisher> op = publisherRepository.findByUsername(username);
+	            	if (op.isPresent()) {
+	            		Publisher p = op.get();
+	            		UserDto dto = new UserDto(p.getUsername(),"Publisher");
+		            	dto.addAttribute("name", p.getName());
+		            	dto.addAttribute("tin", p.getTin());
+		            	return dto;
+	            	}
 	            }
 	            
 	            throw new UserNotFoundException("User not found " + username);
 	        }
 	    }
+	 
+	 public void setSessionUsername(HttpServletRequest request, String username) {
+		 request.getSession().setAttribute("username", username);
+	 }
+	 
+	 public String getSessionUsername(HttpServletRequest request) {
+		 return (String) request.getSession().getAttribute("username");
+	 }
 
 }

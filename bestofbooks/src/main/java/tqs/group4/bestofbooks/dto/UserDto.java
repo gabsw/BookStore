@@ -1,6 +1,7 @@
 package tqs.group4.bestofbooks.dto;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserDto {
 
@@ -8,7 +9,7 @@ public class UserDto {
 	
 	private String userType;
 	
-	private HashMap<String, String> attributes;
+	private Map<String, String> attributes;
 
 	public UserDto(String username, String userType) {
 		this.username = username;
@@ -36,11 +37,11 @@ public class UserDto {
 		this.userType = userType;
 	}
 
-	public HashMap<String, String> getAttributes() {
+	public Map<String, String> getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(HashMap<String, String> attributes) {
+	public void setAttributes(Map<String, String> attributes) {
 		this.attributes = attributes;
 	}
 	

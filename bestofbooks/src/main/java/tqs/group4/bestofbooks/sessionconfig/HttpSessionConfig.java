@@ -1,4 +1,4 @@
-package tqs.group4.bestofbooks.sessionConfig;
+package tqs.group4.bestofbooks.sessionconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

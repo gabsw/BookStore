@@ -21,7 +21,7 @@ public class PublisherTest {
 	
 	@Test
 	public void checkGetPasswordHash() {
-		assertEquals("passwordHash", publisher.getPassword_hash());
+		assertEquals("passwordHash", publisher.getPasswordHash());
 	}
 	
 	@Test
@@ -42,8 +42,8 @@ public class PublisherTest {
 	
 	@Test
 	public void checkSetPasswordHash() {
-		publisher.setPassword_hash("newHash");
-		assertEquals("newHash", publisher.getPassword_hash());
+		publisher.setPasswordHash("newHash");
+		assertEquals("newHash", publisher.getPasswordHash());
 	}
 	
 	@Test

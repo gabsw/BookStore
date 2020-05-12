@@ -1,8 +1,6 @@
 package tqs.group4.bestofbooks.controller;
 
 import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,22 +46,20 @@ public class SessionController {
 
 		UserDto user = loginService.loginUser(username, password);
 		
-		
-		request.getSession().setAttribute("username", user.getUsername());
-
+		loginService.setSessionUsername(request, user.getUsername());
 
 		return user;
 	}
 	
 	@GetMapping("/user-info")
-	public UserDto getUserInfo(HttpServletRequest request) throws LoginFailedException, UserNotFoundException, LoginRequiredException{
-		String user = (String) request.getSession().getAttribute("username");
+	public UserDto getUserInfo(HttpServletRequest request) throws UserNotFoundException, LoginRequiredException{
+		String user = loginService.getSessionUsername(request);
 		
 		if (user == null) {
 			throw new LoginRequiredException("Login Required for this request.");
 		}
-		UserDto u = loginService.getUserDtoByUsername(user);
-		return u;
+		
+		return loginService.getUserDtoByUsername(user);
 	}
 	
 	
