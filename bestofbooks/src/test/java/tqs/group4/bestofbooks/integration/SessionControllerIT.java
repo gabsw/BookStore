@@ -52,11 +52,6 @@ public class SessionControllerIT {
 	@Autowired
     private EntityManager entityManager;
 
-    
-	/*@BeforeEach
-    public void before() {
-        entityManager.createNativeQuery("TRUNCATE SPRING_SESSION, SPRING_SESSION_ATTRIBUTES cascade;").executeUpdate();
-    }*/
 	
     @Test
     void givenValidUsernameAndPassword_whenLogin_thenReturnDto() throws JsonProcessingException, Exception {

@@ -46,7 +46,7 @@ public class BuyerRepositoryTest {
     @Test
     void givenInexistentUsername_whenFindById_returnEmpty() {
     	Optional<Buyer> queryResults = buyerRepository.findById("username");
-        assertEquals(true, queryResults.isEmpty());
+        assertEquals(false, queryResults.isPresent());
     }
     
     @Test

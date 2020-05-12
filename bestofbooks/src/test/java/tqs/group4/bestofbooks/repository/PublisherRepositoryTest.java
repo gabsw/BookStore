@@ -47,7 +47,7 @@ public class PublisherRepositoryTest {
     @Test
     void givenInexistentUsername_whenFindByUsername_returnEmpty() {
     	Optional<Publisher> queryResults = publisherRepository.findByUsername("username");
-        assertEquals(true, queryResults.isEmpty());
+        assertEquals(false, queryResults.isPresent());
     }
     
     @Test
@@ -66,7 +66,7 @@ public class PublisherRepositoryTest {
     @Test
     void givenInexistentName_whenFindById_returnEmpty() {
     	Optional<Publisher> queryResults = publisherRepository.findById("name");
-        assertEquals(true, queryResults.isEmpty());
+        assertEquals(false, queryResults.isPresent());
     }
     
     @Test

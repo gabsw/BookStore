@@ -47,7 +47,7 @@ public class AdminRepositoryTest {
     @Test
     void givenInexistentUsername_whenFindById_returnEmpty() {
     	Optional<Admin> queryResults = adminRepository.findById("username");
-        assertEquals(true, queryResults.isEmpty());
+        assertEquals(false, queryResults.isPresent());
     }
     
     @Test

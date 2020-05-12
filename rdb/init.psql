@@ -82,15 +82,15 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 
 
 -- inserts
-insert into Buyers (username, password_hash) values ('buyer1', 'efg54er5g4w84w35e1fw8e4f3w5e1f68e4g65we1g68e4g65er');
-insert into Buyers (username, password_hash) values ('buyer2', 'v6w84te74ryg15w454bq5er156qf38r4g51q365478g6q45g5q');
+insert into Buyers (username, password_hash) values ('buyer1', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
+insert into Buyers (username, password_hash) values ('buyer2', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
 
-insert into Admin (username, password_hash) values('admin', 'ae5f4g38er4g3q5er4g5qe4rg35qe4rg5q4er6g54werg54w1r');
+insert into Admin (username, password_hash) values('admin', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
 
-insert into Publishers (username, name, tin, password_hash) values ('pub1', 'Publisher 1', 'tin', '872u6g3d47i35ter8347rbco2873tcr2874wbyr28oct4o28r7c');
-insert into Publishers (username, name, tin, password_hash) values ('pub2', 'Publisher 2', 'tin2', '6sf5h46e5r4h5wr4th68w4r8w4rh54wr25th4wr54hwr4th5e4r');
-INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('little_brown', 'Little, Brown', 'tin3', '6sf5h46e5r4h5wr4th68w4r8w4rh54wr25th4wr54hwr4th5e4r');
-INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('viking', 'Viking Press', 'tin4', '6sf5h46e5r4h5wr4th68w4r8w4rh54wr25th4wr54hwr4th5e4r');
+insert into Publishers (username, name, tin, password_hash) values ('pub1', 'Publisher 1', 'tin', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
+insert into Publishers (username, name, tin, password_hash) values ('pub2', 'Publisher 2', 'tin2', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
+INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('little_brown', 'Little, Brown', 'tin3', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
+INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('viking', 'Viking Press', 'tin4', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
 
 insert into Categories (name, description) values ('horror', 'scary stories');
 insert into Categories (name, description) values ('SciFi', 'stories about science fiction');
