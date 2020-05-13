@@ -1,0 +1,57 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TQS Login",
+		"_postman_id": "dd3cc331-c1ab-53ba-d727-56dbc47a2221",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"let auth_token = postman.getResponseHeader(\"x-auth-token\");",
+							"postman.setEnvironmentVariable(\"auth_token\", auth_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/api/session/login",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YnV5ZXIxOnB3",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Login de utilizador"
+			},
+			"response": []
+		},
+		{
+			"name": "User info",
+			"request": {
+				"url": "{{url}}/api/session/user-info",
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "{{auth_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
