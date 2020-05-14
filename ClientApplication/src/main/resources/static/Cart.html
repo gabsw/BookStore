@@ -1,0 +1,150 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Air Quality</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="../Images/Logo-removebg-preview.png" alt="" width="100" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <div class="pull-right">
+                <ul class="nav pull-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, User
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="Cart.html"> <i class="fa fa-shopping-cart"></i> Your Cart</a>
+                            <a class="dropdown-item" href="orders.html">Your Orders</a>
+                            <a class="dropdown-item" href="login.html">LogOut</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <div class="text-center"><h1>Your Cart</h1></div>
+        <p></p>
+        <div class="card shopping-cart">
+            <div class="card-header bg-light text-light">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Shopping Cart
+                <div class="clearfix"></div>
+            </div>
+            <div class="card-body">
+                <!-- PRODUCT -->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-2 text-center">
+                        <img class="img-responsive" src="../Images/51O9tzpYaUL._SY445_QL70_ML2_.jpg" alt="prewiew" width="100" height="120">
+                    </div>
+                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <h4 class="product-name">
+                            <strong>
+                                Awesome Product
+                            </strong>
+                        </h4>
+
+                    </div>
+                    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                        <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                            <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4">
+                            <div class="quantity">
+                                <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
+                                       size="4">
+                            </div>
+                        </div>
+                        <div class="col-2 col-sm-2 col-md-2 text-right">
+                            <button type="button" class="btn btn-outline-danger btn-xs">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- END PRODUCT -->
+                <!-- PRODUCT -->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-2 text-center">
+                        <img class="img-responsive" src="../Images/51O9tzpYaUL._SY445_QL70_ML2_.jpg" alt="prewiew" width="100" height="120">
+                    </div>
+                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <h4 class="product-name">
+                            <strong>
+                                Awesome Product
+                            </strong>
+                        </h4>
+
+                    </div>
+                    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                        <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                            <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4">
+                            <div class="quantity">
+                                <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
+                                       size="4">
+                            </div>
+                        </div>
+                        <div class="col-2 col-sm-2 col-md-2 text-right">
+                            <button type="button" class="btn btn-outline-danger btn-xs">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- END PRODUCT -->
+
+            </div>
+            <div class="card-footer">
+
+                <div class="pull-right" style="margin: 10px">
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#buyModal">Checkout</button>
+                    <div class="pull-right" style="margin: 5px">
+                        Total price: <b>50.00€</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for Purchase -->
+    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modelbuyid">Bought!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Thank you for buying this item !
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
