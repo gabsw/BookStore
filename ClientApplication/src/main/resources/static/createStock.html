@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Air Quality</title>
+    <title>Best Of Books</title>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="publisherIndex.html">
-            <img src="../Images/Logo-removebg-preview.png" alt="" width="100" />
+            <img src="Logo-removebg-preview.png" alt="" width="100" />
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -23,6 +23,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="createStock.html">Create Order</a>
+                            <a class="dropdown-item" href="publisherIndex.html">All Orders</a>
                             <a class="dropdown-item" href="login.html">LogOut</a>
                         </div>
                     </li>
@@ -34,6 +35,7 @@
 
 
     <div class="container py-5">
+        <div class="text-center"><h1>Update Stock</h1></div>
             <div class="row clearfix">
                 <div class="col-md-12">
                     <table class="table table-bordered table-hover" id="tab_logic">
@@ -70,31 +72,17 @@
                     <table class="table table-bordered table-hover" id="tab_logic_total">
                         <tbody>
                             <tr>
-                                <th class="text-center">Sub Total</th>
-                                <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly /></td>
-                            </tr>
-                            <tr>
-                                <th class="text-center">Tax</th>
-                                <td class="text-center">
-                                    <div class="input-group mb-2 mb-sm-0">
-                                        <input type="number" class="form-control" id="tax" placeholder="0">
-                                        <div class="input-group-addon">%</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="text-center">Tax Amount</th>
-                                <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly /></td>
-                            </tr>
-                            <tr>
                                 <th class="text-center">Grand Total</th>
                                 <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly /></td>
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#buyModal" >Add to Cart</button>
+
+    </div>
 
 
     <script src="../Scripts/bootstrap.bundle.min.js"></script>
@@ -147,12 +135,29 @@
             $('.total').each(function () {
                 total += parseInt($(this).val());
             });
-            $('#sub_total').val(total.toFixed(2));
-            tax_sum = total / 100 * $('#tax').val();
-            $('#tax_amount').val(tax_sum.toFixed(2));
-            $('#total_amount').val((tax_sum + total).toFixed(2));
+            $('#total_amount').val((total).toFixed(2));
         }
     </script>
+    <!-- Modal for Purchase -->
+    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modelbuyid">Bought!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   Stock Updated!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-ï»¿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="clientIndex.html">
         <img alt="" src="Logo-removebg-preview.png" width="100"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -19,7 +19,17 @@
         <div class="pull-right">
             <ul class="nav pull-right">
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</i></a>
+                    <a class="nav-link" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
+                </li>
+                <li class="dropdown">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                        Welcome, Client
+                    </button>
+                    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                        <a class="dropdown-item" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
+                        <a class="dropdown-item" href="orders.html">Your Orders</a>
+                        <a class="dropdown-item" href="login.html">LogOut</a>
+                    </div>
                 </li>
 
             </ul>
@@ -53,18 +63,16 @@
                                 <dt><h5 class="mt-0 font-weight-bold mb-2">Filters</h5></dt>
                                 <dd>
                                     <div class="dropdown">
-                                        <button aria-expanded="false" aria-haspopup="true"
-                                                class="btn btn-sm dropdown-toggle"
-                                                data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
                                             Filter By:
                                         </button>
                                         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Title</a>
                                             <a class="dropdown-item" href="#">Lowest to Highest Price</a>
                                             <a class="dropdown-item" href="#">Highest to Lowest Price</a>
                                         </div>
                                     </div>
                                 </dd>
+
                             </dl>
                         </div>
                     </div>
@@ -76,9 +84,8 @@
         <div class="col-lg-8 mx-auto">
 
             <!-- List group-->
-            <ul class="list-group shadow" id="output">
+            <ul class="list-group shadow">
 
-                <!-- list group item-->
                 <li class="list-group-item">
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
@@ -88,20 +95,41 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Author: Beth Kery </li>
                                 <li class="list-group-item">Category:  Literature </li>
-                                <li class="list-group-item">Publisher: EdiÃ§Ãµes ChÃ¡ das Cinco</li>
+                                <li class="list-group-item">Publisher: Edições Chá das Cinco</li>
                                 <li class="list-group-item">Price: <strong>50.00</strong></li>
                                 <li class="list-group-item"><strong>Available:</strong> 50</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
-                                <a class="btn btn-info btn-sm" data-target="#exampleModal" data-toggle="modal"
-                                   role="button">More Details</a>
+                                <a class="btn btn-info" href="details.html" role="button">More Details</a>
+                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
                             </div>
-
                         </div>
                     </div>
                     <!-- End -->
                 </li>
-                <!-- End -->
+                <li class="list-group-item">
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Author: Beth Kery </li>
+                                <li class="list-group-item">Category:  Literature </li>
+                                <li class="list-group-item">Publisher: Edições Chá das Cinco</li>
+                                <li class="list-group-item">Price: <strong>50.00</strong></li>
+                                <li class="list-group-item"><strong>Available:</strong> 50</li>
+                            </ul>
+                            <div class="btn-group" style="width:100%">
+                                <a class="btn btn-info" href="details.html" role="button">More Details</a>
+                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End -->
+                </li>
+                <!-- list group item-->
+
 
             </ul>
             <!-- End -->
@@ -122,54 +150,16 @@
     </ul>
 </nav>
 
-<!-- Modal for Details -->
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"
-     tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Details</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Description:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
-                    </li>
-                    <li class="list-group-item">ISBN: 9789897103667 </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script crossorigin="anonymous"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">
-    function getCoord() {
-        fetch('http://localhost:8080/api/books/isbn/1111111111111', {mode: 'no-cors'})
-            .then(res => res.text())
-            .then((out) => {
-                console.log('Checkout this JSON! ', out);
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+    function myFunction() {
+        alert("Item Added To Cart!");
     }
-
 </script>
 </body>
 </html>
