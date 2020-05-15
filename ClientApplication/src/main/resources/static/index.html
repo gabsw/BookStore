@@ -160,8 +160,8 @@
 
 <script type="text/javascript">
     function getCoord() {
-        fetch('http://localhost:8080/api/books/isbn/1111111111111', {mode: 'no-cors'})
-            .then(res => res.text())
+        fetch('http://localhost:8080/api/books/isbn/1111111111111')
+            .then(res => res.json())
             .then((out) => {
                 console.log('Checkout this JSON! ', out);
             })
@@ -169,6 +169,7 @@
                 console.log(error)
             })
     }
+    window.onload = getCoord();
 
 </script>
 </body>
