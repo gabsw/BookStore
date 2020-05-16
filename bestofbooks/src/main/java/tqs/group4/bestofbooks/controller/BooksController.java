@@ -8,6 +8,7 @@ import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.service.BookService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/books")
 public class BooksController {
