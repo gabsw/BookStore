@@ -3,12 +3,12 @@ package tqs.group4.bestofbooks.model;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Books")
-public class Book implements Serializable {
+public class Book {
     @Id
     @NaturalId
     @Column(name = "isbn", nullable = false)
@@ -27,6 +27,8 @@ public class Book implements Serializable {
     private String category;
     @Column(name = "publisher_name", nullable = false)
     private String publisherName;
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    private Collection<BooksOrders> booksOrdersByIsbn;
 
     public Book() {
     }
@@ -69,6 +71,14 @@ public class Book implements Serializable {
 
     public String getPublisherName() {
         return publisherName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Collection<BooksOrders> getBooksOrdersByIsbn() {
+        return booksOrdersByIsbn;
     }
 
     @Override
