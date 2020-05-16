@@ -9,8 +9,6 @@ import tqs.group4.bestofbooks.model.Commission;
 
 @Repository
 public interface CommissionRepository extends JpaRepository<Commission, Integer> {
-    Page<Commission> findAll(Pageable pageable);
-
     @Query(value = "SELECT SUM(amount) FROM commissions", nativeQuery = true)
-    Double totalAmount();
+    double totalAmount();
 }
