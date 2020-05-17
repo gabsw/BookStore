@@ -52,7 +52,7 @@ public class BookOrderTest {
     
     @Test
     public void testEquals(){
-        EqualsVerifier.forClass(order.getClass())
+        EqualsVerifier.forClass(bookOrder.getClass())
             .withPrefabValues(Book.class, BookMocks.infiniteJest, BookMocks.onTheRoad)
             .withIgnoredFields("order", "id")
             .verify();
@@ -62,8 +62,8 @@ public class BookOrderTest {
     public void testHashCodeEqual(){
         BookOrder newBookOrder = new BookOrder(bookOrder.getBook(), order, bookOrder.getQuantity());
         assertAll(
-            () -> {assertNotSame(order, newBookOrder);},
-            () -> {assertEquals(order.hashCode(), newBookOrder.hashCode());}
+            () -> {assertNotSame(bookOrder, newBookOrder);},
+            () -> {assertEquals(bookOrder.hashCode(), newBookOrder.hashCode());}
         );
     }
 
