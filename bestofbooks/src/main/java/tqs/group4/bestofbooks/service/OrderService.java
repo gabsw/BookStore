@@ -18,7 +18,7 @@ public class OrderService {
     @Autowired
     private OrderRepository repo;
 
-    public OrderDTO getOrderById(int id){
+    public OrderDTO getOrderById(int id) {
         Order order = repo.findById(id);
         if (order == null) {
             throw new OrderNotFoundException("No order with the given id.");
@@ -27,7 +27,7 @@ public class OrderService {
         return OrderDTO.fromOrder(order);
     }
 
-    public List<OrderDTO> getOrderByBuyerUsername(String buyerUsername){
+    public List<OrderDTO> getOrderByBuyerUsername(String buyerUsername) {
         List<Order> orders = repo.findByBuyerUsername(buyerUsername);
         if (orders.isEmpty()) {
             throw new OrderNotFoundException("No orders for the given username.");

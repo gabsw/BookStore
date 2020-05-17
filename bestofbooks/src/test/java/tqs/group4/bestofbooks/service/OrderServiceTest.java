@@ -70,7 +70,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testGetOrderByKnownId() {
+    public void testGetOrderByKnownId() throws OrderNotFoundException {
         when(repo.findById(anyInt())).thenReturn(OrderMocks.order1);
         compareOrderDTO(OrderDTO.fromOrder(OrderMocks.order1), service.getOrderById(3));
     }
@@ -84,7 +84,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void testGetOrderByKnownBuyerUsername() {
+    public void testGetOrderByKnownBuyerUsername() throws OrderNotFoundException {
         List<Order> orders = Lists.newArrayList(OrderMocks.order1);
         when(repo.findByBuyerUsername(anyString())).thenReturn(orders);
         compareListOrderDTO(orders.stream().map(OrderDTO::fromOrder).collect(Collectors.toList()),

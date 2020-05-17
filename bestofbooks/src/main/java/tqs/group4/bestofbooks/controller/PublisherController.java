@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
+import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.service.RevenueService;
 
 @CrossOrigin
@@ -17,12 +18,14 @@ public class PublisherController {
     // TODO: Missing authentication check
 
     @GetMapping("/{publisherName}/revenue")
-    public Page<RevenueDTO> getRevenuesByPublisher(@PathVariable String publisherName, Pageable pageable) {
+    public Page<RevenueDTO> getRevenuesByPublisher(@PathVariable String publisherName, Pageable pageable)
+            throws UserNotFoundException {
         return revenueService.getRevenuesByPublisher(publisherName, pageable);
     }
 
     @GetMapping("/{publisherName}/revenue/total")
-    public Double getRevenuesTotalByPublisher(@PathVariable String publisherName) {
+    public Double getRevenuesTotalByPublisher(@PathVariable String publisherName)
+            throws UserNotFoundException {
         return revenueService.getRevenuesTotalByPublisher(publisherName);
     }
 }

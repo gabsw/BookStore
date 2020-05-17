@@ -2,6 +2,8 @@ package tqs.group4.bestofbooks.dto;
 
 import tqs.group4.bestofbooks.model.Revenue;
 
+import java.util.Objects;
+
 public class RevenueDTO {
     private Integer id;
     private double amount;
@@ -40,5 +42,18 @@ public class RevenueDTO {
     public static RevenueDTO fromRevenue(Revenue revenue) {
         return new RevenueDTO(revenue.getId(), revenue.getAmount(), revenue.getPublisherName(),
                 revenue.getBookOrder().getId(), revenue.getBookOrder().getBook().getIsbn());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RevenueDTO that = (RevenueDTO) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
