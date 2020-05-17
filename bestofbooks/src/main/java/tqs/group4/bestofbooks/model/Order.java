@@ -13,10 +13,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @EqualsAndHashCode()
-@ToString
 @Entity
 @Data
 @Table(name = "Orders")
@@ -45,13 +43,13 @@ public class Order {
     @Column(name = "final_price", nullable = false)
     private double finalPrice;
 
-    public Order(String payment_reference, String username_buyer, 
-        List<BookOrder> bookOrders, String address, double final_price){
-        this.paymentReference = payment_reference;
-        this.buyerUsername = username_buyer;
+    public Order(String paymentReference, String usernameBuyer, 
+        List<BookOrder> bookOrders, String address, double finalPrice){
+        this.paymentReference = paymentReference;
+        this.buyerUsername = usernameBuyer;
         this.bookOrders = bookOrders;
         this.address = address;
-        this.finalPrice = final_price;
+        this.finalPrice = finalPrice;
     }
 
     public void addBookOrder(BookOrder bookOrder){

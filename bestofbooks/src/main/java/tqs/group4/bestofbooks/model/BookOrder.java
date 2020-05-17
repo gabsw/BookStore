@@ -52,7 +52,7 @@ public class BookOrder {
         this.book = book;
         try {
             if (book.getIsbn().length() != 13 || !StringUtils.isNumeric(book.getIsbn()))
-            throw new InvalidIsbnException("Isbn length must be 13 numeric digits.");
+                throw new InvalidIsbnException("Isbn length must be 13 numeric digits.");
         } catch (NullPointerException e){
             throw new NullBookException("Book object cannot be null.");
         }

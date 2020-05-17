@@ -1,6 +1,5 @@
 package tqs.group4.bestofbooks.controller;
 
-import tqs.group4.bestofbooks.exception.OrderNotFoundException;
 import tqs.group4.bestofbooks.model.Order;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class BuyersController {
     private OrderService orderService;
 
     @GetMapping(value="/{buyerUsername}/orders")
-    public List<Order> getByBuyerUsername(@PathVariable String buyerUsername) throws OrderNotFoundException {
+    public List<Order> getByBuyerUsername(@PathVariable String buyerUsername) {
         return orderService.getByBuyerUsername(buyerUsername);
     }
 }
