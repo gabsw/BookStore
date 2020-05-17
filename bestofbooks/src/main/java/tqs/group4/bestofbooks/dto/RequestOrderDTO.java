@@ -7,10 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import tqs.group4.bestofbooks.model.BookOrder;
 
-@Data
 @AllArgsConstructor
 public class RequestOrderDTO {
 
@@ -28,4 +26,20 @@ public class RequestOrderDTO {
     @Size(min = 1, max = 100, message = "Address must be between 1 and 100 characters")
     @NotBlank(message = "Address cannot be null or whitespace")
     private String address;
+
+    public List<BookOrder> getContent(){
+        return content;
+    }
+
+    public String getBuyerUsername(){
+        return buyerUsername;
+    }
+
+    public String getPaymentReference(){
+        return paymentReference;
+    }
+
+    public String getAddress(){
+        return address;
+    }
 }
