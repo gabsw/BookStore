@@ -44,7 +44,6 @@ create table Orders (
     id serial primary key,
     payment_reference varchar(20) unique not null,
     username_buyer varchar(20) references Buyers(username) not null,
-    isbn char(13) references Books(isbn) not null,
     address varchar(100) not null,
     final_price numeric check (final_price > 0) not null
 );
@@ -80,6 +79,12 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
     CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_ID) REFERENCES SPRING_SESSION(SESSION_ID) ON DELETE CASCADE
 );
 
+create table books_orders (
+    order serial not null references Orders(id),
+    book char(13) not null references Books(isbn),
+    quantity int not null default 1,
+    primary key (order, book)
+);
 
 -- inserts
 insert into Buyers (username, password_hash) values ('buyer1', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
