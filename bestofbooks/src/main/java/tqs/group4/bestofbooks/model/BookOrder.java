@@ -1,5 +1,7 @@
 package tqs.group4.bestofbooks.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,8 +26,6 @@ import tqs.group4.bestofbooks.exception.NullBookException;
 @Entity
 @Table(name = "books_orders")
 @Data
-@EqualsAndHashCode
-@ToString
 @NoArgsConstructor
 public class BookOrder {
     
@@ -58,5 +58,18 @@ public class BookOrder {
         }
         this.order = order;
         this.quantity = quantity;
+    }
+
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null) return false;
+        if (!(o instanceof BookOrder)) return false;
+        BookOrder bookOrder = (BookOrder) o;
+        return Objects.equals(book, bookOrder.book)
+            && Objects.equals(quantity, bookOrder.quantity);
+    }
+
+    public int hashCode(){
+        return Objects.hash(book, quantity);
     }
 }

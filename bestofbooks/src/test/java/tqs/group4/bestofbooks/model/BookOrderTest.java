@@ -1,6 +1,9 @@
 package tqs.group4.bestofbooks.model;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,6 +18,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import tqs.group4.bestofbooks.exception.InvalidIsbnException;
 import tqs.group4.bestofbooks.exception.NullBookException;
 import tqs.group4.bestofbooks.mocks.BookMocks;
@@ -25,8 +29,7 @@ public class BookOrderTest {
 
     private String buyerUsername = "someUser",
         paymentReference = "AC%87541215485421",
-        address = "28 55th, MI, FL, USA",
-        isbn;
+        address = "28 55th, MI, FL, USA";
     private Order order;
     private int quantity = 5;
     private double finalPrice = 10.00;
@@ -39,7 +42,6 @@ public class BookOrderTest {
         validator = Validation.buildDefaultValidatorFactory().getValidator();
         order = new Order(paymentReference, buyerUsername, new ArrayList<BookOrder>(), address, finalPrice);
         bookOrder = new BookOrder(BookMocks.infiniteJest, null, quantity);
-        isbn = BookMocks.infiniteJest.getIsbn();
     }
 
     @AfterEach
@@ -48,6 +50,37 @@ public class BookOrderTest {
         violations = null;
     }
     
+    @Test
+    public void testEquals(){
+        EqualsVerifier.forClass(order.getClass())
+            .withPrefabValues(Book.class, BookMocks.infiniteJest, BookMocks.onTheRoad)
+            .withIgnoredFields("order", "id")
+            .verify();
+    }
+
+    @Test
+    public void testHashCodeEqual(){
+        BookOrder newBookOrder = new BookOrder(bookOrder.getBook(), order, bookOrder.getQuantity());
+        assertAll(
+            () -> {assertNotSame(order, newBookOrder);},
+            () -> {assertEquals(order.hashCode(), newBookOrder.hashCode());}
+        );
+    }
+
+    @Test
+    public void testHashCodeNotEqual(){
+        assertAll(
+            () -> {
+                assertNotEquals(bookOrder.hashCode(), new BookOrder(BookMocks.onTheRoad, null, bookOrder.getQuantity())
+                    .hashCode());
+            },
+            () -> {
+                assertNotEquals(bookOrder.hashCode(), new BookOrder(bookOrder.getBook(), null, bookOrder.getQuantity() + 1)
+                    .hashCode());
+            }
+        );
+    }
+
     @Test
     public void testGetOrderBeforeAssignment(){
         assertNull(bookOrder.getOrder());
