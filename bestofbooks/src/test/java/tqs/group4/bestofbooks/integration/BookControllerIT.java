@@ -39,7 +39,7 @@ public class BookControllerIT {
 
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, books_orders").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions").executeUpdate();
     }
 
     @AfterEach
