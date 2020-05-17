@@ -37,7 +37,7 @@ public class OrderRepositoryIT {
 
     String username = "someUser", invalidUsername = "unknown";
 
-    @BeforeEach
+    /**@BeforeEach
     public void setUp(){
         bookOrder1 = new BookOrder();
         bookOrder2 = new BookOrder();
@@ -77,5 +77,5 @@ public class OrderRepositoryIT {
 
         //Order queryResults = orderRepository.findById(order1.getId());
         //assertEquals(order1, queryResults);
-    }
+    } */
 }
