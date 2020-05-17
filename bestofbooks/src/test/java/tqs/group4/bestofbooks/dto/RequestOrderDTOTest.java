@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.model.BookOrder;
 
 public class RequestOrderDTOTest {
@@ -45,9 +46,33 @@ public class RequestOrderDTOTest {
     }
 
     @Test
+    public void testGetContent(){
+        requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, address);
+        assertEquals(bookOrders, requestOrderDTO.getContent());
+    }
+
+    @Test
+    public void testGetBuyerUsername(){
+        requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, address);
+        assertEquals(buyerUsername, requestOrderDTO.getBuyerUsername());
+    }
+
+    @Test
+    public void testGetPaymentReference(){
+        requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, address);
+        assertEquals(paymentReference, requestOrderDTO.getPaymentReference());
+    }
+
+    @Test
+    public void testGetAddress(){
+        requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, address);
+        assertEquals(address, requestOrderDTO.getAddress());
+    }
+
+    @Test
     public void whenNoConstraintViolations_thenReturnNoConstraintViolations(){
-        bookOrders.add(new BookOrder());
-        bookOrders.add(new BookOrder());
+        bookOrders.add(new BookOrder(BookMocks.infiniteJest, null, quant1));
+        bookOrders.add(new BookOrder(BookMocks.onTheRoad, null, quant2));
         requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, address);
         violations = validator.validate(requestOrderDTO);
 
@@ -55,8 +80,41 @@ public class RequestOrderDTOTest {
     }
 
     @Test
-    public void whenEmptyIsbns_thenReturnOneConstraintViolation(){
+    public void whenEmptyBooks_thenReturnOneConstraintViolation(){
         requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, address);
+        violations = validator.validate(requestOrderDTO);
+
+        assertEquals(1, violations.size());
+    }
+
+    @Test
+    public void whenBadBuyerUsername_thenReturnOneConstraintViolation(){
+        bookOrders.add(new BookOrder());
+        bookOrders.add(new BookOrder());
+        requestOrderDTO = new RequestOrderDTO(bookOrders, "onetwothreefourfivesixseveneight", paymentReference, address);
+        violations = validator.validate(requestOrderDTO);
+
+        assertEquals(1, violations.size());
+    }
+
+    @Test
+    public void whenBadPaymentReference_thenReturnOneConstraintViolation(){
+        bookOrders.add(new BookOrder());
+        bookOrders.add(new BookOrder());
+        requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, "111111111111111111111", address);
+        violations = validator.validate(requestOrderDTO);
+
+        assertEquals(1, violations.size());
+    }
+
+    @Test
+    public void whenBadAddress_thenReturnOneConstraintViolation(){
+        bookOrders.add(new BookOrder());
+        bookOrders.add(new BookOrder());
+        String badAdress = "";
+        for (int i = 0; i < 60; i++)
+            badAdress += i;
+        requestOrderDTO = new RequestOrderDTO(bookOrders, buyerUsername, paymentReference, badAdress);
         violations = validator.validate(requestOrderDTO);
 
         assertEquals(1, violations.size());
