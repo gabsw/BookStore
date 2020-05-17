@@ -17,6 +17,26 @@ public class RevenueDTO {
         this.isbn = isbn;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getPublisherName() {
+        return publisherName;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
     public static RevenueDTO fromRevenue(Revenue revenue) {
         return new RevenueDTO(revenue.getId(), revenue.getAmount(), revenue.getPublisherName(),
                 revenue.getBookOrder().getId(), revenue.getBookOrder().getBook().getIsbn());

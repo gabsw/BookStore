@@ -1,0 +1,33 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TQS Order Epic",
+		"_postman_id": "e5e16e47-0dda-0556-3b08-c572ab844ebd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get by id",
+			"request": {
+				"url": "{{url}}/api/books/available",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get by user",
+			"request": {
+				"url": "{{url}}/api/buyer/buyer1/orders",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

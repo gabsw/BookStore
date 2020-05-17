@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tqs.group4.bestofbooks.model.Order;
+import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +18,8 @@ public class OrdersController {
     @Autowired
     private OrderService service;
 
-    @GetMapping(value="/id/{id}")
-    public Order getById(@PathVariable int id) {
-        return service.getById(id);
+    @GetMapping(value="/{id}")
+    public OrderDTO getOrderById(@PathVariable int id) {
+        return service.getOrderById(id);
     }
 }

@@ -1,16 +1,14 @@
 package tqs.group4.bestofbooks.controller;
 
-import tqs.group4.bestofbooks.model.Order;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.service.OrderService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/api/buyer")
@@ -20,7 +18,7 @@ public class BuyersController {
     private OrderService orderService;
 
     @GetMapping(value="/{buyerUsername}/orders")
-    public List<Order> getByBuyerUsername(@PathVariable String buyerUsername) {
-        return orderService.getByBuyerUsername(buyerUsername);
+    public List<OrderDTO> getOrdersByBuyerUsername(@PathVariable String buyerUsername) {
+        return orderService.getOrderByBuyerUsername(buyerUsername);
     }
 }

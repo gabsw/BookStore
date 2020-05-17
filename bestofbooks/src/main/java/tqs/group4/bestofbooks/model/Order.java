@@ -2,6 +2,7 @@ package tqs.group4.bestofbooks.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -21,20 +22,21 @@ public class Order {
     private Double finalPrice;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "username_buyer", referencedColumnName = "username", nullable = false)
-    private Buyer buyersByUsernameBuyer;
+    private Buyer buyer;
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private Collection<BooksOrders> booksOrdersById;
+    private Collection<BookOrder> bookOrders;
 //    @OneToMany(mappedBy = "ordersByOrderId", fetch = FetchType.LAZY)
 //    private Collection<Commission> commissionsById;
 
     public Order() {
     }
 
-    public Order(String paymentReference, String address, Double finalPrice, Buyer buyersByUsernameBuyer) {
+    public Order(String paymentReference, String address, Double finalPrice, Buyer buyer) {
         this.paymentReference = paymentReference;
         this.address = address;
         this.finalPrice = finalPrice;
-        this.buyersByUsernameBuyer = buyersByUsernameBuyer;
+        this.buyer = buyer;
+        this.bookOrders = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -53,12 +55,16 @@ public class Order {
         return finalPrice;
     }
 
-    public Buyer getBuyersByUsernameBuyer() {
-        return buyersByUsernameBuyer;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public Collection<BooksOrders> getBooksOrdersById() {
-        return booksOrdersById;
+    public Collection<BookOrder> getBookOrders() {
+        return bookOrders;
+    }
+
+    public void addBookOrder(BookOrder bookOrder) {
+        this.bookOrders.add(bookOrder);
     }
 
 //    public Collection<Commission> getCommissionsById() {

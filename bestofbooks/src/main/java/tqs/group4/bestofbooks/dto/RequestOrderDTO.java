@@ -6,12 +6,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
 import tqs.group4.bestofbooks.model.BookOrder;
 
-@AllArgsConstructor
 public class RequestOrderDTO {
-
     @NotEmpty(message = "Isbn list cannot be empty.")
     private List<BookOrder> content;
    
@@ -26,6 +23,16 @@ public class RequestOrderDTO {
     @Size(min = 1, max = 100, message = "Address must be between 1 and 100 characters")
     @NotBlank(message = "Address cannot be null or whitespace")
     private String address;
+
+    public RequestOrderDTO() {
+    }
+
+    public RequestOrderDTO(List<BookOrder> content,  String buyerUsername, String paymentReference, String address) {
+        this.content = content;
+        this.buyerUsername = buyerUsername;
+        this.paymentReference = paymentReference;
+        this.address = address;
+    }
 
     public List<BookOrder> getContent(){
         return content;

@@ -16,14 +16,14 @@ public class Revenue {
     private String publisherName;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_order_id", referencedColumnName = "id", nullable = false)
-    private BooksOrders booksOrders;
+    private BookOrder bookOrder;
 
     public Revenue() {
     }
 
-    public Revenue(double amount, BooksOrders bookOrder, String publisherName) {
+    public Revenue(double amount, BookOrder bookOrder, String publisherName) {
         this.amount = amount;
-        this.booksOrders = bookOrder;
+        this.bookOrder = bookOrder;
         this.publisherName = publisherName;
     }
 
@@ -35,8 +35,8 @@ public class Revenue {
         return amount;
     }
 
-    public BooksOrders getBookOrder() {
-        return booksOrders;
+    public BookOrder getBookOrder() {
+        return bookOrder;
     }
 
     public String getPublisherName() {

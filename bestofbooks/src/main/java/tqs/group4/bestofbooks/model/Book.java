@@ -28,7 +28,7 @@ public class Book {
     @Column(name = "publisher_name", nullable = false)
     private String publisherName;
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-    private Collection<BooksOrders> booksOrdersByIsbn;
+    private Collection<BookOrder> bookOrders;
 
     public Book() {
     }
@@ -77,8 +77,8 @@ public class Book {
         return description;
     }
 
-    public Collection<BooksOrders> getBooksOrdersByIsbn() {
-        return booksOrdersByIsbn;
+    public Collection<BookOrder> getBookOrders() {
+        return bookOrders;
     }
 
     @Override
