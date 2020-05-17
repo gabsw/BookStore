@@ -61,12 +61,11 @@ public class BookRepositoryIT {
         entityManager.flush();
 
         Pageable p = PageRequest.of(0, 20);
-        Page<Book> bookPage = new PageImpl<>(Lists.newArrayList(BookMocks.infiniteJest, BookMocks.onTheRoad), p, 2);
 
         Page<Book> queryResults = bookRepository.findByQuantityGreaterThan(0, p);
         assertAll("findByQuantityDB",
-                () -> assertTrue(bookPage.getContent().contains(BookMocks.onTheRoad)),
-                () -> assertTrue(bookPage.getContent().contains(BookMocks.infiniteJest))
+                () -> assertTrue(queryResults.getContent().contains(BookMocks.onTheRoad)),
+                () -> assertTrue(queryResults.getContent().contains(BookMocks.infiniteJest))
         );
     }
 

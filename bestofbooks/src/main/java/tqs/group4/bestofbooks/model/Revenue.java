@@ -10,7 +10,7 @@ public class Revenue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "sales_amount", nullable = false)
+    @Column(name = "sales_amount", nullable = false, precision = 2)
     private double amount;
     @Column(name = "publisher_name", nullable = false)
     private String publisherName;

@@ -19,7 +19,7 @@ public class Book {
     private String author;
     @Column(name = "description")
     private String description;
-    @Column(name = "price", nullable = false)
+    @Column(name = "price", nullable = false, precision = 2)
     private double price;
     @Column(name = "quantity", nullable = false)
     private int quantity;

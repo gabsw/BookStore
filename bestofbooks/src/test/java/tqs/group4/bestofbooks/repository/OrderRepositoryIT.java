@@ -1,19 +1,14 @@
 package tqs.group4.bestofbooks.repository;
 
 import com.google.common.collect.Lists;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import tqs.group4.bestofbooks.mocks.BookMocks;
-import tqs.group4.bestofbooks.mocks.OrderMocks;
-import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.model.Order;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
