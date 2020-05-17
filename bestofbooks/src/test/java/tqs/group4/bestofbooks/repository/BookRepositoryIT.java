@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.model.Book;
+import tqs.group4.bestofbooks.model.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -29,7 +30,11 @@ public class BookRepositoryIT {
 
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers").executeUpdate();
+        Publisher littleBrown = new Publisher("little_brown", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Little, Brown", "tin3");
+        Publisher viking = new Publisher("viking", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Viking Press", "tin4");
+        entityManager.persist(littleBrown);
+        entityManager.persist(viking);
     }
 
     @AfterEach
@@ -82,6 +87,26 @@ public class BookRepositoryIT {
         Page<Book> queryResults = bookRepository.search(BookMocks.onTheRoad.getTitle(),
                 BookMocks.onTheRoad.getAuthor(),
                 BookMocks.onTheRoad.getCategory(), p);
+        assertEquals(bookPage, queryResults);
+    }
+    
+    @Test
+    public void whenFindByPublisherName_thenReturnPageOfBooks() {
+    	Publisher pub = new Publisher("username", "passwordHash", "Publisher", "tin");
+    	Book b1 = new Book("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue", "Publisher");
+    	Book b2 = new Book("9876543216842", "Title 2", "Author 2", "Description 2", 15, 3,
+                "Travelogue", "Publisher");
+    	entityManager.persist(pub);
+        entityManager.persist(b1);
+        entityManager.persist(b2);
+        entityManager.flush();
+        
+        Pageable p = PageRequest.of(0, 20);
+        Page<Book> bookPage = new PageImpl<>(Lists.newArrayList(b1, b2), p, 2);
+        
+        Page<Book> queryResults = bookRepository.findByPublisherName("Publisher", p);
+        
         assertEquals(bookPage, queryResults);
     }
 }
