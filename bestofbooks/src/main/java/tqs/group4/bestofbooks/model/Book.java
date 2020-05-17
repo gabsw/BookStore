@@ -27,7 +27,7 @@ public class Book {
     private String category;
     @Column(name = "publisher_name", nullable = false)
     private String publisherName;
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<BookOrder> bookOrders;
 
     public Book() {

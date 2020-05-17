@@ -14,7 +14,7 @@ public class Revenue {
     private double amount;
     @Column(name = "publisher_name", nullable = false)
     private String publisherName;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "book_order_id", referencedColumnName = "id", nullable = false)
     private BookOrder bookOrder;
 

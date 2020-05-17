@@ -15,7 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.mocks.BookMocks;
+import tqs.group4.bestofbooks.mocks.OrderMocks;
 import tqs.group4.bestofbooks.model.Book;
+import tqs.group4.bestofbooks.model.Order;
 
 
 import javax.persistence.EntityManager;
@@ -39,7 +41,7 @@ public class BookControllerIT {
 
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, books_orders").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, books_orders, revenues").executeUpdate();
     }
 
     @AfterEach

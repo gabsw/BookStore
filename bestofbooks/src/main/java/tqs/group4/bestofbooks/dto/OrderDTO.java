@@ -1,9 +1,10 @@
 package tqs.group4.bestofbooks.dto;
 
-import tqs.group4.bestofbooks.model.BookOrder;
 import tqs.group4.bestofbooks.model.Order;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrderDTO {
@@ -12,7 +13,7 @@ public class OrderDTO {
     private String address;
     private Double finalPrice;
     private String buyerName;
-    private Collection<BookOrderDTO> bookOrders;
+    private List<BookOrderDTO> bookOrders;
 
     OrderDTO(Integer id, String paymentReference, String address, Double finalPrice, String buyerName,
                     Collection<BookOrderDTO> bookOrders) {
@@ -21,7 +22,11 @@ public class OrderDTO {
         this.address = address;
         this.finalPrice = finalPrice;
         this.buyerName = buyerName;
-        this.bookOrders = bookOrders;
+        this.bookOrders = new ArrayList<>(bookOrders);
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
@@ -44,7 +49,7 @@ public class OrderDTO {
         return buyerName;
     }
 
-    public Collection<BookOrderDTO> getBookOrders() {
+    public List<BookOrderDTO> getBookOrders() {
         return bookOrders;
     }
 

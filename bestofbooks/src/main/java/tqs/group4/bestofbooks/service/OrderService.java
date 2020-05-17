@@ -29,7 +29,7 @@ public class OrderService {
 
     public List<OrderDTO> getOrderByBuyerUsername(String buyerUsername){
         List<Order> orders = repo.findByBuyerUsername(buyerUsername);
-        if (orders == null) {
+        if (orders.isEmpty()) {
             throw new OrderNotFoundException("No orders for the given username.");
         }
         return orders.stream().map(OrderDTO::fromOrder).collect(Collectors.toList());

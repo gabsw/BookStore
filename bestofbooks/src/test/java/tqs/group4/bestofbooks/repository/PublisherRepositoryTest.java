@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import tqs.group4.bestofbooks.mocks.OrderMocks;
 import tqs.group4.bestofbooks.model.Admin;
+import tqs.group4.bestofbooks.model.Order;
 import tqs.group4.bestofbooks.model.Publisher;
 
 @SpringBootTest
@@ -28,7 +30,7 @@ public class PublisherRepositoryTest {
     
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers, books_orders").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers, books_orders, revenues").executeUpdate();
     }
     
     @Test

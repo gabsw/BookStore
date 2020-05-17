@@ -4,11 +4,13 @@ package tqs.group4.bestofbooks.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
     @Basic
@@ -20,10 +22,10 @@ public class Order {
     @Basic
     @Column(name = "final_price", nullable = false, precision = 2)
     private Double finalPrice;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "username_buyer", referencedColumnName = "username", nullable = false)
     private Buyer buyer;
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<BookOrder> bookOrders;
 //    @OneToMany(mappedBy = "ordersByOrderId", fetch = FetchType.LAZY)
 //    private Collection<Commission> commissionsById;
@@ -37,6 +39,10 @@ public class Order {
         this.finalPrice = finalPrice;
         this.buyer = buyer;
         this.bookOrders = new ArrayList<>();
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
