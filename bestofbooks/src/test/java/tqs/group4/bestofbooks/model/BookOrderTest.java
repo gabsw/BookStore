@@ -54,6 +54,7 @@ public class BookOrderTest {
     public void testEquals(){
         EqualsVerifier.forClass(bookOrder.getClass())
             .withPrefabValues(Book.class, BookMocks.infiniteJest, BookMocks.onTheRoad)
+            .withPrefabValues(Order.class, order, new Order(paymentReference.replace("5", "8"), "someRandomUser", new ArrayList<BookOrder>(), address, finalPrice + 5))
             .withIgnoredFields("order", "id")
             .verify();
     }
