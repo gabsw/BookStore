@@ -38,6 +38,8 @@ public class OrderTests {
             bookOrders.add(bookOrder2);
             order = new Order(paymentReference1, buyerUsername, bookOrders, address, finalPrice);
             order.setId(id);
+            bookOrder1.setOrder(order);
+            bookOrder2.setOrder(order);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -52,8 +54,12 @@ public class OrderTests {
         bookOrder3 = null;
     }
 
+    @Test
     public void testEquals(){
-        EqualsVerifier.forClass(order.getClass()).verify();
+        EqualsVerifier.forClass(order.getClass())
+            .withPrefabValues(BookOrder.class, bookOrder1, bookOrder2)
+            .withIgnoredFields("paymentReference", "id", "address")
+            .verify();
     }
 
     @Test
@@ -73,19 +79,11 @@ public class OrderTests {
                 bookOrders, address, finalPrice).hashCode());
             },
             () -> {
-                assertNotEquals(order.hashCode(), new Order(paymentReference1.replace("8", "J"), buyerUsername,
-                bookOrders, address, finalPrice).hashCode());
-            },
-            () -> {
                 List<BookOrder> newBookOrders = new ArrayList<>();
                 bookOrder3 = new BookOrder(BookMocks.infiniteJest, null, quant2);
                 bookOrders.add(bookOrder3);
                 assertNotEquals(order.hashCode(), new Order(paymentReference1, buyerUsername,
                 newBookOrders, address, finalPrice).hashCode());
-            },
-            () -> {
-                assertNotEquals(order.hashCode(), new Order(paymentReference1, buyerUsername,
-                bookOrders, "whole new address", finalPrice).hashCode());
             },
             () -> {assertNotEquals(order.hashCode(), new Order(paymentReference1, buyerUsername,
                 bookOrders, address, finalPrice + 5).hashCode());

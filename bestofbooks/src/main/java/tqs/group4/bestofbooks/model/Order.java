@@ -1,6 +1,7 @@
 package tqs.group4.bestofbooks.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-@EqualsAndHashCode()
 @Entity
 @Data
 @Table(name = "Orders")
@@ -22,7 +20,6 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @EqualsAndHashCode.Exclude
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -60,5 +57,19 @@ public class Order {
     public void removeBookOrder(BookOrder bookOrder){
         bookOrders.remove(bookOrder);
         bookOrder.setOrder(null);
+    }
+
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null) return false;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return Objects.equals(bookOrders, order.bookOrders)
+            && Objects.equals(buyerUsername, order.buyerUsername)
+            && Objects.equals(finalPrice, order.finalPrice);
+    }
+
+    public int hashCode(){
+        return Objects.hash(buyerUsername, bookOrders, finalPrice);
     }
 }
