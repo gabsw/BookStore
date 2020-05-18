@@ -38,6 +38,7 @@ import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.mocks.BookMocks;
+import tqs.group4.bestofbooks.mocks.PublisherMocks;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.model.BookOrder;
 import tqs.group4.bestofbooks.model.Buyer;
@@ -80,8 +81,9 @@ public class PublisherControllerIT {
         order1.addBookOrder(bookOrder2);
         revenue1 = new Revenue(150, bookOrder1, "Publisher 1");
         revenue2 = new Revenue(300, bookOrder2, "Publisher 1");
-        Publisher viking = new Publisher("viking", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Viking Press", "tin4");
-        entityManager.persist(viking);
+        entityManager.persist(PublisherMocks.brown);
+        entityManager.persist(PublisherMocks.viking);
+        entityManager.persist(PublisherMocks.publisher1);
         entityManager.flush();
     }
 	
@@ -300,8 +302,8 @@ public class PublisherControllerIT {
 	
 	@Test
 	void givenSuccessfulLoginAndMatchingNameAndBookOfAnotherPublisher_whenUpdateAvailableStock_thenStatusForbidden() throws Exception {
-		Publisher littleBrown = new Publisher("little_brown", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Little, Brown", "tin3");
-		entityManager.persist(littleBrown);
+//		Publisher littleBrown = new Publisher("little_brown", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Little, Brown", "tin3");
+//		entityManager.persist(littleBrown);
 		entityManager.persist(BookMocks.infiniteJest);
         entityManager.flush();
         
