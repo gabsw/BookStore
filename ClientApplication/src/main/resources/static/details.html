@@ -47,23 +47,23 @@
 
         <!-- Portfolio Item Row -->
         <div class="row" id="output">
-
             <div class="col-md-6">
                 <img class="img-fluid" src="../Images/51O9tzpYaUL._SY445_QL70_ML2_.jpg" alt="">
             </div>
             <div class="col-md-4">
                 <h3 class="my-3">Description</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
                 <h3 class="my-3">Specifications</h3>
                 <ul>
-                    <li>ISBN: 9789897103667</li>
-                    <li>Editor: Edições Chá das Cinco</li>
-                    <li>Category: Literature</li>
-                    <li>Author: Beth Kery</li>
-                    <li>Price: 120,00</li>
+                    <li id="isbn">ISBN: 9789897103667</li>
+                    <li id="editor">Editor: Edições Chá das Cinco</li>
+                    <li id="category">Category: Literature</li>
+                    <li id="author">Author: Beth Kery</li>
+                    <li id="price">Price: 120,00</li>
 
                 </ul>
             </div>
+
 
         </div>
         <!-- /.row -->
@@ -101,12 +101,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript">
         const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const url = 'http://192.168.160.70:8080/api';
 
-        const product = urlParams.get('isbn');
+        const url = 'http://192.168.160.70:8080/api/books/isbn' +queryString;
+
         window.onload = function getByIsbn(){
-            fetch(url + '/')
+            fetch(url)
+                .then((res) => res.json())
+                .then((data) => {
+                    let info = data["content"];
+                    let isbn = `${data.latitude}`
+                    let editor = `${data.longitude}`
+                    let category = `${data.longitude}`
+                    let author = `${data.longitude}`
+                    let price = `${data.longitude}`
+
+                    document.getElementById('latitude').innerHTML = "Latitude: " + lat;
+                     document.getElementById('longitude').innerHTML = "Longitude: " + lon;
+                    }
+                )
         }
 
     </script>
