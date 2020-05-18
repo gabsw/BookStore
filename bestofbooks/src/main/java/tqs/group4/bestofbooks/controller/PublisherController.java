@@ -15,8 +15,6 @@ public class PublisherController {
     @Autowired
     private RevenueService revenueService;
 
-    // TODO: Missing authentication check
-
     @GetMapping("/{publisherName}/revenue")
     public Page<RevenueDTO> getRevenuesByPublisher(@PathVariable String publisherName, Pageable pageable)
             throws UserNotFoundException {

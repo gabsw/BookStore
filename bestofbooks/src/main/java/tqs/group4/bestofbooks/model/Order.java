@@ -1,10 +1,8 @@
 package tqs.group4.bestofbooks.model;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Orders")

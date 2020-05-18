@@ -2,7 +2,6 @@ package tqs.group4.bestofbooks.controller;
 
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.exception.OrderNotFoundException;
 import tqs.group4.bestofbooks.mocks.OrderMocks;
-import tqs.group4.bestofbooks.model.Order;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import java.util.List;
@@ -24,7 +22,6 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static tqs.group4.bestofbooks.mocks.BuyerMock.buyer1;
 import static tqs.group4.bestofbooks.utils.Json.toJson;
 
 @WebMvcTest(BuyersController.class)
