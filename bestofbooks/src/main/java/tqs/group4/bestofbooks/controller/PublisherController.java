@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
@@ -23,6 +25,11 @@ import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.service.StockService;
+import tqs.group4.bestofbooks.dto.RevenueDTO;
+import tqs.group4.bestofbooks.exception.UserNotFoundException;
+import tqs.group4.bestofbooks.service.RevenueService;
+
+
 
 @CrossOrigin
 @RestController
@@ -31,7 +38,9 @@ public class PublisherController {
 	
 	@Autowired
     private StockService stockService;
-	
+
+    @Autowired
+    private RevenueService revenueService;
 	
 	
 	@GetMapping("{publisherName}/stock")
@@ -47,4 +56,15 @@ public class PublisherController {
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
+    @GetMapping("/{publisherName}/revenue")
+    public Page<RevenueDTO> getRevenuesByPublisher(@PathVariable String publisherName, Pageable pageable)
+            throws UserNotFoundException {
+        return revenueService.getRevenuesByPublisher(publisherName, pageable);
+    }
+
+    @GetMapping("/{publisherName}/revenue/total")
+    public Double getRevenuesTotalByPublisher(@PathVariable String publisherName)
+            throws UserNotFoundException {
+        return revenueService.getRevenuesTotalByPublisher(publisherName);
+    }
 }

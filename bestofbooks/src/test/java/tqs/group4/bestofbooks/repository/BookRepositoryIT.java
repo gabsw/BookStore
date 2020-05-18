@@ -30,7 +30,7 @@ public class BookRepositoryIT {
 
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers, books_orders, revenues").executeUpdate();
         Publisher littleBrown = new Publisher("little_brown", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Little, Brown", "tin3");
         Publisher viking = new Publisher("viking", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Viking Press", "tin4");
         entityManager.persist(littleBrown);
