@@ -6,12 +6,14 @@
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="index.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="jscript/clientIndex.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.html">
-        <img alt="" src="Logo-removebg-preview.png" width="100"/>
+        <img alt="" src="images/Logo-removebg-preview.png" width="100"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -32,15 +34,28 @@
     <div class="text-center"><h1>Explore Our Books</h1></div>
     <p></p>
     <div class="row">
-        <div class="input-group md-form form-sm form-1 col-lg-12">
-            <div class="input-group-prepend">
-                    <span class="input-group-text cyan lighten-2" id="basic-text1">
-                        <i class="fa fa-search"></i>
-                    </span>
+        <div class="input-group">
+            <input aria-label="Search" class="form-control" id="findBook" placeholder="Ex:Book Title" type="search">
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="book_title" value="option1">
+                <label class="form-check-label" for="book_title">Title</label>
             </div>
-            <input aria-label="Search" class="form-control my-0 py-1" placeholder="Search" type="text">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="book_author" value="option2">
+                <label class="form-check-label" for="book_author">Author</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="book_category" value="option2">
+                <label class="form-check-label" for="book_category">Category</label>
+            </div>
         </div>
+
+        <button class="btn-save btn btn-primary " onclick="searchBooksNoLogin()">Search</button>
+
     </div>
+    <!--end of col-->
+
     <p></p>
     <div class="row">
         <div class="col-lg-2 mx-auto">
@@ -53,18 +68,16 @@
                                 <dt><h5 class="mt-0 font-weight-bold mb-2">Filters</h5></dt>
                                 <dd>
                                     <div class="dropdown">
-                                        <button aria-expanded="false" aria-haspopup="true"
-                                                class="btn btn-sm dropdown-toggle"
-                                                data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" type="button">
                                             Filter By:
                                         </button>
                                         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Title</a>
-                                            <a class="dropdown-item" href="#">Lowest to Highest Price</a>
-                                            <a class="dropdown-item" href="#">Highest to Lowest Price</a>
+                                            <button class="dropdown-item" type="button" onclick="lowestNoLogin()" >Lowest to Highest Price</button>
+                                            <button class="dropdown-item" type="button" onclick="highestNoLogin()">Highest to Lowest Price</button>
                                         </div>
                                     </div>
                                 </dd>
+
                             </dl>
                         </div>
                     </div>
@@ -72,15 +85,11 @@
 
             </ul>
         </div>
-
         <div class="col-lg-8 mx-auto">
 
             <!-- List group-->
             <ul class="list-group shadow" id="output">
 
-                <!-- list group item-->
-
-                <!-- End -->
 
             </ul>
             <!-- End -->
@@ -101,30 +110,6 @@
     </ul>
 </nav>
 
-<!-- Modal for Details -->
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"
-     tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Details</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" id="description">
-                    </li>
-                    <li class="list-group-item" id="isbn" ></li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script crossorigin="anonymous"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -138,44 +123,7 @@
 
 
 <script type="text/javascript">
-    function getBooks() {
-        fetch('http://192.168.160.70:8080/api/books/available')
-            .then(res => res.json())
-            .then((data) => {
-                let output = '';
-                data["content"].forEach(function (book) {
-                    output += `
-                <li class="list-group-item">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
-                            </ul>
-                            <div class="btn-group" style="width:100%">
-                                <a class="btn btn-info btn-sm" data-target="#exampleModal" data-toggle="modal"
-                                   role="button" id="detailsModal">More Details</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-                         `;
-                    let isbn = `ISBN: ${book.isbn}`;
-                    document.getElementById('isbn').innerHTML = isbn;
-
-                })
-                document.getElementById('output').innerHTML = output;
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
-        window.onload = getBooks();
-
-
-
+    document.onload = getBooksNoLogin();
 </script>
 </body>
 </html>

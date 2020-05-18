@@ -7,12 +7,12 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">
-            <img src="Logo-removebg-preview.png" alt="" width="100" />
+            <img src="images/Logo-removebg-preview.png" alt="" width="100" />
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -41,25 +41,25 @@
     <div class="container py-5">
 
         <!-- Portfolio Item Heading -->
-        <h1 class="my-4">
-            Awesome Product
+        <h1 class="my-4" id="book_title">
+
         </h1>
 
         <!-- Portfolio Item Row -->
         <div class="row" id="output">
-            <div class="col-md-6">
-                <img class="img-fluid" src="../Images/51O9tzpYaUL._SY445_QL70_ML2_.jpg" alt="">
+            <div class="col-md-6" align="center">
+                <img src="images/generic.jpg" class="img-fluid" width="300"/>
             </div>
             <div class="col-md-4">
-                <h3 class="my-3">Description</h3>
-                <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                <h3 class="my-3">Specifications</h3>
+                <h2 class="my-3">Description</h2>
+                <p id="description"></p>
+                <h2 class="my-3">Specifications</h2>
                 <ul>
-                    <li id="isbn">ISBN: 9789897103667</li>
-                    <li id="editor">Editor: Edições Chá das Cinco</li>
-                    <li id="category">Category: Literature</li>
-                    <li id="author">Author: Beth Kery</li>
-                    <li id="price">Price: 120,00</li>
+                    <li id="isbn"></li>
+                    <li id="editor"></li>
+                    <li id="category"></li>
+                    <li id="author"></li>
+                    <li id="price"></li>
 
                 </ul>
             </div>
@@ -69,31 +69,11 @@
         <!-- /.row -->
 
         <p></p>
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#buyModal" >Add to Cart</button>
-        <p></p>
         <a href="clientIndex.html" class="btn btn-info btn-sm" role="button">Go Back</a>
 
     </div>
     <!-- /.container -->
-    <!-- Modal for Purchase -->
-    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modelbuyid">Bought!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Item was added to Cart !
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <script src="../Scripts/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -101,22 +81,27 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript">
         const queryString = window.location.search;
-
-        const url = 'http://192.168.160.70:8080/api/books/isbn' +queryString;
+        const urlParams = new URLSearchParams(queryString);
+        const product = urlParams.get('isbn')
+        const url = 'http://192.168.160.70:8080/api/books/isbn/' +product;
 
         window.onload = function getByIsbn(){
             fetch(url)
                 .then((res) => res.json())
                 .then((data) => {
-                    let info = data["content"];
-                    let isbn = `${data.latitude}`
-                    let editor = `${data.longitude}`
-                    let category = `${data.longitude}`
-                    let author = `${data.longitude}`
-                    let price = `${data.longitude}`
+                    let isbn = `${data.isbn}`;
+                    let editor = `${data.publisherName}`;
+                    let category = `${data.category}`;
+                    let author = `${data.author}`;
+                    let price = `${data.price}`;
+                    let book_title  = `${data.title}`;
+                    document.getElementById('isbn').innerHTML = "ISBN: " + isbn;
+                    document.getElementById('editor').innerHTML = "Editor: " + editor;
+                    document.getElementById('category').innerHTML = "Category: " + category;
+                    document.getElementById('author').innerHTML = "Author: " + author;
+                    document.getElementById('price').innerHTML = "Price: " + price;
+                    document.getElementById('book_title').innerHTML = book_title;
 
-                    document.getElementById('latitude').innerHTML = "Latitude: " + lat;
-                     document.getElementById('longitude').innerHTML = "Longitude: " + lon;
                     }
                 )
         }
