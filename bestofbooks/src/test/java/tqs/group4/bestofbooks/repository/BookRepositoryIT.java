@@ -35,6 +35,7 @@ public class BookRepositoryIT {
         Publisher viking = new Publisher("viking", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Viking Press", "tin4");
         entityManager.persist(littleBrown);
         entityManager.persist(viking);
+        entityManager.flush();
     }
 
     @AfterEach
@@ -66,12 +67,11 @@ public class BookRepositoryIT {
         entityManager.flush();
 
         Pageable p = PageRequest.of(0, 20);
-        Page<Book> bookPage = new PageImpl<>(Lists.newArrayList(BookMocks.infiniteJest, BookMocks.onTheRoad), p, 2);
-
+        
         Page<Book> queryResults = bookRepository.findByQuantityGreaterThan(0, p);
         assertAll("findByQuantityDB",
-                () -> assertTrue(bookPage.getContent().contains(BookMocks.onTheRoad)),
-                () -> assertTrue(bookPage.getContent().contains(BookMocks.infiniteJest))
+                () -> assertTrue(queryResults.getContent().contains(BookMocks.onTheRoad)),
+                () -> assertTrue(queryResults.getContent().contains(BookMocks.infiniteJest))
         );
     }
 

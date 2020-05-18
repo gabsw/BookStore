@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.model.Book;
-
+import tqs.group4.bestofbooks.model.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -39,7 +39,12 @@ public class BookControllerIT {
 
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers").executeUpdate();
+        Publisher littleBrown = new Publisher("little_brown", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Little, Brown", "tin3");
+        Publisher viking = new Publisher("viking", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Viking Press", "tin4");
+        entityManager.persist(littleBrown);
+        entityManager.persist(viking);
+        entityManager.flush();
     }
 
     @AfterEach

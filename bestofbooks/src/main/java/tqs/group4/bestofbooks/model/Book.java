@@ -55,7 +55,11 @@ public class Book implements Serializable {
         return author;
     }
 
-    public double getPrice() {
+    public String getDescription() {
+		return description;
+	}
+
+	public double getPrice() {
         return price;
     }
 
