@@ -10,7 +10,7 @@
 		{
 			"name": "get by id",
 			"request": {
-				"url": "{{url}}/api/books/available",
+				"url": "{{url}}/api/order/1",
 				"method": "GET",
 				"header": [],
 				"body": {},

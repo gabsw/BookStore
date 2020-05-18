@@ -10,7 +10,7 @@
 		{
 			"name": "get revenue by publisher",
 			"request": {
-				"url": "{{url}}/api/publisher/Publisher1/revenue",
+				"url": "{{url}}/api/publisher/Publisher 1/revenue",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -21,7 +21,7 @@
 		{
 			"name": "get total in revenue by publisher",
 			"request": {
-				"url": "{{url}}/api/publisher/Publisher1/revenue/total",
+				"url": "{{url}}/api/publisher/Publisher 1/revenue/total",
 				"method": "GET",
 				"header": [],
 				"body": {},

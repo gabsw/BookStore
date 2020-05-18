@@ -122,3 +122,6 @@ INSERT INTO public.books_orders (id, isbn, order_id, quantity) VALUES (3, '11111
 
 insert into Commissions (id, amount, order_id) values (1, 2.00, 1);
 insert into Commissions (id, amount, order_id) values (2, 2.00, 2);
+
+insert into Revenues (id, sales_amount, book_order_id, publisher_name) values (1, 20.00, 1, 'Publisher 1');
+insert into Revenues (id, sales_amount, book_order_id, publisher_name) values (2, 30.50, 3, 'Publisher 1');
