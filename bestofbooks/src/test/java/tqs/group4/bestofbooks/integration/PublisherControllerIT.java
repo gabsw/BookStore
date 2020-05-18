@@ -302,8 +302,6 @@ public class PublisherControllerIT {
 	
 	@Test
 	void givenSuccessfulLoginAndMatchingNameAndBookOfAnotherPublisher_whenUpdateAvailableStock_thenStatusForbidden() throws Exception {
-//		Publisher littleBrown = new Publisher("little_brown", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Little, Brown", "tin3");
-//		entityManager.persist(littleBrown);
 		entityManager.persist(BookMocks.infiniteJest);
         entityManager.flush();
         
