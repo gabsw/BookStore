@@ -28,7 +28,7 @@ public class AdminRepositoryTest {
     
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, admin").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, admin, books_orders, revenues").executeUpdate();
     }
     
     @Test

@@ -13,7 +13,9 @@ import org.mockito.internal.verification.VerificationModeFactory;
 import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.dto.UserDto;
+import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
+import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Admin;
 import tqs.group4.bestofbooks.model.Buyer;
@@ -225,7 +227,7 @@ public class LoginServicesTest {
 	void givenInvalidUsername_whenGetUserDto_thenThrowUserNotFoundException() {
 		when(buyerRepository.existsById("username")).thenReturn(false);
 		when(adminRepository.existsById("username")).thenReturn(false);
-		when(publisherRepository.existsById("username")).thenReturn(false);
+		when(publisherRepository.existsByUsername("username")).thenReturn(false);
 		
 		assertThrows(UserNotFoundException.class,
                 () -> loginService.getUserDtoByUsername("username"));
@@ -237,5 +239,67 @@ public class LoginServicesTest {
                 () -> loginService.getUserDtoByUsername(null));
 	}
 	
+	@Test
+	void givenBuyerUsername_whenCheckUserIsBuyer_thenNoExceptionThrown() throws LoginRequiredException, ForbiddenUserException {
+		when(buyerRepository.existsById("username")).thenReturn(true);
+		
+		loginService.checkUserIsBuyer("username");
+	}
+	
+	@Test
+	void givenNullUsername_whenCheckUserIsBuyer_thenThrowLoginRequiredException() {
+		assertThrows(LoginRequiredException.class,
+                () -> loginService.checkUserIsBuyer(null));
+	}
+	
+	@Test
+	void givenInvalidOrAdminOrPublisherUsername_whenCheckUserIsBuyer_thenForbiddenUserExceptionThrown() {
+		when(buyerRepository.existsById("username")).thenReturn(false);
+		
+		assertThrows(ForbiddenUserException.class,
+                () -> loginService.checkUserIsBuyer("username"));
+	}
+	
+	@Test
+	void givenAdminUsername_whenCheckUserIsAdmin_thenNoExceptionThrown() throws LoginRequiredException, ForbiddenUserException {
+		when(adminRepository.existsById("username")).thenReturn(true);
+		
+		loginService.checkUserIsAdmin("username");
+	}
+	
+	@Test
+	void givenNullUsername_whenCheckUserIsAdmin_thenThrowLoginRequiredException() {
+		assertThrows(LoginRequiredException.class,
+                () -> loginService.checkUserIsAdmin(null));
+	}
+	
+	@Test
+	void givenInvalidOrBuyerOrPublisherUsername_whenCheckUserIsAdmin_thenForbiddenUserExceptionThrown() {
+		when(adminRepository.existsById("username")).thenReturn(false);
+		
+		assertThrows(ForbiddenUserException.class,
+                () -> loginService.checkUserIsAdmin("username"));
+	}
+	
+	@Test
+	void givenPublisherUsername_whenCheckUserIsPublisher_thenNoExceptionThrown() throws LoginRequiredException, ForbiddenUserException {
+		when(publisherRepository.existsByUsername("username")).thenReturn(true);
+		
+		loginService.checkUserIsPublisher("username");
+	}
+	
+	@Test
+	void givenNullUsername_whenCheckUserIsPublisher_thenThrowLoginRequiredException() {
+		assertThrows(LoginRequiredException.class,
+                () -> loginService.checkUserIsPublisher(null));
+	}
+	
+	@Test
+	void givenInvalidOrBuyerOrAdminUsername_whenCheckUserIsPublisher_thenForbiddenUserExceptionThrown() {
+		when(publisherRepository.existsByUsername("username")).thenReturn(false);
+		
+		assertThrows(ForbiddenUserException.class,
+                () -> loginService.checkUserIsPublisher("username"));
+	}
 
 }
