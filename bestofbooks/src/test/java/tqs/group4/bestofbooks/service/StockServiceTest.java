@@ -126,7 +126,7 @@ public class StockServiceTest {
         
         StockDto returned = service.updateBookStock("Publisher", inStock, new MockHttpServletRequest());
         assertEquals(returned.getIsbn(), inStock.getIsbn());
-        assertEquals(returned.getQuantity(), 10);
+        assertEquals(10, returned.getQuantity());
 	}
 	
 	@Test

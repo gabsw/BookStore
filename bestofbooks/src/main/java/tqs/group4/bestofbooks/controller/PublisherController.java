@@ -17,14 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tqs.group4.bestofbooks.dto.StockDto;
-import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
-import tqs.group4.bestofbooks.repository.BookRepository;
-import tqs.group4.bestofbooks.service.LoginServices;
 import tqs.group4.bestofbooks.service.StockService;
 
 @CrossOrigin

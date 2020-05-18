@@ -60,11 +60,10 @@ public class StockDto implements Serializable{
 		if (isbn == null) {
 			if (other.isbn != null)
 				return false;
-		} else if (!isbn.equals(other.isbn))
+		}
+		else if (!isbn.equals(other.isbn))
 			return false;
-		if (quantity != other.quantity)
-			return false;
-		return true;
+		return (quantity == other.quantity);
 	}
 	
 
