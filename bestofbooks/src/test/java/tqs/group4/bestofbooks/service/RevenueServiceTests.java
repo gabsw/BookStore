@@ -42,7 +42,7 @@ public class RevenueServiceTests {
         Pageable p = PageRequest.of(0, 20);
         Page<Revenue> revenuePage = new PageImpl<>(Lists.newArrayList(RevenueMocks.revenue1,
                 RevenueMocks.revenue2), p, 2);
-        when(publisherRepository.existsByUsername(RevenueMocks.revenue1.getPublisherName()))
+        when(publisherRepository.existsByName(RevenueMocks.revenue1.getPublisherName()))
                 .thenReturn(true);
         when(revenueRepository.findByPublisherName(RevenueMocks.revenue1.getPublisherName(), p))
                 .thenReturn(revenuePage);
@@ -58,7 +58,7 @@ public class RevenueServiceTests {
     @Test
     void givenUnknownPublisherName_UserNotFoundExceptionIsThrown() {
         Pageable p = PageRequest.of(0, 20);
-        when(publisherRepository.existsByUsername("NONE")).thenReturn(false);
+        when(publisherRepository.existsByName("NONE")).thenReturn(false);
 
         assertThrows(UserNotFoundException.class, () -> service.getRevenuesByPublisher("NONE", p));
         assertThrows(UserNotFoundException.class, () -> service.getRevenuesTotalByPublisher("NONE"));
@@ -69,7 +69,7 @@ public class RevenueServiceTests {
         Pageable p = PageRequest.of(0, 20);
         Page<Revenue> revenuePage = new PageImpl<>(Lists.newArrayList(RevenueMocks.revenue1,
                 RevenueMocks.revenue2), p, 2);
-        when(publisherRepository.existsByUsername(RevenueMocks.revenue1.getPublisherName()))
+        when(publisherRepository.existsByName(RevenueMocks.revenue1.getPublisherName()))
                 .thenReturn(true);
         when(revenueRepository.totalSalesAmountByPublisher(RevenueMocks.revenue1.getPublisherName()))
                 .thenReturn(500.0);

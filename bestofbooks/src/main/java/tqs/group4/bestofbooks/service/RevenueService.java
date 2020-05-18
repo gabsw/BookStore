@@ -22,7 +22,7 @@ public class RevenueService {
 
     public Page<RevenueDTO> getRevenuesByPublisher(String publisherName, Pageable pageable)
             throws UserNotFoundException {
-        if (!publisherRepository.existsByUsername(publisherName)) {
+        if (!publisherRepository.existsByName(publisherName)) {
             throw new UserNotFoundException("Publisher named " + publisherName + " was not found.");
         }
         return revenueRepository.findByPublisherName(publisherName, pageable).map(RevenueDTO::fromRevenue);
@@ -30,7 +30,7 @@ public class RevenueService {
 
     public Double getRevenuesTotalByPublisher(String publisherName)
             throws UserNotFoundException {
-        if (!publisherRepository.existsByUsername(publisherName)) {
+        if (!publisherRepository.existsByName(publisherName)) {
             throw new UserNotFoundException("Publisher named " + publisherName + " was not found.");
         }
         return revenueRepository.totalSalesAmountByPublisher(publisherName);
