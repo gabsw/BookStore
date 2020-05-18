@@ -7,6 +7,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="index.css" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -42,14 +43,25 @@
     <div class="text-center"><h1>Explore Our Books</h1></div>
     <p></p>
     <div class="row">
-        <div class="input-group md-form form-sm form-1 col-lg-12">
-            <div class="input-group-prepend">
-                    <span class="input-group-text cyan lighten-2" id="basic-text1">
-                        <i class="fa fa-search"></i>
-                    </span>
+        <div class="input-group">
+            <input aria-label="Search" class="form-control" id="findBook" placeholder="Ex:Book Title" type="search">
+            <div class="btn-group " data-toggle="buttons">
+                <label class="btn btn-primary active ">
+                    <input type="checkbox" value="book_title">Title
+                </label>
+                <label class="btn btn-primary" >
+                    <input type="checkbox" value="book_author"> Author
+                </label>
+                <label class="btn btn-primary">
+                    <input type="checkbox" value="book_category"> Category
+                </label>
             </div>
-            <input aria-label="Search" class="form-control my-0 py-1" placeholder="Search" type="text">
         </div>
+        <button class="btn-save btn btn-primary " onclick="searchBooks()">Search</button>
+
+        </div>
+        <!--end of col-->
+    </div>
     </div>
     <p></p>
     <div class="row">
@@ -63,7 +75,7 @@
                                 <dt><h5 class="mt-0 font-weight-bold mb-2">Filters</h5></dt>
                                 <dd>
                                     <div class="dropdown">
-                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" type="button">
                                             Filter By:
                                         </button>
                                         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
@@ -84,51 +96,7 @@
         <div class="col-lg-8 mx-auto">
 
             <!-- List group-->
-            <ul class="list-group shadow">
-
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Author: Beth Kery </li>
-                                <li class="list-group-item">Category:  Literature </li>
-                                <li class="list-group-item">Publisher: Edições Chá das Cinco</li>
-                                <li class="list-group-item">Price: <strong>50.00</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> 50</li>
-                            </ul>
-                            <div class="btn-group" style="width:100%">
-                                <a class="btn btn-info" href="details.html" role="button">More Details</a>
-                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </li>
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Author: Beth Kery </li>
-                                <li class="list-group-item">Category:  Literature </li>
-                                <li class="list-group-item">Publisher: Edições Chá das Cinco</li>
-                                <li class="list-group-item">Price: <strong>50.00</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> 50</li>
-                            </ul>
-                            <div class="btn-group" style="width:100%">
-                                <a class="btn btn-info" href="details.html" role="button">More Details</a>
-                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </li>
-                <!-- list group item-->
+            <ul class="list-group shadow" id="output">
 
 
             </ul>
@@ -136,6 +104,7 @@
         </div>
     </div>
 </div>
+<p></p>
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item disabled">
@@ -157,9 +126,90 @@
 
 
 <script type="text/javascript">
+    let url = 'http://192.168.160.70:8080/api';
+
+    function searchBooks() {
+        let book_title = document.getElementById("findBook").value;
+        fetch(url+'/books/search?title='+ book_title)
+            .then(res => res.json())
+            .then((data) => {
+                let output = '';
+                data["content"].forEach(function (book) {
+                    output += `
+                <li class="list-group-item">
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" >Author: ${book.author} </li>
+                                <li class="list-group-item">Category: ${book.category} </li>
+                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                            </ul>
+                            <div class="btn-group" style="width:100%">
+                                <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
+                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End -->
+                </li>
+                         `;
+
+                })
+                document.getElementById('output').innerHTML = output;
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    window.onload = function getBooks(){
+        fetch(url + '/books/available')
+            .then(res => res.json())
+            .then((data) => {
+                let output = '';
+                data["content"].forEach(function (book) {
+                    output += `
+                <li class="list-group-item">
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" >Author: ${book.author} </li>
+                                <li class="list-group-item">Category: ${book.category} </li>
+                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                            </ul>
+                            <div class="btn-group" style="width:100%">
+                                <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
+                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End -->
+                </li>
+                         `;
+
+                })
+                document.getElementById('output').innerHTML = output;
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+
     function myFunction() {
         alert("Item Added To Cart!");
     }
-</script>
+
+    </script>
 </body>
 </html>

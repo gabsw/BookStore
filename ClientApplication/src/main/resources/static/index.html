@@ -79,28 +79,7 @@
             <ul class="list-group shadow" id="output">
 
                 <!-- list group item-->
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
 
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Author: Beth Kery </li>
-                                <li class="list-group-item">Category:  Literature </li>
-                                <li class="list-group-item">Publisher: Edições Chá das Cinco</li>
-                                <li class="list-group-item">Price: <strong>50.00</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> 50</li>
-                            </ul>
-                            <div class="btn-group" style="width:100%">
-                                <a class="btn btn-info btn-sm" data-target="#exampleModal" data-toggle="modal"
-                                   role="button">More Details</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- End -->
-                </li>
                 <!-- End -->
 
             </ul>
@@ -135,9 +114,9 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Description:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
+                    <li class="list-group-item" id="description">
                     </li>
-                    <li class="list-group-item">ISBN: 9789897103667 </li>
+                    <li class="list-group-item" id="isbn" ></li>
                 </ul>
             </div>
             <div class="modal-footer">
@@ -159,17 +138,43 @@
 
 
 <script type="text/javascript">
-    function getCoord() {
-        fetch('http://localhost:8080/api/books/isbn/1111111111111')
+    function getBooks() {
+        fetch('http://192.168.160.70:8080/api/books/available')
             .then(res => res.json())
-            .then((out) => {
-                console.log('Checkout this JSON! ', out);
+            .then((data) => {
+                let output = '';
+                data["content"].forEach(function (book) {
+                    output += `
+                <li class="list-group-item">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" >Author: ${book.author} </li>
+                                <li class="list-group-item">Category: ${book.category} </li>
+                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                            </ul>
+                            <div class="btn-group" style="width:100%">
+                                <a class="btn btn-info btn-sm" data-target="#exampleModal" data-toggle="modal"
+                                   role="button" id="detailsModal">More Details</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                         `;
+                    let isbn = `ISBN: ${book.isbn}`;
+                    document.getElementById('isbn').innerHTML = isbn;
+
+                })
+                document.getElementById('output').innerHTML = output;
             })
             .catch((error) => {
                 console.log(error)
             })
     }
-    window.onload = getCoord();
+        window.onload = getBooks();
+
+
 
 </script>
 </body>
