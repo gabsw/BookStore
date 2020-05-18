@@ -27,7 +27,7 @@ public class BuyerRepositoryTest {
     
     @BeforeEach
     public void before() {
-        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, buyers").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, buyers, books_orders, revenues").executeUpdate();
     }
     
     @Test
