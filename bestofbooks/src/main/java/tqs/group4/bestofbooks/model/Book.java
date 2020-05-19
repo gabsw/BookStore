@@ -57,7 +57,11 @@ public class Book {
         return author;
     }
 
-    public double getPrice() {
+    public String getDescription() {
+		return description;
+	}
+
+	public double getPrice() {
         return price;
     }
 
@@ -73,9 +77,6 @@ public class Book {
         return publisherName;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
     public Collection<BookOrder> getBookOrders() {
         return bookOrders;
