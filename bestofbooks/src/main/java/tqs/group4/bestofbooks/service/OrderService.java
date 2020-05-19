@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.RequestOrderDTO;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
+import tqs.group4.bestofbooks.exception.NotEnoughStockException;
 import tqs.group4.bestofbooks.exception.OrderNotFoundException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.*;
@@ -41,6 +42,9 @@ public class OrderService {
     private UserService userService;
 
     @Autowired
+    private StockService stockService;
+
+    @Autowired
     private RevenueService revenueService;
 
     @Autowired
@@ -63,12 +67,14 @@ public class OrderService {
         return orders.stream().map(OrderDTO::fromOrder).collect(Collectors.toList());
     }
 
-    public OrderDTO createOrderDTO(RequestOrderDTO requestOrderDTO) throws BookNotFoundException, UserNotFoundException {
+    public OrderDTO createOrderDTO(RequestOrderDTO requestOrderDTO)
+            throws BookNotFoundException, UserNotFoundException, NotEnoughStockException {
         Order order = createOrder(requestOrderDTO);
         List<BookOrder> bookOrders = createBooksOrders(order, requestOrderDTO);
 
         for (BookOrder bookOrder : bookOrders) {
             order.addBookOrder(bookOrder);
+            stockService.decreaseStockAfterSale(bookOrder.getBook(), bookOrder.getQuantity());
         }
 
         persistNewOrder(order, createRevenues(bookOrders));
@@ -87,7 +93,7 @@ public class OrderService {
     }
 
     private List<BookOrder> createBooksOrders(Order order, RequestOrderDTO requestOrderDTO)
-            throws BookNotFoundException {
+            throws BookNotFoundException, NotEnoughStockException {
         Map<Book, Integer> booksWithQuantities = bookService.retrieveBooksAndQuantitiesFromIncomingOrderDTOS(
                 requestOrderDTO.getIncomingBookOrderDTOS());
         List<BookOrder> bookOrders = new ArrayList<>();
@@ -120,4 +126,6 @@ public class OrderService {
             revenueRepository.save(revenue);
         }
     }
+
+
 }

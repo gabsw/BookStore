@@ -3,7 +3,9 @@ package tqs.group4.bestofbooks.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tqs.group4.bestofbooks.dto.IncomingBookOrderDTO;
+import tqs.group4.bestofbooks.dto.RequestOrderDTO;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
+import tqs.group4.bestofbooks.exception.NotEnoughStockException;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.repository.BookRepository;
 
@@ -57,17 +59,25 @@ public class BookService {
 
     public Map<Book, Integer> retrieveBooksAndQuantitiesFromIncomingOrderDTOS(List<IncomingBookOrderDTO>
                                                                                       incomingBookOrderDTOS)
-            throws BookNotFoundException {
+            throws BookNotFoundException, NotEnoughStockException {
         Map<Book, Integer> booksWithQuantities = new HashMap<>();
         for (IncomingBookOrderDTO incomingOrder : incomingBookOrderDTOS) {
             Book book = bookRepository.findByIsbn(incomingOrder.getIsbn());
+            int quantityInRequest = incomingOrder.getQuantity();
             if (book == null) {
                 throw new BookNotFoundException("Book with " + incomingOrder.getIsbn() +
                         " was not found in the platform.");
+            } else if (!checkIfBookHasEnoughCopies(book, quantityInRequest)) {
+                throw new NotEnoughStockException(book.getTitle() + " does not have " +
+                        "enough copies in stock to fulfill order request.");
             } else {
-                booksWithQuantities.put(book, incomingOrder.getQuantity());
+                booksWithQuantities.put(book, quantityInRequest);
             }
         }
         return booksWithQuantities;
+    }
+
+    private boolean checkIfBookHasEnoughCopies(Book book, int quantity) {
+        return book.getQuantity() >= quantity;
     }
 }

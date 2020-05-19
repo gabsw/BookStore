@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.RequestOrderDTO;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
+import tqs.group4.bestofbooks.exception.NotEnoughStockException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.service.OrderService;
 
@@ -29,7 +30,7 @@ public class OrdersController {
     // TODO: Check validation exception
     @PostMapping("/")
     public ResponseEntity<OrderDTO> createOrder(@Valid @RequestBody RequestOrderDTO requestOrderDTO)
-            throws BookNotFoundException, UserNotFoundException {
+            throws BookNotFoundException, UserNotFoundException, NotEnoughStockException {
         OrderDTO createdOrder = service.createOrderDTO(requestOrderDTO);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
