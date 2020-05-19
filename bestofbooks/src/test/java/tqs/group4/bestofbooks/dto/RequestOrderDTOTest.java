@@ -1,3 +1,4 @@
+/*
 package tqs.group4.bestofbooks.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -128,4 +129,4 @@ public class RequestOrderDTOTest {
 
         assertEquals(3, violations.size());
     }
-}
+}*/

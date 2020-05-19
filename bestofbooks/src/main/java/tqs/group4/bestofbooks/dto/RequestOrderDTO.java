@@ -6,11 +6,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import tqs.group4.bestofbooks.model.BookOrder;
-
 public class RequestOrderDTO {
     @NotEmpty(message = "Isbn list cannot be empty.")
-    private List<BookOrder> content;
+    private List<IncomingBookOrderDTO> incomingBookOrderDTOS;
    
     @Size(min = 1, max = 20, message = "Buyer's username must be between 1 and 20 characters")
     @NotBlank(message = "Buyer's username cannot be null or whitespace")
@@ -27,15 +25,16 @@ public class RequestOrderDTO {
     public RequestOrderDTO() {
     }
 
-    public RequestOrderDTO(List<BookOrder> content,  String buyerUsername, String paymentReference, String address) {
-        this.content = content;
+    public RequestOrderDTO(List<IncomingBookOrderDTO> incomingBookOrderDTOS,  String buyerUsername,
+                           String paymentReference, String address) {
+        this.incomingBookOrderDTOS = incomingBookOrderDTOS;
         this.buyerUsername = buyerUsername;
         this.paymentReference = paymentReference;
         this.address = address;
     }
 
-    public List<BookOrder> getContent(){
-        return content;
+    public List<IncomingBookOrderDTO> getIncomingBookOrderDTOS() {
+        return incomingBookOrderDTOS;
     }
 
     public String getBuyerUsername(){

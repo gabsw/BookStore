@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
+import tqs.group4.bestofbooks.model.BookOrder;
 import tqs.group4.bestofbooks.repository.PublisherRepository;
 import tqs.group4.bestofbooks.repository.RevenueRepository;
 
@@ -14,6 +15,8 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class RevenueService {
+    private static final double REVENUE_PERCENTAGE = 0.80;
+
     @Autowired
     private RevenueRepository revenueRepository;
 
@@ -34,5 +37,9 @@ public class RevenueService {
             throw new UserNotFoundException("Publisher named " + publisherName + " was not found.");
         }
         return revenueRepository.totalSalesAmountByPublisher(publisherName);
+    }
+
+    public double computeRevenueAmountByBookOrder(BookOrder bookOrder) {
+        return bookOrder.getQuantity() * bookOrder.getBook().getPrice() * REVENUE_PERCENTAGE;
     }
 }
