@@ -162,8 +162,10 @@ function searchBooks() {
         .then(res => res.json())
         .then((data) => {
             let output = '';
-            data["content"].forEach(function (book) {
-                output += `
+            if ( data["content"].length == 0) { output = '<h1 class="mt-0 font-weight-bold mb-2" align="center">Nothing Found !</h1>';}
+            else {
+                data["content"].forEach(function (book) {
+                        output += `
                 <li class="list-group-item">
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
@@ -186,7 +188,9 @@ function searchBooks() {
                     <!-- End -->
                 </li>
                          `;
-            })
+                    }
+                )
+            }
             document.getElementById('output').innerHTML = output;
         })
         .catch((error) => {
@@ -207,8 +211,10 @@ function searchBooksNoLogin() {
         .then(res => res.json())
         .then((data) => {
             let output = '';
-            data["content"].forEach(function (book) {
-                output += `
+            if ( data["content"].length == 0) { output = '<h1 class="mt-0 font-weight-bold mb-2" align="center">Nothing Found !</h1>';}
+            else {
+                data["content"].forEach(function (book) {
+                    output += `
                 <li class="list-group-item">
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
@@ -230,7 +236,8 @@ function searchBooksNoLogin() {
                     <!-- End -->
                 </li>
                          `;
-            })
+                })
+            }
             document.getElementById('output').innerHTML = output;
         })
         .catch((error) => {
