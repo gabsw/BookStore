@@ -1,5 +1,6 @@
 package tqs.group4.bestofbooks.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Book {
     private String category;
     @Column(name = "publisher_name", nullable = false)
     private String publisherName;
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<BookOrder> bookOrders;
 
@@ -57,7 +59,11 @@ public class Book {
         return author;
     }
 
-    public double getPrice() {
+    public String getDescription() {
+		return description;
+	}
+
+	public double getPrice() {
         return price;
     }
 
@@ -73,9 +79,6 @@ public class Book {
         return publisherName;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
     public Collection<BookOrder> getBookOrders() {
         return bookOrders;
