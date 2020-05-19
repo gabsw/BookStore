@@ -7,15 +7,14 @@ import tqs.group4.bestofbooks.dto.RequestOrderDTO;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.exception.OrderNotFoundException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
-import tqs.group4.bestofbooks.model.Book;
-import tqs.group4.bestofbooks.model.BookOrder;
-import tqs.group4.bestofbooks.model.Order;
-import tqs.group4.bestofbooks.model.Revenue;
+import tqs.group4.bestofbooks.model.*;
+import tqs.group4.bestofbooks.repository.CommissionRepository;
 import tqs.group4.bestofbooks.repository.OrderRepository;
 import tqs.group4.bestofbooks.repository.RevenueRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,6 +32,9 @@ public class OrderService {
     private RevenueRepository revenueRepository;
 
     @Autowired
+    private CommissionRepository commissionRepository;
+
+    @Autowired
     private BookService bookService;
 
     @Autowired
@@ -41,12 +43,15 @@ public class OrderService {
     @Autowired
     private RevenueService revenueService;
 
+    @Autowired
+    private CommissionService commissionService;
+
     public OrderDTO getOrderById(int id) {
         Order order = orderRepository.findById(id);
         if (order == null) {
             throw new OrderNotFoundException("No order with the given id.");
         }
-//        Collection<BookOrder> bookOrders = order.getBookOrders(); // loads the lazy relationship
+        Collection<BookOrder> bookOrders = order.getBookOrders(); // loads the lazy relationship
         return fromOrder(order);
     }
 
@@ -66,9 +71,7 @@ public class OrderService {
             order.addBookOrder(bookOrder);
         }
 
-        List<Revenue> revenues = createRevenues(bookOrders);
-        persistNewOrder(order, revenues);
-
+        persistNewOrder(order, createRevenues(bookOrders));
         return fromOrder(order);
     }
 
@@ -106,8 +109,13 @@ public class OrderService {
         return revenues;
     }
 
+    private Commission createCommission(Order order) {
+        return new Commission(commissionService.computeCommissionAmountByOrder(order), order.getId());
+    }
+
     private void persistNewOrder(Order order, List<Revenue> revenues) {
         orderRepository.save(order);
+        commissionRepository.save(createCommission(order));
         for (Revenue revenue : revenues) {
             revenueRepository.save(revenue);
         }

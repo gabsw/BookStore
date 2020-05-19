@@ -1,5 +1,7 @@
 package tqs.group4.bestofbooks.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -7,7 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class RequestOrderDTO {
-    @NotEmpty(message = "Isbn list cannot be empty.")
+    @NotEmpty(message = "bookOrders cannot be empty.")
+    @JsonProperty("bookOrders")
     private List<IncomingBookOrderDTO> incomingBookOrderDTOS;
    
     @Size(min = 1, max = 20, message = "Buyer's username must be between 1 and 20 characters")

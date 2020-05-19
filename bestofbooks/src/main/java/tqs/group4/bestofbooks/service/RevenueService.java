@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class RevenueService {
-    private static final double REVENUE_PERCENTAGE = 0.80;
+    static final double REVENUE_PERCENTAGE = 0.80;
 
     @Autowired
     private RevenueRepository revenueRepository;
