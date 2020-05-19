@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class RequestOrderDTO {
+public class IncomingOrderDTO {
     @NotEmpty(message = "bookOrders cannot be empty.")
     @JsonProperty("bookOrders")
     private List<IncomingBookOrderDTO> incomingBookOrderDTOS;
@@ -25,11 +25,11 @@ public class RequestOrderDTO {
     @NotBlank(message = "Address cannot be null or whitespace")
     private String address;
 
-    public RequestOrderDTO() {
+    public IncomingOrderDTO() {
     }
 
-    public RequestOrderDTO(List<IncomingBookOrderDTO> incomingBookOrderDTOS,  String buyerUsername,
-                           String paymentReference, String address) {
+    public IncomingOrderDTO(List<IncomingBookOrderDTO> incomingBookOrderDTOS, String buyerUsername,
+                            String paymentReference, String address) {
         this.incomingBookOrderDTOS = incomingBookOrderDTOS;
         this.buyerUsername = buyerUsername;
         this.paymentReference = paymentReference;

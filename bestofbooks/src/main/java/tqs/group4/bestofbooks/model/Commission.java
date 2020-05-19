@@ -27,6 +27,10 @@ public class Commission {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public double getAmount() {
         return amount;
     }

@@ -3,11 +3,8 @@ package tqs.group4.bestofbooks.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tqs.group4.bestofbooks.dto.OrderDTO;
-import tqs.group4.bestofbooks.dto.RequestOrderDTO;
-import tqs.group4.bestofbooks.exception.BookNotFoundException;
-import tqs.group4.bestofbooks.exception.NotEnoughStockException;
-import tqs.group4.bestofbooks.exception.OrderNotFoundException;
-import tqs.group4.bestofbooks.exception.UserNotFoundException;
+import tqs.group4.bestofbooks.dto.IncomingOrderDTO;
+import tqs.group4.bestofbooks.exception.*;
 import tqs.group4.bestofbooks.model.*;
 import tqs.group4.bestofbooks.repository.CommissionRepository;
 import tqs.group4.bestofbooks.repository.OrderRepository;
@@ -67,10 +64,15 @@ public class OrderService {
         return orders.stream().map(OrderDTO::fromOrder).collect(Collectors.toList());
     }
 
-    public OrderDTO createOrderDTO(RequestOrderDTO requestOrderDTO)
-            throws BookNotFoundException, UserNotFoundException, NotEnoughStockException {
-        Order order = createOrder(requestOrderDTO);
-        List<BookOrder> bookOrders = createBooksOrders(order, requestOrderDTO);
+    public OrderDTO createOrderDTO(IncomingOrderDTO incomingOrderDTO)
+            throws BookNotFoundException, UserNotFoundException, NotEnoughStockException, RepeatedPaymentReferenceException, EmptyIncomingOrderException {
+
+        if (checkIfPaymentReferenceAlreadyExists(incomingOrderDTO.getPaymentReference())) {
+            throw new RepeatedPaymentReferenceException(incomingOrderDTO.getPaymentReference() + " already exists");
+        }
+
+        Order order = createOrder(incomingOrderDTO);
+        List<BookOrder> bookOrders = createBooksOrders(order, incomingOrderDTO);
 
         for (BookOrder bookOrder : bookOrders) {
             order.addBookOrder(bookOrder);
@@ -81,7 +83,7 @@ public class OrderService {
         return fromOrder(order);
     }
 
-    private Order createOrder(RequestOrderDTO request)
+    Order createOrder(IncomingOrderDTO request)
             throws BookNotFoundException, UserNotFoundException {
         double finalPrice = bookService.computeFinalPriceFromIncomingOrder(request.getIncomingBookOrderDTOS());
         return new Order(
@@ -92,10 +94,10 @@ public class OrderService {
         );
     }
 
-    private List<BookOrder> createBooksOrders(Order order, RequestOrderDTO requestOrderDTO)
-            throws BookNotFoundException, NotEnoughStockException {
+    List<BookOrder> createBooksOrders(Order order, IncomingOrderDTO incomingOrderDTO)
+            throws BookNotFoundException, NotEnoughStockException, EmptyIncomingOrderException {
         Map<Book, Integer> booksWithQuantities = bookService.retrieveBooksAndQuantitiesFromIncomingOrderDTOS(
-                requestOrderDTO.getIncomingBookOrderDTOS());
+                incomingOrderDTO.getIncomingBookOrderDTOS());
         List<BookOrder> bookOrders = new ArrayList<>();
 
         for (Map.Entry<Book, Integer> entry : booksWithQuantities.entrySet()) {
@@ -105,7 +107,7 @@ public class OrderService {
         return bookOrders;
     }
 
-    private List<Revenue> createRevenues(List<BookOrder> bookOrders) {
+    List<Revenue> createRevenues(List<BookOrder> bookOrders) {
         List<Revenue> revenues = new ArrayList<>();
         for (BookOrder bookOrder : bookOrders) {
             Revenue revenue = new Revenue(revenueService.computeRevenueAmountByBookOrder(bookOrder),
@@ -115,11 +117,11 @@ public class OrderService {
         return revenues;
     }
 
-    private Commission createCommission(Order order) {
+    Commission createCommission(Order order) {
         return new Commission(commissionService.computeCommissionAmountByOrder(order), order.getId());
     }
 
-    private void persistNewOrder(Order order, List<Revenue> revenues) {
+    void persistNewOrder(Order order, List<Revenue> revenues) {
         orderRepository.save(order);
         commissionRepository.save(createCommission(order));
         for (Revenue revenue : revenues) {
@@ -127,5 +129,7 @@ public class OrderService {
         }
     }
 
-
+    boolean checkIfPaymentReferenceAlreadyExists(String paymentReference) {
+        return orderRepository.existsByPaymentReference(paymentReference);
+    }
 }
