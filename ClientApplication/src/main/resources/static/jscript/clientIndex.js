@@ -323,7 +323,6 @@ function getBooks(){
         })
 }
 
-
 function myFunction() {
     alert("Item Added To Cart!");
 }
