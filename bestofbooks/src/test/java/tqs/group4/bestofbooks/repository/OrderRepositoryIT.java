@@ -1,81 +1,82 @@
 package tqs.group4.bestofbooks.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-
-import org.junit.jupiter.api.AfterEach;
+import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
-
-import tqs.group4.bestofbooks.model.BookOrder;
 import tqs.group4.bestofbooks.model.Order;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static tqs.group4.bestofbooks.mocks.BuyerMock.buyer1;
 
 @SpringBootTest
 @Transactional
 public class OrderRepositoryIT {
-    
+
     @Autowired
     private EntityManager entityManager;
-    
+
     @Autowired
     OrderRepository orderRepository;
 
-    List<BookOrder> bookOrders1, bookOrders2;
-    List<Order> orders;
-    Order order1, order2;
+    private Order order;
 
-    BookOrder bookOrder1, bookOrder2;
-
-    String username = "someUser", invalidUsername = "unknown";
-
-    /**@BeforeEach
-    public void setUp(){
-        bookOrder1 = new BookOrder();
-        bookOrder2 = new BookOrder();
-        bookOrders1 = new ArrayList<>();
-        bookOrders1.add(bookOrder1);
-        bookOrders2 = new ArrayList<>();
-        bookOrders2.add(bookOrder2);
-        order1 = new Order("AC%EWRGER684654165", "someUser", bookOrders1, "77th st no 21, LA, CA, USA", 10.00);
-        order1.setId(10);
-        bookOrder1.setOrder(order1);
-        order2 = new Order("AC%EWRGER684989898", "someUser", bookOrders2, "77th st no 21, LA, CA, USA", 10.00);
-        order2.setId(10);
-        bookOrder2.setOrder(order2);
-        for (BookOrder bookOrder: bookOrders1)
-            bookOrder.setOrder(order1);
-        for (BookOrder bookOrder: bookOrders2)
-            bookOrder.setOrder(order2);
-        orders = new ArrayList<>();
-        orders.add(order1);
-        orders.add(order2);
-        entityManager.createNativeQuery("TRUNCATE Books, Orders, Commissions, books_orders").executeUpdate();
-    }
-
-    @AfterEach
-    public void after(){
-        entityManager.remove(order1);
-        entityManager.remove(order2);
-        entityManager.flush();
+    @BeforeEach
+    public void before() {
+        entityManager.createNativeQuery("TRUNCATE books, orders, commissions, books_orders, revenues").executeUpdate();
+        entityManager.createNativeQuery("ALTER SEQUENCE orders_id_seq RESTART WITH 1").executeUpdate();
+        order = new Order("AC%EWRGER684654165",
+                "77th st no 21, LA, CA, USA",
+                10.00,
+                buyer1);
     }
 
     @Test
-    public void whenFindByValidId_thenReturnOrder(){
-        entityManager.persist(bookOrder1);
-        entityManager.persist(bookOrder2);
-        entityManager.persist(order1);
+    public void whenFindByExistentId_thenReturnOrder() {
+        entityManager.persist(order);
         entityManager.flush();
 
-        //Order queryResults = orderRepository.findById(order1.getId());
-        //assertEquals(order1, queryResults);
-    } */
+        Order queryResults = orderRepository.findById(order.getId().intValue());
+        assertEquals(order, queryResults);
+    }
+
+    @Test
+    public void whenFindByUnknownId_thenReturnNull() {
+        Order queryResults = orderRepository.findById(1994949);
+        assertNull(queryResults);
+    }
+
+    @Test
+    public void whenFindByExistentBuyer_thenReturnOrder() {
+        entityManager.persist(order);
+        entityManager.flush();
+
+        List<Order> queryResults = orderRepository.findByBuyerUsername(order.getBuyer().getUsername());
+        assertEquals(Lists.newArrayList(order), queryResults);
+    }
+
+    @Test
+    public void whenFindByUnknownBuyer_thenReturnNull() {
+        List<Order> queryResults = orderRepository.findByBuyerUsername("None");
+        assertEquals(0, queryResults.size());
+    }
+
+    @Test
+    public void whenExistsByKnownPaymentReference_thenReturnTrue() {
+        entityManager.persist(order);
+        entityManager.flush();
+        boolean queryResults = orderRepository.existsByPaymentReference("AC%EWRGER684654165");
+        assertTrue(queryResults);
+    }
+
+    @Test
+    public void whenExistsByUnknownPaymentReference_thenReturnFalse() {
+        boolean queryResults = orderRepository.existsByPaymentReference("None");
+        assertFalse(queryResults);
+    }
 }

@@ -1,75 +1,77 @@
 package tqs.group4.bestofbooks.model;
 
-import java.util.List;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import lombok.Data;
 @Entity
-@Data
 @Table(name = "Orders")
 public class Order {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Column(name = "payment_reference", nullable = false)
+    @Basic
+    @Column(name = "payment_reference", nullable = false, length = 20)
     private String paymentReference;
-    @Column(name = "username_buyer", nullable = false)
-    private String buyerUsername;
-
-    @OneToMany(
-        mappedBy = "order",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
-    private List<BookOrder> bookOrders;
-
-    @Column(name = "address", nullable = false)
+    @Basic
+    @Column(name = "address", nullable = false, length = 100)
     private String address;
-    @Column(name = "final_price", nullable = false)
-    private double finalPrice;
+    @Basic
+    @Column(name = "final_price", nullable = false, precision = 2)
+    private Double finalPrice;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "username_buyer", referencedColumnName = "username", nullable = false)
+    private Buyer buyer;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<BookOrder> bookOrders;
+//    @OneToMany(mappedBy = "ordersByOrderId", fetch = FetchType.LAZY)
+//    private Collection<Commission> commissionsById;
 
-    public Order(String paymentReference, String usernameBuyer, 
-        List<BookOrder> bookOrders, String address, double finalPrice){
+    public Order() {
+    }
+
+    public Order(String paymentReference, String address, Double finalPrice, Buyer buyer) {
         this.paymentReference = paymentReference;
-        this.buyerUsername = usernameBuyer;
-        this.bookOrders = bookOrders;
         this.address = address;
         this.finalPrice = finalPrice;
+        this.buyer = buyer;
+        this.bookOrders = new ArrayList<>();
     }
 
-    public void addBookOrder(BookOrder bookOrder){
-        bookOrders.add(bookOrder);
-        bookOrder.setOrder(this);
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void removeBookOrder(BookOrder bookOrder){
-        bookOrders.remove(bookOrder);
-        bookOrder.setOrder(null);
+    public Integer getId() {
+        return id;
     }
 
-    public boolean equals(Object o){
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return Objects.equals(bookOrders, order.bookOrders)
-            && Objects.equals(buyerUsername, order.buyerUsername)
-            && Objects.equals(finalPrice, order.finalPrice);
+    public String getPaymentReference() {
+        return paymentReference;
     }
 
-    public int hashCode(){
-        return Objects.hash(buyerUsername, bookOrders, finalPrice);
+    public String getAddress() {
+        return address;
     }
+
+    public Double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public Collection<BookOrder> getBookOrders() {
+        return bookOrders;
+    }
+
+    public void addBookOrder(BookOrder bookOrder) {
+        this.bookOrders.add(bookOrder);
+    }
+
+//    public Collection<Commission> getCommissionsById() {
+//        return commissionsById;
+//    }
 }

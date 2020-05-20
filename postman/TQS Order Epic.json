@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TQS Order Epic",
+		"_postman_id": "e5e16e47-0dda-0556-3b08-c572ab844ebd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get by id",
+			"request": {
+				"url": "{{url}}/api/order/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "post order",
+			"request": {
+				"url": "{{url}}/api/order/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"buyerUsername\": \"buyer1\",\n\t\"address\": \"test address\",\n\t\"paymentReference\": \"AX402\",\n\t\"bookOrders\": [\n\t\t{\"isbn\": \"1111111111111\", \"quantity\": 2},\n\t\t{\"isbn\": \"1111111111112\", \"quantity\": 2}\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get estimated price",
+			"request": {
+				"url": "{{url}}/api/order/estimated-price",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"isbn\": \"1111111111111\", \"quantity\": 2},\n\t{\"isbn\": \"1111111111112\", \"quantity\": 2}\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get by user",
+			"request": {
+				"url": "{{url}}/api/buyer/buyer1/orders",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
