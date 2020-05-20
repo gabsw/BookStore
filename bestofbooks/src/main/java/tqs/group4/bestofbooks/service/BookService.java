@@ -2,7 +2,6 @@ package tqs.group4.bestofbooks.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import tqs.group4.bestofbooks.dto.IncomingBookOrderDTO;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.exception.EmptyIncomingOrderException;
@@ -32,7 +31,7 @@ public class BookService {
     public Book getBookByIsbn(String isbn) throws BookNotFoundException {
         Book book = bookRepository.findByIsbn(isbn);
         if (book == null) {
-            throw new BookNotFoundException("Book with " + isbn + " was not found in the platform.");
+            throw new BookNotFoundException(isbn);
         } else {
             return book;
         }
@@ -48,8 +47,7 @@ public class BookService {
         for (IncomingBookOrderDTO incomingOrder : incomingBookOrderDTOS) {
             Book book = bookRepository.findByIsbn(incomingOrder.getIsbn());
             if (book == null) {
-                throw new BookNotFoundException("Book with " + incomingOrder.getIsbn() +
-                        " was not found in the platform.");
+                throw new BookNotFoundException(incomingOrder.getIsbn());
             } else {
                 finalPrice += (book.getPrice() * incomingOrder.getQuantity());
             }
@@ -70,8 +68,7 @@ public class BookService {
             Book book = bookRepository.findByIsbn(incomingOrder.getIsbn());
             int quantityInRequest = incomingOrder.getQuantity();
             if (book == null) {
-                throw new BookNotFoundException("Book with " + incomingOrder.getIsbn() +
-                        " was not found in the platform.");
+                throw new BookNotFoundException(incomingOrder.getIsbn());
             } else if (!checkIfBookHasEnoughCopies(book, quantityInRequest)) {
                 throw new NotEnoughStockException(book.getTitle() + " does not have " +
                         "enough copies in stock to fulfill order request.");

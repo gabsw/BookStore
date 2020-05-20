@@ -3,8 +3,8 @@ package tqs.group4.bestofbooks.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tqs.group4.bestofbooks.dto.IncomingBookOrderDTO;
-import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.IncomingOrderDTO;
+import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.exception.*;
 import tqs.group4.bestofbooks.model.*;
 import tqs.group4.bestofbooks.repository.CommissionRepository;
@@ -13,7 +13,6 @@ import tqs.group4.bestofbooks.repository.RevenueRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,7 +52,6 @@ public class OrderService {
         if (order == null) {
             throw new OrderNotFoundException("No order with the given id.");
         }
-        Collection<BookOrder> bookOrders = order.getBookOrders(); // loads the lazy relationship
         return fromOrder(order);
     }
 
