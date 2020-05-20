@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 public class IncomingOrderDTO {
     @NotEmpty(message = "bookOrders cannot be empty.")
     @JsonProperty("bookOrders")
+    @Valid
     private List<IncomingBookOrderDTO> incomingBookOrderDTOS;
    
     @Size(min = 1, max = 20, message = "Buyer's username must be between 1 and 20 characters")
