@@ -54,10 +54,6 @@ public class OrderServiceTest {
             quantity);
     private IncomingBookOrderDTO incomingBookOrderDTO2 = new IncomingBookOrderDTO(BookMocks.onTheRoad.getIsbn(),
             quantity + 1);
-    private IncomingBookOrderDTO failedIncomingOrder1 = new IncomingBookOrderDTO("9780140042543",
-            quantity);
-    private IncomingBookOrderDTO giganticIncomingOrder = new IncomingBookOrderDTO(BookMocks.onTheRoad.getIsbn(),
-            100);
     private List<IncomingBookOrderDTO> incomingBookOrderDTOList = new ArrayList(Arrays.asList(incomingBookOrderDTO1, incomingBookOrderDTO2));
     private IncomingOrderDTO incomingOrderDTO = new IncomingOrderDTO(incomingBookOrderDTOList, BuyerMock.buyer1.getUsername(),
             "XYZ", "Address");
@@ -317,7 +313,21 @@ public class OrderServiceTest {
         );
     }
 
+    @Test
+    public void testComputePriceForIncomingOrder_WhenBookIsUnknown_throwBookNotFoundException() throws BookNotFoundException {
+        when(bookService.computeFinalPriceFromIncomingOrder(incomingBookOrderDTOList)).thenThrow(new BookNotFoundException());
 
+        assertThrows(BookNotFoundException.class,
+                () -> {
+                    orderService.computePriceForIncomingOrder(incomingBookOrderDTOList);
+                }
+        );
+    }
 
+    @Test
+    public void testComputePriceForIncomingOrder_WhenAllBooksAreKnown() throws BookNotFoundException {
+        when(bookService.computeFinalPriceFromIncomingOrder(incomingBookOrderDTOList)).thenReturn(100.00);
 
+        assertEquals(100.00, orderService.computePriceForIncomingOrder(incomingBookOrderDTOList));
+    }
 }

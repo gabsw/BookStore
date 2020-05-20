@@ -2,6 +2,7 @@ package tqs.group4.bestofbooks.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tqs.group4.bestofbooks.dto.IncomingBookOrderDTO;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.IncomingOrderDTO;
 import tqs.group4.bestofbooks.exception.*;
@@ -131,5 +132,10 @@ public class OrderService {
 
     boolean checkIfPaymentReferenceAlreadyExists(String paymentReference) {
         return orderRepository.existsByPaymentReference(paymentReference);
+    }
+
+    public Double computePriceForIncomingOrder(List<IncomingBookOrderDTO> incomingBookOrderDTOList)
+            throws BookNotFoundException {
+        return bookService.computeFinalPriceFromIncomingOrder(incomingBookOrderDTOList);
     }
 }

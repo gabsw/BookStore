@@ -3,6 +3,7 @@ package tqs.group4.bestofbooks.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -50,5 +51,21 @@ public class IncomingOrderDTO {
 
     public String getAddress(){
         return address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IncomingOrderDTO that = (IncomingOrderDTO) o;
+        return Objects.equals(incomingBookOrderDTOS, that.incomingBookOrderDTOS) &&
+                Objects.equals(buyerUsername, that.buyerUsername) &&
+                Objects.equals(paymentReference, that.paymentReference) &&
+                Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(incomingBookOrderDTOS, buyerUsername, paymentReference, address);
     }
 }
