@@ -17,8 +17,6 @@ public class AdminController {
     @Autowired
     private CommissionService commissionService;
 
-    // TODO: Missing authentication check
-
     @GetMapping("/")
     public Page<Commission> getCommissions(Pageable pageable) {
         return commissionService.getCommissions(pageable);
