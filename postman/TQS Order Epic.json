@@ -19,6 +19,46 @@
 			"response": []
 		},
 		{
+			"name": "post order",
+			"request": {
+				"url": "{{url}}/api/order/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"buyerUsername\": \"buyer1\",\n\t\"address\": \"test address\",\n\t\"paymentReference\": \"AX402\",\n\t\"bookOrders\": [\n\t\t{\"isbn\": \"1111111111111\", \"quantity\": 2},\n\t\t{\"isbn\": \"1111111111112\", \"quantity\": 2}\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get estimated price",
+			"request": {
+				"url": "{{url}}/api/order/estimated-price",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"isbn\": \"1111111111111\", \"quantity\": 2},\n\t{\"isbn\": \"1111111111112\", \"quantity\": 2}\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "get by user",
 			"request": {
 				"url": "{{url}}/api/buyer/buyer1/orders",
