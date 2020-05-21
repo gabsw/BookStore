@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "4e9ce025-4c95-4714-b4cb-a75adc44f8dc",
+		"name": "TQS Stocks Epic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get stocks/books of a publisher",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/publisher/publisher1/stock",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"publisher",
+						"publisher1",
+						"stock"
+					]
+				},
+				"description": "Para este pedido ser realizado é necessário a presença do token de autenticação no header(que está vazio neste pedido)."
+			},
+			"response": []
+		},
+		{
+			"name": "put/add stock to a book",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"isbn\": \"1234567891234\",\n    \"quantity\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/publisher/publisher1/stock",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"publisher",
+						"publisher1",
+						"stock"
+					]
+				},
+				"description": "Adiciona o stock a um livro. Os argumentos estão no body, sendo o \"isbn\" o identificador do livro e \"quantity\" a quantidade a ser somada de stock a um livro.\nEstes atributos são os atributos da classe StockDto.\nPara este pedido ser realizado é necessário a presença do token de autenticação no header(que está vazio neste pedido)."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

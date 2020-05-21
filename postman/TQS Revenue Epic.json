@@ -1,0 +1,33 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TQS Revenue Epic",
+		"_postman_id": "a6b2b409-c60d-b4f4-ae17-ca39bdf076d4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get revenue by publisher",
+			"request": {
+				"url": "{{url}}/api/publisher/Publisher 1/revenue",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get total in revenue by publisher",
+			"request": {
+				"url": "{{url}}/api/publisher/Publisher 1/revenue/total",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

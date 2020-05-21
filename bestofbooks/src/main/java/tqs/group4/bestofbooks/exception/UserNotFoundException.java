@@ -11,4 +11,6 @@ public class UserNotFoundException extends Exception {
         super(s);
     }
 
+    public UserNotFoundException() {
+    }
 }

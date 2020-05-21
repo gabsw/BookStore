@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.dto.UserDto;
+import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
+import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Admin;
 import tqs.group4.bestofbooks.model.Buyer;
@@ -33,6 +35,9 @@ public class LoginServices {
 	
 	@Autowired
 	BuyerRepository buyerRepository;
+	
+	static String loginRequiredMessage = "Login required for this request.";
+	static String userForbiddenMessage = "User not allowed.";
 	
 	public UserDto loginUser(String username, String password) throws LoginFailedException, UserNotFoundException {
 		String loginFailedMessage = "Login failed.";
@@ -106,6 +111,39 @@ public class LoginServices {
 	 
 	 public String getSessionUsername(HttpServletRequest request) {
 		 return (String) request.getSession().getAttribute("username");
+	 }
+	 
+	 public void checkUserIsBuyer(String username) throws LoginRequiredException, ForbiddenUserException {
+		 if (username == null) {
+			 throw new LoginRequiredException(loginRequiredMessage);
+	     }
+		 else {
+			 if (!buyerRepository.existsById(username)) {
+				throw new ForbiddenUserException(userForbiddenMessage); 
+			 }
+		 }
+	 }
+	 
+	 public void checkUserIsAdmin(String username) throws LoginRequiredException, ForbiddenUserException {
+		 if (username == null) {
+			 throw new LoginRequiredException(loginRequiredMessage);
+	     }
+		 else {
+			 if (!adminRepository.existsById(username)) {
+				throw new ForbiddenUserException(userForbiddenMessage); 
+			 }
+		 }
+	 }
+	 
+	 public void checkUserIsPublisher(String username) throws LoginRequiredException, ForbiddenUserException {
+		 if (username == null) {
+			 throw new LoginRequiredException(loginRequiredMessage);
+	     }
+		 else {
+			 if (!publisherRepository.existsByUsername(username)) {
+				throw new ForbiddenUserException(userForbiddenMessage); 
+			 }
+		 }
 	 }
 
 }
