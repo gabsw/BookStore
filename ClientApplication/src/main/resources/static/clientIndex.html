@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="clientIndex.html">
         <img alt="" src="images/Logo-removebg-preview.png" width="100"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,7 +21,17 @@
         <div class="pull-right">
             <ul class="nav pull-right">
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</i></a>
+                    <a class="nav-link" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
+                </li>
+                <li class="dropdown">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="client_name" id="dropdownMenuButton" type="button">
+                        Welcome, Client
+                    </button>
+                    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                        <a class="dropdown-item" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
+                        <a class="dropdown-item" href="orders.html">Your Orders</a>
+                        <a class="dropdown-item" href="login.html">LogOut</a>
+                    </div>
                 </li>
 
             </ul>
@@ -51,10 +61,10 @@
             </div>
         </div>
 
-        <button class="btn-save btn btn-primary " id="search_book" onclick="searchBooksNoLogin()">Search</button>
+        <button class="btn-save btn btn-primary " onclick="searchBooks()">Search</button>
 
     </div>
-    <!--end of col-->
+        <!--end of col-->
 
     <p></p>
     <div class="row">
@@ -72,8 +82,8 @@
                                             Filter By:
                                         </button>
                                         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                                            <button class="dropdown-item" type="button" onclick="lowestNoLogin()" >Lowest to Highest Price</button>
-                                            <button class="dropdown-item" type="button" onclick="highestNoLogin()">Highest to Lowest Price</button>
+                                            <button class="dropdown-item" type="button" onclick="lowest()" >Lowest to Highest Price</button>
+                                            <button class="dropdown-item" type="button" onclick="highest()">Highest to Lowest Price</button>
                                         </div>
                                     </div>
                                 </dd>
@@ -85,6 +95,7 @@
 
             </ul>
         </div>
+
         <div class="col-lg-8 mx-auto">
 
             <!-- List group-->
@@ -96,6 +107,8 @@
         </div>
     </div>
 </div>
+
+<p></p>
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item disabled">
@@ -111,19 +124,13 @@
 </nav>
 
 
-<script crossorigin="anonymous"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+<script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    document.onload = getBooksNoLogin();
+ document.onload =getBooks();
 </script>
+
 </body>
 </html>
