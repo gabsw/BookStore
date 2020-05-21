@@ -91,14 +91,19 @@ insert into Publishers (username, name, tin, password_hash) values ('pub1', 'Pub
 insert into Publishers (username, name, tin, password_hash) values ('pub2', 'Publisher 2', 'tin2', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
 INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('little_brown', 'Little, Brown', 'tin3', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
 INSERT INTO public.publishers (username, name, tin, password_hash) VALUES ('viking', 'Viking Press', 'tin4', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
+insert into Publishers (username, name, tin, password_hash) values ('external_publisher', 'External Publisher', 'tin5', '30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4');
 
 insert into Categories (name, description) values ('horror', 'scary stories');
 insert into Categories (name, description) values ('SciFi', 'stories about science fiction');
 INSERT INTO categories (name, description) VALUES ('Postmodernism', 'something');
 INSERT INTO categories (name, description) VALUES ('Travelogue', 'another something');
+INSERT INTO categories (name, description) VALUES ('Dark comedy', 'another something');
 
 insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book1', '1111111111111', 'SciFi', 'someauthor', 'A very ice book', 'Publisher 1', 10.00, 50);
 insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Book2', '1111111111112', 'horror', 'someauthor2', 'A very bad book', 'Publisher 2', 15.00, 100);
+insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Slaughterhouse-Five', '9780812988529', 'Dark comedy', 'Kurt Vonnegut', 'Satire centering on the infamous firebombing of Dresden.', 'External Publisher', 25.00, 1);
+insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('Breakfast Of Champions', '9780099842606', 'Dark comedy', 'Kurt Vonnegut', 'Funny absurdist novel about the human condition.', 'External Publisher', 7.00, 1);
+insert into Books (title, isbn, category, author, description, publisher_name, price, quantity) values ('The Sirens of Titan', '9780385333498', 'Dark comedy', 'Kurt Vonnegut', 'The richest and most depraved man on Earth takes a wild space journey to distant worlds.', 'External Publisher', 18.00, 1);
 
 insert into Orders (id, payment_reference, username_buyer, isbn, address, final_price) values (1, 'w65r46wr842', 'buyer1', '1111111111112', 'Rua3, Espinho', 17.00);
 insert into Orders (id, payment_reference, username_buyer, isbn, address, final_price) values (2, 'e8rg4r5g4e6', 'buyer2', '1111111111111', 'Rua4, Espinho', 12.00);
