@@ -15,7 +15,7 @@ public class OrderDTO {
     private String buyerName;
     private List<BookOrderDTO> bookOrders;
 
-    OrderDTO(Integer id, String paymentReference, String address, Double finalPrice, String buyerName,
+    public OrderDTO(Integer id, String paymentReference, String address, Double finalPrice, String buyerName,
                     Collection<BookOrderDTO> bookOrders) {
         this.id = id;
         this.paymentReference = paymentReference;
