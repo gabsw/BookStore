@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -44,5 +45,41 @@ public class SearchBookTitleTest {
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_title 1")));
     selectPollutant.click();
     assertThat(driver.findElement(By.id("book_title 1")).getText(), is("Book1"));
+  }
+
+  @Test
+  public void searchBookCategory() throws InterruptedException {
+    driver.findElement(By.id("findBook")).click();
+    driver.findElement(By.id("findBook")).sendKeys("horror");
+    driver.findElement(By.id("book_category")).click();
+    driver.findElement(By.id("search_book")).click();
+    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_category 1")));
+    selectPollutant.click();
+    assertThat(driver.findElement(By.id("book_category 1")).getText(), containsString("horror"));
+  }
+
+  @Test
+  public void searchBookAuthor() throws InterruptedException {
+    driver.findElement(By.id("findBook")).click();
+    driver.findElement(By.id("findBook")).sendKeys("someauthor");
+    driver.findElement(By.id("book_author")).click();
+    driver.findElement(By.id("search_book")).click();
+    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_author 1")));
+    selectPollutant.click();
+    assertThat(driver.findElement(By.id("book_author 1")).getText(), containsString("someauthor"));
+  }
+
+
+  @Test
+  public void searchInexistingBook() throws InterruptedException {
+    driver.findElement(By.id("findBook")).click();
+    driver.findElement(By.id("findBook")).sendKeys("nothing");
+    driver.findElement(By.id("search_book")).click();
+    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("undefined")));
+    selectPollutant.click();
+    assertThat(driver.findElement(By.id("undefined")).getText(), is("Nothing Found !"));
   }
 }

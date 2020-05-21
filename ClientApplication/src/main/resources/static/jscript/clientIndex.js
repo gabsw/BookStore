@@ -4,6 +4,7 @@ function highest() {
     fetch(url + '/books/available?sort=price,desc')
         .then(res => res.json())
         .then((data) => {
+            let count = 0;
             let output = '';
             data["content"].forEach(function (book) {
                 output += `
@@ -11,14 +12,14 @@ function highest() {
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+                          <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                                 <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
@@ -42,6 +43,7 @@ function highestNoLogin() {
     fetch(url + '/books/available?sort=price,desc')
         .then(res => res.json())
         .then((data) => {
+            let count = 0;
             let output = '';
             data["content"].forEach(function (book) {
                 output += `
@@ -49,14 +51,14 @@ function highestNoLogin() {
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                               <a class="btn btn-outline-warning" role="button" id="detailsModal" href="login.html">Login to Buy/See More !</a>
@@ -79,6 +81,7 @@ function lowest() {
     fetch(url + '/books/available?sort=price,asc')
         .then(res => res.json())
         .then((data) => {
+            let count =0 ;
             let output = '';
             data["content"].forEach(function (book) {
                 output += `
@@ -86,14 +89,14 @@ function lowest() {
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                                 <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
@@ -116,6 +119,7 @@ function lowestNoLogin() {
     fetch(url + '/books/available?sort=price,asc')
         .then(res => res.json())
         .then((data) => {
+            let count = 0;
             let output = '';
             data["content"].forEach(function (book) {
                 output += `
@@ -123,14 +127,14 @@ function lowestNoLogin() {
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+                            <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                               <a class="btn btn-outline-warning" role="button" id="detailsModal" href="login.html">Login to Buy/See More !</a>
@@ -161,8 +165,9 @@ function searchBooks() {
     fetch(url+'/books/search?' + add + book_title)
         .then(res => res.json())
         .then((data) => {
+            let count = 0;
             let output = '';
-            if ( data["content"].length == 0) { output = '<h1 class="mt-0 font-weight-bold mb-2" align="center">Nothing Found !</h1>';}
+            if ( data["content"].length == 0) { output = '<h1 class="mt-0 font-weight-bold mb-2" id="undefined" align="center">Nothing Found !</h1>';}
             else {
                 data["content"].forEach(function (book) {
                         output += `
@@ -170,14 +175,14 @@ function searchBooks() {
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">${book["title"]}</h5>
+                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                                 <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
@@ -212,7 +217,7 @@ function searchBooksNoLogin() {
         .then((data) => {
             let count = 0;
             let output = '';
-            if ( data["content"].length == 0) { output = '<h1 class="mt-0 font-weight-bold mb-2" align="center">Nothing Found !</h1>';}
+            if ( data["content"].length == 0) { output = '<h1 class="mt-0 font-weight-bold mb-2" id="undefined" align="center">Nothing Found !</h1>';}
             else {
                 data["content"].forEach(function (book) {
                     count ++;
@@ -225,7 +230,7 @@ function searchBooksNoLogin() {
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
-                                <li class="list-group-item" id="book_category`+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
                                 <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
@@ -251,6 +256,7 @@ function getBooksNoLogin() {
     fetch(url + '/books/available')
         .then(res => res.json())
         .then((data) => {
+            let count =0 ;
             let output = '';
             data["content"].forEach(function (book) {
                 count ++;
@@ -260,14 +266,14 @@ function getBooksNoLogin() {
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2"> ${book["title"]}</h5>
+                            <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                                <a class="btn btn-outline-warning" role="button" id="detailsModal" href="login.html">Login to Buy/See More !</a>
@@ -292,6 +298,7 @@ function getBooks(){
     fetch(url + '/books/available')
         .then(res => res.json())
         .then((data) => {
+            let count = 0;
             let output = '';
             data["content"].forEach(function (book) {
                 output += `
@@ -299,14 +306,14 @@ function getBooks(){
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2" >${book["title"]}</h5>
+                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title \`+count + \`">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" >Author: ${book.author} </li>
-                                <li class="list-group-item">Category: ${book.category} </li>
-                                <li class="list-group-item">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item">Price: <strong>${book.price}</strong></li>
-                                <li class="list-group-item"><strong>Available:</strong> ${book.quantity}</li>
+                                <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
+                                <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong></li>
+                                <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
                                 <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
