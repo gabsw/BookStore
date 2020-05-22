@@ -1,7 +1,23 @@
-
-
 values = function fin() {
     return JSON.parse(localStorage.getItem('mapa'));
+};
+
+/**
+ * @return {string}
+ */
+jsontrying = function StringForJson() {
+    let output = '[';
+    let virgCount = 0;
+    let maxVirg = values().length -1 ;
+    for (let i = 0; i < values().length; i++) {
+        output += '{' + '\"isbn\"' + '\:"' + values()[i] +'\",' + '\"quantity\"' + '\:' + result().get(values()[i]) + '}'
+        if(virgCount < maxVirg) {
+            output += ',';
+            virgCount ++;
+        }
+    }
+    output += ']';
+    return output;
 };
 
 result = function createOrder () {

@@ -176,20 +176,21 @@
 
 
 <script type="text/javascript" >
-    /*
+
     let url = 'http://192.168.160.70:8080/api';
     window.onload = function getBooks(){
         fetch(url + '/order/estimated-price' , {
             method: 'post',
                 headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(strMapToObj(result()))})
+                },
+            body: JSON.parse(jsontrying())})
             .then(res => res.json())
-                .then(res => document.getElementById('finalPrice').innerHTML = "Final Price: " + res );
+            .then(res =>
+             document.getElementById('finalPrice').innerHTML = "Final Price: " + res );
     }
 
-    window.onload = console.log(JSON.stringify(strMapToObj(result())));
+  /*  window.onload = console.log(JSON.stringify(strMapToObj(result())));
     'http://192.168.160.70:8080/api/books/isbn/'+
   console.log('http://192.168.160.70:8080/api/books/isbn/'+Array.from(result().keys())[0]);
 
@@ -233,7 +234,10 @@
         )
         }
     }
-*/
+
+    window.onload = console.log(JSON.parse(jsontrying()));
+    */
+
 
 </script>
 </html>
