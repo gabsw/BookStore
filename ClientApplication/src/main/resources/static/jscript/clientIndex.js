@@ -299,7 +299,11 @@ function getBooks(){
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
+<<<<<<< Updated upstream
                             <h5 class="mt-0 font-weight-bold mb-2" >${book["title"]}</h5>
+=======
+                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
+>>>>>>> Stashed changes
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" >Author: ${book.author} </li>
@@ -310,7 +314,7 @@ function getBooks(){
                             </ul>
                             <div class="btn-group" style="width:100%">
                                 <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
-                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
+                                <a class="btn btn-info"  onclick="myFunction(${book.isbn})" role="button">Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -326,6 +330,15 @@ function getBooks(){
         })
 }
 
-function myFunction() {
-    alert("Item Added To Cart!");
+
+let storeObj= [];
+function myFunction(isbn) {
+    storeObj.push(isbn);
+    console.log(storeObj);
+    localStorage.setItem('mapa',JSON.stringify(storeObj));
 }
+
+
+
+
+
