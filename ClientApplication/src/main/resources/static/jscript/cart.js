@@ -68,7 +68,7 @@ function getBy(){
                         <h6><strong>${data.price} €<span class="text-muted">x</span></strong></h6>
                     </div>
                     <div class="col-3 col-sm-3 col-md-3">
-                        <div class="quantity">
+                        <div class="quantity" style="padding-top: 5px">
                         <h6><strong> Qty: `+ result().get(Array.from(result().keys())[i]) +`</strong></h6>
                         </div>
                         </div>
