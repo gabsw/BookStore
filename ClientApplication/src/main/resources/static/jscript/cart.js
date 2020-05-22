@@ -1,3 +1,5 @@
+let url = 'http://192.168.160.70:8080/api';
+
 values = function fin() {
     return JSON.parse(localStorage.getItem('storage'));
 };
@@ -33,7 +35,6 @@ result = function createOrder () {
     return map;
 };
 
-let url = 'http://192.168.160.70:8080/api';
 
 function getFinalPrice(){
     fetch(url + '/order/estimated-price' , {
@@ -83,3 +84,32 @@ function getBy(){
             )
     }
 }
+
+
+ref = function generateRef() {
+   return  Math.random().toString(36).slice(2)
+};
+
+function createOrder() {
+    fetch(url + '/order/' , {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "buyerUsername": "buyer1",
+            "address": document.getElementById('address').value,
+            "paymentReference": ref(),
+            "bookOrders": JSON.parse(jsontrying())
+        }) })
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+            if (JSON.stringify(data).includes("does not have enough copies in stock to fulfill order request")) {
+                alert("Not enough books in Stock!")
+            }else {alert("Thank You For Your Purchase!");}
+
+        })
+}
+
