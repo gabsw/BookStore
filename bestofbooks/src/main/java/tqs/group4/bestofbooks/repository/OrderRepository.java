@@ -10,4 +10,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     Order findById(int id);
 
     List<Order> findByBuyerUsername(String buyerUsername);
+
+    boolean existsByPaymentReference(String paymentReference);
 }

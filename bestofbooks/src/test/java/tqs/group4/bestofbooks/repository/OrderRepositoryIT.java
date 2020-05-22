@@ -11,8 +11,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static tqs.group4.bestofbooks.mocks.BuyerMock.buyer1;
 
 @SpringBootTest
@@ -65,5 +64,19 @@ public class OrderRepositoryIT {
     public void whenFindByUnknownBuyer_thenReturnNull() {
         List<Order> queryResults = orderRepository.findByBuyerUsername("None");
         assertEquals(0, queryResults.size());
+    }
+
+    @Test
+    public void whenExistsByKnownPaymentReference_thenReturnTrue() {
+        entityManager.persist(order);
+        entityManager.flush();
+        boolean queryResults = orderRepository.existsByPaymentReference("AC%EWRGER684654165");
+        assertTrue(queryResults);
+    }
+
+    @Test
+    public void whenExistsByUnknownPaymentReference_thenReturnFalse() {
+        boolean queryResults = orderRepository.existsByPaymentReference("None");
+        assertFalse(queryResults);
     }
 }
