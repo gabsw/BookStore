@@ -48,92 +48,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="card-body" id="output">
-                <!-- PRODUCT -->
-                <div class="row">
-                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                        <h4 class="product-name">
-                            <strong>
-                                Awesome Product
-                            </strong>
-                        </h4>
 
-                    </div>
-                    <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
-                        <div class="col-6 col-sm-6 col-md-6 text-md-right" style="padding-top: 5px">
-                            <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3">
-                            <div class="quantity">
-                                <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                       size="4">
-                            </div>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3 text-right">
-                            <button type="button" class="btn btn-outline-danger btn-xs">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <!-- END PRODUCT --> <!-- PRODUCT -->
-                <div class="row">
-                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                        <h4 class="product-name">
-                            <strong>
-                                Awesome Product
-                            </strong>
-                        </h4>
-
-                    </div>
-                    <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
-                        <div class="col-6 col-sm-6 col-md-6 text-md-right" style="padding-top: 5px">
-                            <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3">
-                            <div class="quantity">
-                                <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                       size="4">
-                            </div>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3 text-right">
-                            <button type="button" class="btn btn-outline-danger btn-xs">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <!-- END PRODUCT -->
-                <!-- PRODUCT -->
-                <div class="row">
-                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                        <h4 class="product-name">
-                            <strong>
-                                Awesome Product
-                            </strong>
-                        </h4>
-
-                    </div>
-                    <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
-                        <div class="col-6 col-sm-6 col-md-6 text-md-right" style="padding-top: 5px">
-                            <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3">
-                            <div class="quantity">
-                                <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                       size="4">
-                            </div>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3 text-right">
-                            <button type="button" class="btn btn-outline-danger btn-xs">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <!-- END PRODUCT -->
 
 
 
@@ -177,67 +92,8 @@
 
 <script type="text/javascript" >
 
-    let url = 'http://192.168.160.70:8080/api';
-    window.onload = function getBooks(){
-        fetch(url + '/order/estimated-price' , {
-            method: 'post',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-            body: jsontrying()})
-            .then(res => res.json())
-            .then(res => document.getElementById('finalPrice').innerHTML = "Final Price: " + res )
-            .catch(error => console.error('Error:', error));
-    }
+    window.onload = getBy(),getFinalPrice();
 
-  /*
-window.onload = console.log(JSON.stringify(strMapToObj(result())));
-    'http://192.168.160.70:8080/api/books/isbn/'+
-  console.log('http://192.168.160.70:8080/api/books/isbn/'+Array.from(result().keys())[0]);
-
-    window.onload =  function getBy(){
-        let output = ``;
-        for (let i= 0 ; i < result().length; i++) {
-            fetch(url + Array.from(result().keys())[i])
-                .then((res) => res.json())
-                .then((data) => {
-                output += `
-                <div class="row">
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                        <h4 class="product-name" id="product-name">
-                            <strong>
-                                ${data.title}
-                            </strong>
-                       </h4>
-                    </div>
-                    <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
-                        <div class="col-6 col-sm-6 col-md-6 text-md-right" id="price" style="padding-top: 5px">
-                        <h6><strong>${data.price}<span class="text-muted">x</span></strong></h6>
-                    </div>
-                    <div class="col-3 col-sm-3 col-md-3">
-                        <div class="quantity">
-                        <input type="number" step="1" max="99" min="1" value=`+quantity+` title="Qty" class="qty"
-                    size="4">
-                        </div>
-                        </div>
-                        <div class="col-3 col-sm-3 col-md-3 text-right">
-                            <button type="button" class="btn btn-outline-danger btn-xs">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                        </div>
-                        </div>
-                        <hr>
-                        `;
-                    document.getElementById('output').innerHTML = output;
-                }
-
-        )
-        }
-    }
-
-    window.onload = console.log(JSON.parse(jsontrying()));
-    */
 
 
 </script>

@@ -33,3 +33,53 @@ result = function createOrder () {
     return map;
 };
 
+let url = 'http://192.168.160.70:8080/api';
+
+function getFinalPrice(){
+    fetch(url + '/order/estimated-price' , {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsontrying()})
+        .then(res => res.json())
+        .then(res => document.getElementById('finalPrice').innerHTML = "Final Price: " + res +"€")
+        .catch(error => console.error('Error:', error));
+};
+
+
+function getBy(){
+    let output = ``;
+    for (let i= 0 ; i < result().size; i++) {
+        fetch(url+'/books/isbn/' + Array.from(result().keys())[i])
+            .then((res) => res.json())
+            .then((data) => {
+                    output += `
+                <div class="row">
+                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <h4 class="product-name" id="product-name">
+                            <strong>
+                                ${data.title}
+                            </strong>
+                       </h4>
+                    </div>
+                    <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
+                        <div class="col-6 col-sm-6 col-md-6 text-md-right" id="price" style="padding-top: 5px">
+                        <h6><strong>${data.price} €<span class="text-muted">x</span></strong></h6>
+                    </div>
+                    <div class="col-3 col-sm-3 col-md-3">
+                        <div class="quantity">
+                        <h6><strong> Qty: `+ result().get(Array.from(result().keys())[i]) +`</strong></h6>
+                        </div>
+                        </div>
+                        
+                        </div>
+                        </div>
+                        <hr>
+                        `;
+                    document.getElementById('output').innerHTML = output;
+                }
+
+            )
+    }
+}
