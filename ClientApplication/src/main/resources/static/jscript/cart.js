@@ -1,5 +1,5 @@
 values = function fin() {
-    return JSON.parse(localStorage.getItem('mapa'));
+    return JSON.parse(localStorage.getItem('storage'));
 };
 
 /**
@@ -8,9 +8,9 @@ values = function fin() {
 jsontrying = function StringForJson() {
     let output = '[';
     let virgCount = 0;
-    let maxVirg = values().length -1 ;
-    for (let i = 0; i < values().length; i++) {
-        output += '{' + '\"isbn\"' + '\:"' + values()[i] +'\",' + '\"quantity\"' + '\:' + result().get(values()[i]) + '}'
+    let maxVirg = result().size -1 ;
+    for (let i = 0; i < result().size; i++) {
+        output += '{' + '\"isbn\"' + '\:"' + Array.from(result().keys())[i] +'\",' + '\"quantity\"' + '\:' + result().get(Array.from(result().keys())[i]) + '}'
         if(virgCount < maxVirg) {
             output += ',';
             virgCount ++;
@@ -26,16 +26,10 @@ result = function createOrder () {
     for (let i= 0 ; i < values().length; i++) {
         if(!map.has(values()[i])) {
             map.set(values()[i], 1);
-        } else { count++ ; map.set(values()[i],count);}
+        } else {
+            count++ ;
+            map.set(values()[i],count);}
     }
     return map;
 };
-
-function strMapToObj(result) {
-    let obj = Object.create(null);
-    for (let [k,v] of result) {
-        obj[k] = v;
-    }
-    return obj;
-}
 

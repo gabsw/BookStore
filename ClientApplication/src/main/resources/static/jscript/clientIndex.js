@@ -337,8 +337,8 @@ function getBooks(){
 let storeObj= [];
 function myFunction(isbn) {
     storeObj.push(isbn);
-    console.log(storeObj);
-    localStorage.setItem('mapa',JSON.stringify(storeObj));
+    console.log("Array " + storeObj);
+    localStorage.setItem('storage',JSON.stringify(storeObj));
 }
 
 

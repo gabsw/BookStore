@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -44,8 +45,7 @@ public class SearchBookTest {
     selectPollutant.click();
     assertThat(driver.findElement(By.id("book_title 1")).getText(), is("Book1"));
   }
-<<<<<<< Updated upstream:ClientApplication/src/test/java/com/client/application/enduser/selenium/SearchBookTitleTest.java
-=======
+
 
   @Test
   public void searchBookCategory() {
@@ -82,5 +82,4 @@ public class SearchBookTest {
     selectPollutant.click();
     assertThat(driver.findElement(By.id("undefined")).getText(), is("Nothing Found !"));
   }
->>>>>>> Stashed changes:ClientApplication/src/test/java/com/client/application/enduser/selenium/SearchBookTest.java
 }
