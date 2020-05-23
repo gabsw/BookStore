@@ -20,8 +20,8 @@ jobs:
         docker-compose up -d main_application
     - name: Install Google Chrome # Using shell script to install Google Chrome
       run: |
-       chmod +x ./scripts/instal_chrome.sh
-        ./scripts/instal_chrome.sh
+       chmod +x ./scripts/install_chrome.sh
+        ./scripts/install_chrome.sh
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
