@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68c8ee9c-a246-4f53-8732-6bc8ede41764" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +27,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bestofbooks" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ClientApplication" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="EndUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -49,6 +62,7 @@
       <updated>1589464988239</updated>
       <workItem from="1589464990937" duration="149000" />
       <workItem from="1589822817272" duration="32000" />
+      <workItem from="1590245206746" duration="10000" />
     </task>
     <servers />
   </component>
