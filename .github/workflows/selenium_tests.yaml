@@ -10,37 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: user
-          POSTGRES_DB: book_store
-        #volumes:
-        #  - /home/runner/work/BookStore/BookStore/rdb/init.psql:/docker-entrypoint-initdb.d/init.sql
-        ports:
-        - 5432:5432
-        # needed because the postgres container does not provide a healthcheck//
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-      main_application:
-        build: ./bestofbooks
-        container_name: main_application
-        depends_on:
-            - postgres
-        environment:
-            SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/book_store
-        ports:
-            - "8080:8080"
-
-    
     steps:
     - uses: actions/checkout@v1
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
-    - name: Fill DB
-      run: psql postgresql://user:user@localhost:5432/book_store < rdb/init.psql
+    - name: docker compose service
+      run: |
+        docker-compose up -d main_application
     - name: Install Google Chrome # Using shell script to install Google Chrome
       run: |
        chmod +x ./scripts/instal_chrome.sh
