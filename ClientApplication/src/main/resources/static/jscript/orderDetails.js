@@ -1,0 +1,36 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const product = urlParams.get('id');
+let url = 'http://192.168.160.70:8080/api/order/'+product;
+function getById(){
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            let id = `${data["id"]}`;
+            document.getElementById('order_id').innerHTML = "Order #" + id;
+            let buyer_name = `${data.buyerName}`;
+            document.getElementById('buyer_name').innerHTML = "<strong>" + buyer_name+ "</strong>";
+            let buyer_address = `${data.address}`;
+            document.getElementById('buyer_address').innerHTML ="Address: " +buyer_address;
+            let total = `${data.finalPrice}`;
+            document.getElementById('total_price').innerHTML ="<strong>" + total + " $ </strong>";
+
+            let output = '';
+            data["bookOrders"].forEach(function (order) {
+                output += `
+                    <tr>
+                    <td class="center">${order.isbn}</td>
+                    <td class="left strong">${order["title"]}</td>
+
+                    <td class="right">${order.author}</td>
+                    <td class="center">${order.quantity}</td>
+                    </tr>
+                         `;
+
+            })
+            document.getElementById('output').innerHTML = output;
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}

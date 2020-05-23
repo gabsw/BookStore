@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Air Quality</title>
+    <title>Best Of Books</title>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <script src="jscript/orderDetails.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">
-            <img src="../Images/Logo-removebg-preview.png" alt="" width="100" />
+            <img src="images/Logo-removebg-preview.png" alt="" width="100"/>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -22,7 +24,7 @@
                     </li>
                     <li class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Welcome, User
+                            Welcome, Client
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="Cart.html"> <i class="fa fa-shopping-cart"></i> Your Cart</a>
@@ -38,20 +40,17 @@
 
 
     <div class="container">
+        <div class="text-center"><h1>Order</h1></div>
         <div class="card">
-            <div class="card-header">
-                Order #1
+            <div class="card-header" id="order_id">
             </div>
             <div class="card-body">
                 <div class="row mb-4">
                     <div class="col-sm-6">
                         <h6 class="mb-3">To:</h6>
-                        <div>
-                            <strong>BobMart</strong>
+                        <div id="buyer_name">
                         </div>
-                        <div>Attn: Daniel Marek</div>
-                        <div>43-190 Mikolow, Poland</div>
-
+                        <div id="buyer_address"></div>
                     </div>
 
 
@@ -62,44 +61,14 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th class="center">#</th>
+                                <th class="center">Isbn</th>
                                 <th>Item</th>
-                                <th class="right">Unit Cost</th>
+                                <th class="right">Author</th>
                                 <th class="center">Qty</th>
-                                <th class="right">Total</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="center">1</td>
-                                <td class="left strong">Awesome product</td>
+                        <tbody id="output">
 
-                                <td class="right">$120,00</td>
-                                <td class="center">1</td>
-                                <td class="right">$120,00</td>
-                            </tr>
-                            <tr>
-                                <td class="center">2</td>
-                                <td class="left">Awesome product</td>
-                                <td class="right">$99,00</td>
-                                <td class="center">2</td>
-                                <td class="right">$198,00</td>
-                            </tr>
-                            <tr>
-                                <td class="center">3</td>
-                                <td class="left">Awesome product</td>
-                                <td class="right">$140,00</td>
-                                <td class="center">1</td>
-                                <td class="right">$140,00</td>
-                            </tr>
-                            <tr>
-                                <td class="center">4</td>
-                                <td class="left">Awesome product</td>
-
-                                <td class="right">$220,00</td>
-                                <td class="center">1</td>
-                                <td class="right">$220,00</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -116,8 +85,7 @@
                                     <td class="left">
                                         <strong>Total</strong>
                                     </td>
-                                    <td class="right">
-                                        <strong>678,00$</strong>
+                                    <td class="right" id="total_price">
                                     </td>
                                 </tr>
                             </tbody>
@@ -129,14 +97,19 @@
 
             </div>
         </div>
+        <a href="orders.html" class="btn btn-info btn-sm" role="button">Go Back </a>
     </div>
     <p></p>
-    <a href="orders.html" class="btn btn-info btn-sm" role="button">Go Back </a>
 
 
-    <script src="../Scripts/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    document.onload = getById();
+
+</script>
+
 </body>
 </html>

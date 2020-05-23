@@ -1,7 +1,7 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Book Epic",
+		"name": "TQS Book Epic",
 		"_postman_id": "f91b81e3-eca6-c054-8914-92c8fbf3d35d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
@@ -63,27 +63,7 @@
 		{
 			"name": "get book by isbn",
 			"request": {
-				"url": {
-					"raw": "{{url}}/api/books/isbn/?isbn=1111111111111",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"books",
-						"isbn",
-						""
-					],
-					"query": [
-						{
-							"key": "isbn",
-							"value": "1111111111111",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
+				"url": "{{url}}/api/books/isbn/1111111111111",
 				"method": "GET",
 				"header": [],
 				"body": {},

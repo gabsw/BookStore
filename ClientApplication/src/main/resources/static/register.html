@@ -80,24 +80,24 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col text-center">
-                    <img src="../Images/Logo-removebg-preview.png" alt="" class="img-fluid" />
+                    <img src="images/Logo-removebg-preview.png" alt="" class="img-fluid"/>
                 </div>
             </div>
         </div>
         <label for="inputEmail" class="sr-only">Username</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Username"> <!--required autofocus-->
+        <input type="email" id="inputEmail" class="form-control" placeholder="Username" required autofocus >
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password"> <!--required-->
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">What Are You?</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>Admin</option>
-                <option>Client</option>
-                <option>Publisher</option>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="form-group" >
+            <label for="example">What Are You?</label>
+            <select class="form-control" id="example">
+                <option value="Admin">Admin</option>
+                <option value="Client">Client</option>
+                <option value="Publisher">Publisher</option>
             </select>
         </div>
 
-        <a href="index.html" class="btn btn-lg btn-primary btn-block" role="button">Create Account</a>
+        <a href="#" class="btn btn-lg btn-primary btn-block" id="createAccount"  onclick="account()" role="button">Create Account</a>
 
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="login.html">Already have an account? Sign In</a>
@@ -109,5 +109,16 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script>
+        function account() {
+            if (document.getElementById("example").value === "Admin")
+            {document.getElementById("createAccount").href = "adminIndex.html"}
+            else if (document.getElementById("example").value === "Publisher")
+            {document.getElementById("createAccount").href = "publisherIndex.html"}
+            else if (document.getElementById("example").value === "Client")
+            {document.getElementById("createAccount").href = "clientIndex.html"}
+        }
+    </script>
 </body>
 </html>

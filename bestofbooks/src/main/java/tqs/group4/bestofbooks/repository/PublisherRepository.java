@@ -13,4 +13,6 @@ public interface PublisherRepository extends JpaRepository<Publisher, String>{
 	
 	boolean existsByUsername(String username);
 
+	boolean existsByName(String name);
+
 }

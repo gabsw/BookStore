@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Air Quality</title>
+    <title>Best Of Books</title>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="publisherIndex.html">
-            <img src="../Images/Logo-removebg-preview.png" alt="" width="100" />
+            <img src="images/Logo-removebg-preview.png" alt="" width="100" />
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -25,6 +25,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="createStock.html"> <i class="fa fa-plus"></i> Create Order</a>
+                            <a class="dropdown-item" href="publisherIndex.html">See Orders</a>
                             <a class="dropdown-item" href="login.html">LogOut</a>
                         </div>
                     </li>
@@ -36,19 +37,8 @@
 
 
     <div class="container py-5">
-        <div class="text-center"><h1>Explore Our Books</h1></div>
         <p></p>
-        <div class="row">
-            <div class="input-group md-form form-sm form-1 col-lg-12">
-                <div class="input-group-prepend">
-                    <span class="input-group-text cyan lighten-2" id="basic-text1">
-                        <i class="fa fa-search"></i>
-                    </span>
-                </div>
-                <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search">
-            </div>
-        </div>
-        <p></p>
+
         <div class="row">
             <div class="col-lg-2 mx-auto">
                 <ul class="list-group shadow">
@@ -115,7 +105,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="OrderDetails.html" class="btn btn-info btn-sm" role="button">Invoice Details</a>
+                                                <a href="stockDetails.html" class="btn btn-info btn-sm" role="button">Invoice Details</a>
 
                                             </td>
                                         </tr>
@@ -126,7 +116,6 @@
                         <!-- End -->
                     </li>
                     <!-- End -->
-                    <!-- list group item-->
                     <li class="list-group-item">
                         <!-- Custom content-->
                         <div class="media align-items-lg-center flex-column flex-lg-row p-3">
@@ -140,93 +129,11 @@
                                             <td>
                                                 <p class="font-italic text-muted mb-0 small">Publisher: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
                                                 <div class="d-flex align-items-center justify-content-between mt-1">
-                                                    <h6 class="font-weight-bold my-2">$10.00</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <a href="OrderDetails.html" class="btn btn-info btn-sm" role="button">Order Details</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End -->
-                    </li>
-                    <!-- End --><!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <table>
-                                        <tr>
-                                            <th scope="row"><h5 class="mt-0 font-weight-bold mb-2">Order #3</h5></th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="font-italic text-muted mb-0 small">Publisher: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                                    <h6 class="font-weight-bold my-2">$20.00</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <a href="commissionDetails.html" class="btn btn-info btn-sm" role="button">Order Details</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End -->
-                    </li>
-                    <!-- End --><!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <table>
-                                        <tr>
-                                            <th scope="row"><h5 class="mt-0 font-weight-bold mb-2">Order #4</h5></th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="font-italic text-muted mb-0 small">Publisher: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                                    <h6 class="font-weight-bold my-2">$50.00</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <a href="commissionDetails.html" class="btn btn-info btn-sm" role="button">Order</a>
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End -->
-                    </li>
-                    <!-- End --><!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <table>
-                                        <tr>
-                                            <th scope="row"><h5 class="mt-0 font-weight-bold mb-2">Order #5</h5></th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p class="font-italic text-muted mb-0 small">Publisher: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                                                <div class="d-flex align-items-center justify-content-between mt-1">
                                                     <h6 class="font-weight-bold my-2">$25.00</h6>
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="commissionDetails.html" class="btn btn-info btn-sm" role="button">Order Details</a>
+                                                <a href="stockDetails.html" class="btn btn-info btn-sm" role="button">Order Details</a>
 
                                             </td>
                                         </tr>
