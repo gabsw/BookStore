@@ -27,7 +27,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tqs.group4.bestofbooks.utils.Json.toJson;
 
@@ -51,6 +53,11 @@ public class SessionControllerIT {
 	
 	@Autowired
     private EntityManager entityManager;
+	
+	@BeforeEach
+	public void before() {
+		entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers, books_orders, revenues, buyers, admin").executeUpdate();
+	}
 
 	
     @Test
@@ -175,6 +182,47 @@ public class SessionControllerIT {
     	.andExpect(status()
                 .isUnauthorized());
     	
+    }
+    
+    @Test
+    void givenValidAuthHeaderAndDto_whenRegister_thenReturnCreatedUserDto() throws JsonProcessingException, Exception {
+    	String url = "/api/session/login";
+        UserDto dto = new UserDto("username", "Buyer");
+        
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isOk())
+           .andExpect(content().json(toJson(dto)))
+           .andExpect(header().exists("x-auth-token"));
+   
+    }
+    
+    @Test
+    void givenInvalidAuthorizationHeader_whenRegister_thenHttpStatusBadRequest() throws Exception {
+    	String url = "/api/session/login";
+    	UserDto dto = new UserDto("username", "Buyer");
+
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
     }
 	
 }
