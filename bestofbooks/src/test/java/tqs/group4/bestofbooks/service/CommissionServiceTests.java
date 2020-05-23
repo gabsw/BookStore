@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import tqs.group4.bestofbooks.mocks.CommissionMocks;
 import tqs.group4.bestofbooks.mocks.OrderMocks;
+import tqs.group4.bestofbooks.model.Commission;
+import tqs.group4.bestofbooks.repository.AdminRepository;
 import tqs.group4.bestofbooks.repository.CommissionRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +27,12 @@ public class CommissionServiceTests {
     }
 
     // Still missing 2 feature tests
+
+    @Test
+    void getCommissionTotal() {
+        //Failing test
+        assertEquals(CommissionMocks.commission1.getAmount(),service.getCommissionsTotal());
+    }
 
     @Test
     void testComputeCommissionAmountByOrderResults() {
