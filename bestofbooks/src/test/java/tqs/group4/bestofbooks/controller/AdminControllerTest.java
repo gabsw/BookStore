@@ -19,11 +19,11 @@ import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.model.Commission;
 import tqs.group4.bestofbooks.service.BookService;
 import tqs.group4.bestofbooks.service.CommissionService;
+import tqs.group4.bestofbooks.service.LoginServices;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,20 +37,22 @@ class AdminControllerTest {
     @MockBean
     private CommissionService commissionService;
 
+    @MockBean
+    private LoginServices loginService;
+
     @AfterEach
     public void after() {
         reset(commissionService);
+        reset(loginService);
     }
 
-    @Test
-    void getCommissions() {
-    }
 
     @Test
-    void givenCommissions_thenGetCommissionsTotal() throws Exception {
+    void givenCommissions_forValidAuth_thenGetCommissionsTotal() throws Exception {
         Double allCommissions = CommissionMocks.commission1.getAmount() +  CommissionMocks.commission2.getAmount();
         String url = "/api/admin/commissions/total";
         given(commissionService.getCommissionsTotal()).willReturn(allCommissions);
+        doNothing().when(loginService).checkUserIsAdmin("admin");
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status()
@@ -60,10 +62,11 @@ class AdminControllerTest {
     }
 
     @Test
-    void givenNoCommissions_thenGetZeroAsTotal() throws Exception {
+    void givenNoCommissions_forValidAuth_thenGetZeroAsTotal() throws Exception {
         Double allCommissions = 0.0;
         String url = "/api/admin/commissions/total";
         given(commissionService.getCommissionsTotal()).willReturn(allCommissions);
+        doNothing().when(loginService).checkUserIsAdmin("admin");
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status()
@@ -73,12 +76,13 @@ class AdminControllerTest {
     }
 
     @Test
-    void givenCommissions_thenGetAllCommissions() throws Exception {
+    void givenCommissions_forValidAuth_thenGetAllCommissions() throws Exception {
         Pageable p = PageRequest.of(0, 20);
         Page<Commission> commissionPage = new PageImpl<>(Lists.newArrayList(CommissionMocks.commission1,
                 CommissionMocks.commission2), p, 2);
 
         given(commissionService.getCommissions(p)).willReturn(commissionPage);
+        doNothing().when(loginService).checkUserIsAdmin("admin");
 
         String url = "/api/admin/commissions/";
 
