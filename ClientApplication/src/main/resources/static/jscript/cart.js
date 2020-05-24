@@ -1,5 +1,3 @@
-let url = 'http://192.168.160.70:8080/api';
-
 values = function fin() {
     return JSON.parse(localStorage.getItem('storage'));
 };
@@ -37,7 +35,7 @@ result = function createOrder () {
 
 
 function getFinalPrice(){
-    fetch(url + '/order/estimated-price' , {
+    fetch(url + 'order/estimated-price' , {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -52,7 +50,7 @@ function getFinalPrice(){
 function getBy(){
     let output = ``;
     for (let i= 0 ; i < result().size; i++) {
-        fetch(url+'/books/isbn/' + Array.from(result().keys())[i])
+        fetch(url+'books/isbn/' + Array.from(result().keys())[i])
             .then((res) => res.json())
             .then((data) => {
                     output += `
@@ -91,7 +89,7 @@ ref = function generateRef() {
 };
 
 function createOrder() {
-    fetch(url + '/order/' , {
+    fetch(url + 'order/' , {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',

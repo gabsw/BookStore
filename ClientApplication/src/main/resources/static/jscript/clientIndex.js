@@ -1,7 +1,6 @@
-let url = 'http://192.168.160.70:8080/api';
 
 function highest() {
-    fetch(url + '/books/available?sort=price,desc')
+    fetch(url + 'books/available?sort=price,desc')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -40,7 +39,7 @@ function highest() {
 }
 
 function highestNoLogin() {
-    fetch(url + '/books/available?sort=price,desc')
+    fetch(url + 'books/available?sort=price,desc')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -78,7 +77,7 @@ function highestNoLogin() {
 }
 
 function lowest() {
-    fetch(url + '/books/available?sort=price,asc')
+    fetch(url + 'books/available?sort=price,asc')
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -116,7 +115,7 @@ function lowest() {
         })
 }
 function lowestNoLogin() {
-    fetch(url + '/books/available?sort=price,asc')
+    fetch(url + 'books/available?sort=price,asc')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -162,7 +161,7 @@ function searchBooks() {
     } else if (document.getElementById("book_category").checked){
         add = 'category='
     } else { add = 'title='}
-    fetch(url+'/books/search?' + add + book_title)
+    fetch(url+'books/search?' + add + book_title)
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -212,7 +211,7 @@ function searchBooksNoLogin() {
     } else if (document.getElementById("book_category").checked){
         add = 'category='
     } else { add = 'title='}
-    fetch(url+'/books/search?' + add + book_title)
+    fetch(url+'books/search?' + add + book_title)
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -253,7 +252,7 @@ function searchBooksNoLogin() {
 }
 
 function getBooksNoLogin() {
-    fetch(url + '/books/available')
+    fetch(url + 'books/available')
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -295,7 +294,7 @@ function getBooksNoLogin() {
 }
 
 function getBooks(){
-    fetch(url + '/books/available')
+    fetch(url + 'books/available')
         .then(res => res.json())
         .then((data) => {
             let count = 0;

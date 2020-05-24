@@ -1,5 +1,5 @@
 function getCommissions() {
-    fetch('http://192.168.160.70:8080/api/admin/commissions/')
+    fetch(  url+ 'admin/commissions/')
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -31,7 +31,7 @@ function getCommissions() {
         })
 }
 function getCommissionsTotal() {
-    fetch('http://192.168.160.70:8080/api/admin/commissions/total')
+    fetch(url + 'admin/commissions/total')
         .then(res => res.json())
         .then((data) => {
             document.getElementById('finalPrice').innerHTML = '<strong>Commission Total:</strong> '+  data +'€';
