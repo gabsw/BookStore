@@ -170,7 +170,7 @@ public class LoginServices {
 		Optional<Publisher> optionalPublisher = publisherRepository.findByUsername(sessionUsername);
 		if (optionalPublisher.isPresent()) {
 			Publisher publisher = optionalPublisher.get();
-			if (!publisher.getName().equals(sessionUsername)) {
+			if (!publisher.getName().equals(endpointName)) {
 				throw new ForbiddenUserException("Publisher mismatch.");
 			}
 		}
