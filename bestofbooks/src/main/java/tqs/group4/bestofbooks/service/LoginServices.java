@@ -152,7 +152,7 @@ public class LoginServices {
 			 throws ForbiddenUserException, LoginRequiredException {
 		checkUserIsBuyer(sessionUsername);
 		if (!endpointUsername.equals(sessionUsername)) {
-			throw new ForbiddenUserException("User mismatch.");
+			throw new ForbiddenUserException("Buyer mismatch.");
 		}
 	 }
 
@@ -164,4 +164,15 @@ public class LoginServices {
 		}
 	}
 
+	public void checkIfUserIsTheRightPublisher(String endpointName, String sessionUsername)
+			throws ForbiddenUserException, LoginRequiredException {
+		checkUserIsPublisher(sessionUsername);
+		Optional<Publisher> optionalPublisher = publisherRepository.findByUsername(sessionUsername);
+		if (optionalPublisher.isPresent()) {
+			Publisher publisher = optionalPublisher.get();
+			if (!publisher.getName().equals(sessionUsername)) {
+				throw new ForbiddenUserException("Publisher mismatch.");
+			}
+		}
+	}
 }
