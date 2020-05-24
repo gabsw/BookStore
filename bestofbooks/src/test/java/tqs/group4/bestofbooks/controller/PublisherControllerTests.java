@@ -3,8 +3,7 @@ package tqs.group4.bestofbooks.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -48,147 +47,151 @@ import tqs.group4.bestofbooks.service.StockService;
 @WebMvcTest(PublisherController.class)
 public class PublisherControllerTests {
 
-	 @Autowired
-	 private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-	 @MockBean
-	 private StockService stockService;
+    @MockBean
+    private StockService stockService;
 
-	 @MockBean
+    @MockBean
     private RevenueService revenueService;
+
+	@MockBean
+	private LoginServices loginService;
 
     Pageable p = PageRequest.of(0, 20);
 
-		 
-	 @AfterEach
-	 public void after() {
-		 reset(stockService);
-		 reset(revenueService);
-	 }
-	 
-	 @Test
-	 void givenValidPublisherTokenValidName_whenGetAvailableStock_thenReturnJsonWithBooks() throws JsonProcessingException, Exception {
-		 UserDto dto = new UserDto("username", "Publisher");
-		 dto.addAttribute("name", "PublisherName");
-		 dto.addAttribute("tin", "PublisherTIN");
-		 Book b1 = new Book("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
-	                "Travelogue", "Publisher");
-		 Book b2 = new Book("9876543216842", "Title 2", "Author 2", "Description 2", 15, 3,
-	                "Travelogue", "Publisher");
-		 Pageable p = PageRequest.of(0, 20);
-	     Page<Book> bookPage = new PageImpl<>(Lists.newArrayList(b1, b2), p, 2);
-		 given(stockService.getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p))).willReturn(bookPage);
-		 
-		 String url = "/api/publisher/Publisher/stock/";
-		 
-		 mvc.perform(get(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	        ).andExpect(status()
-	                .isOk())
-	           .andExpect(content().json(toJson(bookPage)));
-		 
-		 verify(stockService, VerificationModeFactory.times(1)).getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p));
-	 }
-	 
-	 @Test
-	 void givenInvalidPublisherToken_whenGetAvailableStock_thenStatusUnauthorized() throws JsonProcessingException, Exception {
-		 Pageable p = PageRequest.of(0, 20);
-		 given(stockService.getPublisherBooks(eq("Publisher"),any(HttpServletRequest.class), eq(p))).willThrow(new LoginRequiredException("Login required for this request."));
-		 String url = "/api/publisher/Publisher/stock/";
-		 
-		 mvc.perform(get(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	        ).andExpect(status()
-	                .isUnauthorized());
-		 
-		 verify(stockService, VerificationModeFactory.times(1)).getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p));
-	 }
-	 
-	 @Test
-	 void givenUnauthorizedOrMismatchedPublisherToken_whenGetAvailableStock_thenStatusForbidden() throws JsonProcessingException, Exception {
-		 Pageable p = PageRequest.of(0, 20);
-		 given(stockService.getPublisherBooks(eq("Publisher"),any(HttpServletRequest.class), eq(p))).willThrow(new ForbiddenUserException("User not allowed."));
-		 String url = "/api/publisher/Publisher/stock/";
-		 
-		 mvc.perform(get(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	        ).andExpect(status()
-	                .isForbidden());
-		 
-		 verify(stockService, VerificationModeFactory.times(1)).getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p));
-	 }
-	 
-	 @Test
-	 void givenValidPublisherTokenAndValidNameAndValidBookIsbn_whenUpdateAvailableStock_thenReturnJsonWithStockDto() throws JsonProcessingException, Exception {
-		 UserDto dto = new UserDto("username", "Publisher");
-		 dto.addAttribute("name", "PublisherName");
-		 dto.addAttribute("tin", "PublisherTIN");
-		 StockDto InstockDto = new StockDto("1234567891234", 5);
-		 StockDto OutstockDto = new StockDto("1234567891234", 10);
-		 given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willReturn(OutstockDto);
-		 
-		 String url = "/api/publisher/Publisher/stock/";
-		 String body = toJson(InstockDto);
-		 
-		 mvc.perform(put(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	                .content(body)
-	        ).andExpect(status()
-	                .isOk())
-	           .andExpect(content().json(toJson(OutstockDto)));
-		 verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
-	 }
-	 
-	 @Test
-	 void givenInvalidPublisherToken_whenUpdateAvailableStock_thenStatusUnauthorized() throws JsonProcessingException, Exception {
-		 StockDto InstockDto = new StockDto("1234567891234", 5);
-		 given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willThrow(new LoginRequiredException("Login required for this request."));
-		 String url = "/api/publisher/Publisher/stock/";
-		 String body = toJson(InstockDto);
-		 
-		 mvc.perform(put(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	                .content(body)
-	        ).andExpect(status()
-	                .isUnauthorized());
-		 
-		 verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
-	 }
-	 
-	 @Test
-	 void givenUnauthorizedOrMismatchedPublisherToken_whenUpdateAvailableStock_thenStatusForbidden() throws JsonProcessingException, Exception {
-		 StockDto InstockDto = new StockDto("1234567891234", 5);
-		 given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willThrow(new ForbiddenUserException("User not allowed."));
-		 String url = "/api/publisher/Publisher/stock/";
-		 String body = toJson(InstockDto);
-		 
-		 mvc.perform(put(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	                .content(body)
-	        ).andExpect(status()
-	                .isForbidden());
-		 
-		 verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
-	 }
-	 
-	 @Test
-	 void givenValidPublisherTokenAndValidNameAndInvalidBookIsbn_whenUpdateAvailableStock_thenStatusNotFound() throws Exception {
-		 StockDto InstockDto = new StockDto("1234567891234", 5);
-		 given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willThrow(new BookNotFoundException("Book with " + InstockDto.getIsbn() + " was not found in the platform."));
-		 String url = "/api/publisher/Publisher/stock/";
-		 String body = toJson(InstockDto);
-		 
-		 mvc.perform(put(url)
-	                .contentType(MediaType.APPLICATION_JSON)
-	                .content(body)
-	        ).andExpect(status()
-	                .isNotFound());
-		 
-		 verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
-	 }
 
-	 @Test
+    @AfterEach
+    public void after() {
+        reset(stockService);
+        reset(revenueService);
+    }
+
+    @Test
+    void givenValidPublisherTokenValidName_whenGetAvailableStock_thenReturnJsonWithBooks() throws JsonProcessingException, Exception {
+        UserDto dto = new UserDto("username", "Publisher");
+        dto.addAttribute("name", "PublisherName");
+        dto.addAttribute("tin", "PublisherTIN");
+        Book b1 = new Book("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue", "Publisher");
+        Book b2 = new Book("9876543216842", "Title 2", "Author 2", "Description 2", 15, 3,
+                "Travelogue", "Publisher");
+        Pageable p = PageRequest.of(0, 20);
+        Page<Book> bookPage = new PageImpl<>(Lists.newArrayList(b1, b2), p, 2);
+        given(stockService.getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p))).willReturn(bookPage);
+
+        String url = "/api/publisher/Publisher/stock/";
+
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status()
+                .isOk())
+           .andExpect(content().json(toJson(bookPage)));
+
+        verify(stockService, VerificationModeFactory.times(1)).getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p));
+    }
+
+    @Test
+    void givenInvalidPublisherToken_whenGetAvailableStock_thenStatusUnauthorized() throws JsonProcessingException, Exception {
+        Pageable p = PageRequest.of(0, 20);
+        given(stockService.getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p))).willThrow(new LoginRequiredException("Login required for this request."));
+        String url = "/api/publisher/Publisher/stock/";
+
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status()
+                .isUnauthorized());
+
+        verify(stockService, VerificationModeFactory.times(1)).getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p));
+    }
+
+    @Test
+    void givenUnauthorizedOrMismatchedPublisherToken_whenGetAvailableStock_thenStatusForbidden() throws JsonProcessingException, Exception {
+        Pageable p = PageRequest.of(0, 20);
+        given(stockService.getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p))).willThrow(new ForbiddenUserException("User not allowed."));
+        String url = "/api/publisher/Publisher/stock/";
+
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status()
+                .isForbidden());
+
+        verify(stockService, VerificationModeFactory.times(1)).getPublisherBooks(eq("Publisher"), any(HttpServletRequest.class), eq(p));
+    }
+
+    @Test
+    void givenValidPublisherTokenAndValidNameAndValidBookIsbn_whenUpdateAvailableStock_thenReturnJsonWithStockDto() throws JsonProcessingException, Exception {
+        UserDto dto = new UserDto("username", "Publisher");
+        dto.addAttribute("name", "PublisherName");
+        dto.addAttribute("tin", "PublisherTIN");
+        StockDto InstockDto = new StockDto("1234567891234", 5);
+        StockDto OutstockDto = new StockDto("1234567891234", 10);
+        given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willReturn(OutstockDto);
+
+        String url = "/api/publisher/Publisher/stock/";
+        String body = toJson(InstockDto);
+
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
+        ).andExpect(status()
+                .isOk())
+           .andExpect(content().json(toJson(OutstockDto)));
+        verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
+    }
+
+    @Test
+    void givenInvalidPublisherToken_whenUpdateAvailableStock_thenStatusUnauthorized() throws JsonProcessingException, Exception {
+        StockDto InstockDto = new StockDto("1234567891234", 5);
+        given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willThrow(new LoginRequiredException("Login required for this request."));
+        String url = "/api/publisher/Publisher/stock/";
+        String body = toJson(InstockDto);
+
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
+        ).andExpect(status()
+                .isUnauthorized());
+
+        verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
+    }
+
+    @Test
+    void givenUnauthorizedOrMismatchedPublisherToken_whenUpdateAvailableStock_thenStatusForbidden() throws JsonProcessingException, Exception {
+        StockDto InstockDto = new StockDto("1234567891234", 5);
+        given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willThrow(new ForbiddenUserException("User not allowed."));
+        String url = "/api/publisher/Publisher/stock/";
+        String body = toJson(InstockDto);
+
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
+        ).andExpect(status()
+                .isForbidden());
+
+        verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
+    }
+
+    @Test
+    void givenValidPublisherTokenAndValidNameAndInvalidBookIsbn_whenUpdateAvailableStock_thenStatusNotFound() throws Exception {
+        StockDto InstockDto = new StockDto("1234567891234", 5);
+        given(stockService.updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class))).willThrow(new BookNotFoundException("Book with " + InstockDto.getIsbn() + " was not found in the platform."));
+        String url = "/api/publisher/Publisher/stock/";
+        String body = toJson(InstockDto);
+
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
+        ).andExpect(status()
+                .isNotFound());
+
+        verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
+    }
+
+    @Test
     void givenExistentPublisherName_whenGetRevenuesByPublisherName_thenReturnJson() throws Exception {
+        doNothing().when(loginService).checkIfUserIsTheRightPublisher("Publisher 1", "pub1");
         String knownPublisher = RevenueMocks.revenue1.getPublisherName();
         String url = "/api/publisher/" + knownPublisher + "/revenue";
 
@@ -217,6 +220,7 @@ public class PublisherControllerTests {
 
     @Test
     void givenExistentPublisherName_whenGetTotalRevenuesByPublisherName_thenReturnJson() throws Exception {
+		doNothing().when(loginService).checkIfUserIsTheRightPublisher("Publisher 1", "pub1");
         String knownPublisher = RevenueMocks.revenue1.getPublisherName();
         String url = "/api/publisher/" + knownPublisher + "/revenue/total";
 
@@ -241,5 +245,5 @@ public class PublisherControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isNotFound());
     }
-    
+
 }

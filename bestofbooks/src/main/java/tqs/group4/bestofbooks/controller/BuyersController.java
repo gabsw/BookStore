@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/api/buyer")
+@RequestMapping("/api/buyer")
 public class BuyersController {
     
     @Autowired
@@ -22,7 +22,7 @@ public class BuyersController {
     @Autowired
     private LoginServices loginService;
 
-    @GetMapping(value="/{buyerUsername}/orders")
+    @GetMapping("/{buyerUsername}/orders")
     public List<OrderDTO> getOrdersByBuyerUsername(@PathVariable String buyerUsername, HttpServletRequest request)
             throws LoginRequiredException, ForbiddenUserException {
         loginService.checkIfUserIsTheRightBuyer(buyerUsername, loginService.getSessionUsername(request));

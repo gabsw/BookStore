@@ -11,4 +11,7 @@ public class ForbiddenUserException extends Exception{
     public ForbiddenUserException(String message){
         super(message);
     }
+
+    public ForbiddenUserException() {
+    }
 }
