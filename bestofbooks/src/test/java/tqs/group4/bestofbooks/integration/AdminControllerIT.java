@@ -112,6 +112,5 @@ public class AdminControllerIT {
         ).andExpect(status()
                 .isOk())
            .andExpect(content().json(toJson(commissionPage)));
-
     }
 }
