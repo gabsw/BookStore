@@ -60,6 +60,12 @@ class CommissionRepositoryTest {
     }
 
     @Test
+    void givenNoCommissions_receiveTotalAmountAsZero() {
+        Double queryResult = commissionRepository.totalAmount();
+        assertEquals(0.00, queryResult);
+    }
+
+    @Test
     void givenCommissions_fetchCommissionsPage() {
         entityManager.persist(order1);
         entityManager.persist(order2);
