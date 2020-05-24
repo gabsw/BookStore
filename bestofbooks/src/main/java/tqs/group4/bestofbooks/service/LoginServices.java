@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.hash.Hashing;
 
+import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
@@ -18,6 +19,7 @@ import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Admin;
 import tqs.group4.bestofbooks.model.Buyer;
+import tqs.group4.bestofbooks.model.Order;
 import tqs.group4.bestofbooks.model.Publisher;
 import tqs.group4.bestofbooks.repository.AdminRepository;
 import tqs.group4.bestofbooks.repository.BuyerRepository;
@@ -145,5 +147,21 @@ public class LoginServices {
 			 }
 		 }
 	 }
+
+	 public void checkIfUserIsTheRightBuyer(String endpointUsername, String sessionUsername)
+			 throws ForbiddenUserException, LoginRequiredException {
+		checkUserIsBuyer(sessionUsername);
+		if (!endpointUsername.equals(sessionUsername)) {
+			throw new ForbiddenUserException("User mismatch.");
+		}
+	 }
+
+	public void checkIfUserIsTheRightBuyerForOrder(OrderDTO orderDTO, String sessionUsername)
+			throws ForbiddenUserException, LoginRequiredException {
+		checkUserIsBuyer(sessionUsername);
+		if (!orderDTO.getBuyerName().equals(sessionUsername)) {
+			throw new ForbiddenUserException("Username does not match the order's buyer.");
+		}
+	}
 
 }
