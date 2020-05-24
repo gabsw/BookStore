@@ -350,4 +350,25 @@ public class LoginServicesTest {
 				() -> loginService.checkIfUserIsTheRightBuyerForOrder(orderDTO, "username3"));
 	}
 
+	@Test
+	void givenLoginWasNotProvided_whenCheckIfUserIsTheRightPublisher_thenLoginRequiredExceptionThrown() {
+		assertThrows(LoginRequiredException.class,
+				() -> loginService.checkIfUserIsTheRightPublisher("pub1",null));
+	}
+
+	@Test
+	void givenBuyerWasNotFound_whenCheckIfUserIsTheRightPublisher_thenForbiddenUserExceptionThrown() {
+		when(publisherRepository.existsById("pub1")).thenReturn(false);
+
+		assertThrows(ForbiddenUserException.class,
+				() -> loginService.checkIfUserIsTheRightPublisher("pub1", "pub1"));
+	}
+
+	@Test
+	void givenBuyerMismatch_whenCheckIfUserIsTheRightPublisher_thenForbiddenUserExceptionThrown() {
+		when(buyerRepository.existsById("pub1")).thenReturn(true);
+
+		assertThrows(ForbiddenUserException.class,
+				() -> loginService.checkIfUserIsTheRightPublisher("pub1", "username"));
+	}
 }
