@@ -8,5 +8,5 @@ import tqs.group4.bestofbooks.model.Commission;
 @Repository
 public interface CommissionRepository extends JpaRepository<Commission, Integer> {
     @Query(value = "SELECT SUM(amount) FROM commissions", nativeQuery = true)
-    double totalAmount();
+    Double totalAmount();
 }
