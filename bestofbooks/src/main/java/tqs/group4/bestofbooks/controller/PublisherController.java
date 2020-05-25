@@ -1,5 +1,7 @@
 package tqs.group4.bestofbooks.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -22,9 +24,11 @@ import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
+import tqs.group4.bestofbooks.exception.RepeatedBookIsbnException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.service.StockService;
+import tqs.group4.bestofbooks.dto.BookDTO;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.service.RevenueService;
 
@@ -53,6 +57,13 @@ public class PublisherController {
 		StockDto dto = stockService.updateBookStock(publisherName, stockDto, request);
 		
 		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+	
+	@PostMapping("{publisherName}/stock")
+	public ResponseEntity<List<BookDTO>> addBooks(@PathVariable String publisherName, @Valid @RequestBody List<BookDTO> newBooks, HttpServletRequest request) throws LoginRequiredException, ForbiddenUserException, UserNotFoundException, RepeatedBookIsbnException {
+		stockService.addNewBook(publisherName, newBooks, request);
+		
+		return ResponseEntity.noContent().header("Content-Length", "0").build();
 	}
 
     @GetMapping("/{publisherName}/revenue")

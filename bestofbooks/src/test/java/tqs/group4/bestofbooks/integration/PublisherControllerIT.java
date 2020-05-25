@@ -2,6 +2,7 @@ package tqs.group4.bestofbooks.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tqs.group4.bestofbooks.mocks.BuyerMock.buyer1;
@@ -9,7 +10,9 @@ import static tqs.group4.bestofbooks.utils.Json.toJson;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -34,6 +37,7 @@ import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.BestofbooksApplication;
+import tqs.group4.bestofbooks.dto.BookDTO;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
@@ -377,7 +381,211 @@ public class PublisherControllerIT {
                 .isUnauthorized());
 	}
 	
-    
+	@Test
+	void givenSuccessfulLoginAndMatchingNameAndValidBookDTOList_whenAddBooks_thenStatusNoContent() throws Exception {
+        String loginUrl = "/api/session/login";
+    	
+    	String auth = "viking:pw";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	
+    	MvcResult result = mvc.perform(get(loginUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+        ).andReturn();
+    	
+    	String token = result.getResponse().getHeader("x-auth-token");
+    	BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue");
+		BookDTO b2 = new BookDTO("1234567892546", "Title 2", "Author 2", "Description 2", 18, 3,
+                "Travelogue");
+    	List<BookDTO> l = new ArrayList<>();
+		l.add(b1);
+		l.add(b2);
+        
+        String publisherName = "Viking Press";
+        String url = "/api/publisher/" + publisherName + "/stock";
+        String body = toJson(l);
+        
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
+                .content(body)
+        ).andExpect(status()
+                .isNoContent());
+	}
+	
+	@Test
+	void givenSuccessfulLoginAndMatchingNameAndValidBookDTOListWithExistentBookIsbn_whenAddBooks_thenStatusBadRequest() throws Exception {
+		entityManager.persist(BookMocks.onTheRoad);
+        entityManager.flush();
+		String loginUrl = "/api/session/login";
+    	
+    	String auth = "viking:pw";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	
+    	MvcResult result = mvc.perform(get(loginUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+        ).andReturn();
+    	
+    	String token = result.getResponse().getHeader("x-auth-token");
+    	BookDTO b1 = new BookDTO(BookMocks.onTheRoad.getIsbn(), "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue");
+		BookDTO b2 = new BookDTO("1234567892546", "Title 2", "Author 2", "Description 2", 18, 3,
+                "Travelogue");
+    	List<BookDTO> l = new ArrayList<>();
+		l.add(b1);
+		l.add(b2);
+        
+        String publisherName = "Viking Press";
+        String url = "/api/publisher/" + publisherName + "/stock";
+        String body = toJson(l);
+        
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
+	}
+	
+	@Test
+	void givenSuccessfulLoginAndMatchingNameAndValidBookDTOListWithRepeatedBookIsbn_whenAddBooks_thenStatusBadRequest() throws Exception {
+		String loginUrl = "/api/session/login";
+    	
+    	String auth = "viking:pw";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	
+    	MvcResult result = mvc.perform(get(loginUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+        ).andReturn();
+    	
+    	String token = result.getResponse().getHeader("x-auth-token");
+    	BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue");
+		BookDTO b2 = new BookDTO("1234567891234", "Title 2", "Author 2", "Description 2", 18, 3,
+                "Travelogue");
+    	List<BookDTO> l = new ArrayList<>();
+		l.add(b1);
+		l.add(b2);
+        
+        String publisherName = "Viking Press";
+        String url = "/api/publisher/" + publisherName + "/stock";
+        String body = toJson(l);
+        
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
+	}
+	
+	@Test
+	void givenUnauthenticatedUser_whenAddBooks_returnStatusUnauthorized() throws Exception {
+		BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue");
+		BookDTO b2 = new BookDTO("1234567892546", "Title 2", "Author 2", "Description 2", 18, 3,
+                "Travelogue");
+    	List<BookDTO> l = new ArrayList<>();
+		l.add(b1);
+		l.add(b2);
+        String publisherName = "Viking Press";
+        String url = "/api/publisher/" + publisherName + "/stock";
+        String body = toJson(l);
+        
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body)
+        ).andExpect(status()
+                .isUnauthorized());
+	}
+	
+	@Test
+	void givenSuccessfullAdminOrBuyerLogin_whenAddBooks_thenStatusForbidden() throws Exception {
+		String password = "pw";
+        String passwordHash  = Hashing.sha256()
+				  .hashString(password, StandardCharsets.UTF_8)
+				  .toString();
+    	Buyer b = new Buyer("username", passwordHash);
+		entityManager.persist(b);
+        entityManager.flush();
+        
+        String loginUrl = "/api/session/login";
+    	
+    	String auth = "username:pw";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	
+    	MvcResult result = mvc.perform(get(loginUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+        ).andReturn();
+    	
+    	String token = result.getResponse().getHeader("x-auth-token");
+
+    	BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue");
+		BookDTO b2 = new BookDTO("1234567892546", "Title 2", "Author 2", "Description 2", 18, 3,
+                "Travelogue");
+    	List<BookDTO> l = new ArrayList<>();
+		l.add(b1);
+		l.add(b2);
+        String publisherName = "Viking Press";
+        String url = "/api/publisher/" + publisherName + "/stock";
+        String body = toJson(l);
+        
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
+                .content(body)
+        ).andExpect(status()
+                .isForbidden());
+	}
+	
+	@Test
+	void givenSuccessfulLoginAndNameNotMatching_whenAddBooks_thenReturnStatusForbidden() throws Exception {
+		String loginUrl = "/api/session/login";
+    	
+    	String auth = "viking:pw";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	
+    	MvcResult result = mvc.perform(get(loginUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+        ).andReturn();
+    	
+    	String token = result.getResponse().getHeader("x-auth-token");
+
+    	BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+                "Travelogue");
+		BookDTO b2 = new BookDTO("1234567892546", "Title 2", "Author 2", "Description 2", 18, 3,
+                "Travelogue");
+    	List<BookDTO> l = new ArrayList<>();
+		l.add(b1);
+		l.add(b2);
+        
+        String publisherName = "Wrong Publisher";
+        String url = "/api/publisher/" + publisherName + "/stock";
+        String body = toJson(l);
+        
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
+                .content(body)
+        ).andExpect(status()
+                .isForbidden());
+	}
 
     @Test
     void givenExistentPublisherName_whenGetRevenuesByPublisherName_thenReturnJson() throws Exception {

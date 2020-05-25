@@ -7,9 +7,13 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tqs.group4.bestofbooks.utils.Json.toJson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,12 +34,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 
+import tqs.group4.bestofbooks.dto.BookDTO;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
+import tqs.group4.bestofbooks.exception.RepeatedBookIsbnException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.mocks.RevenueMocks;
@@ -185,6 +191,97 @@ public class PublisherControllerTests {
 	                .isNotFound());
 		 
 		 verify(stockService, VerificationModeFactory.times(1)).updateBookStock(eq("Publisher"), eq(InstockDto), any(HttpServletRequest.class));
+	 }
+	 
+	 @Test
+	 void givenValidPublisherTokenAndValidNameAndValidBookDTOList_whenAddBooks_thenStatusNoContent() throws Exception {
+		 BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+	                "Travelogue");
+		 BookDTO b2 = new BookDTO("1234567891234", "Title 2", "Author 2", "Description 2", 18, 3,
+	               "Travelogue");
+		 List<BookDTO> l = new ArrayList<>();
+		 l.add(b1);
+		 l.add(b2);
+		 
+		 String url = "/api/publisher/Publisher/stock/";
+		 String body = toJson(l);
+		 
+		 mvc.perform(post(url)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body)
+			).andExpect(status()
+				.isNoContent());
+		 
+		 verify(stockService, VerificationModeFactory.times(1)).addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class));
+	 }
+	 
+	 @Test
+	 void givenUnauthorizedOrMismatchedPublisherToken_whenAddBooks_thenStatusForbidden() throws Exception {
+		 BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+	                "Travelogue");
+		 BookDTO b2 = new BookDTO("1234567891234", "Title 2", "Author 2", "Description 2", 18, 3,
+	               "Travelogue");
+		 List<BookDTO> l = new ArrayList<>();
+		 l.add(b1);
+		 l.add(b2);
+		 given(stockService.addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class))).willThrow(new ForbiddenUserException("User not allowed."));
+		 
+		 String url = "/api/publisher/Publisher/stock/";
+		 String body = toJson(l);
+		 
+		 mvc.perform(post(url)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body)
+			).andExpect(status()
+				.isForbidden());
+		 
+		 verify(stockService, VerificationModeFactory.times(1)).addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class));
+	 }
+	 
+	 @Test
+	 void givenRequestWithoutToken_whenAddBooks_thenStatusForbidden() throws Exception {
+		 BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+	                "Travelogue");
+		 BookDTO b2 = new BookDTO("1234567891234", "Title 2", "Author 2", "Description 2", 18, 3,
+	               "Travelogue");
+		 List<BookDTO> l = new ArrayList<>();
+		 l.add(b1);
+		 l.add(b2);
+		 given(stockService.addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class))).willThrow(new LoginRequiredException("Login required for this request."));
+		 
+		 String url = "/api/publisher/Publisher/stock/";
+		 String body = toJson(l);
+		 
+		 mvc.perform(post(url)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body)
+			).andExpect(status()
+				.isUnauthorized());
+		 
+		 verify(stockService, VerificationModeFactory.times(1)).addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class));
+	 }
+	 
+	 @Test
+	 void givenValidPublisherTokenAndValidNameAndBookDTOListRepeatedIsbn_whenAddBooks_thenStatusBadRequest() throws Exception {
+		 BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
+	                "Travelogue");
+		 BookDTO b2 = new BookDTO("1234567891234", "Title 2", "Author 2", "Description 2", 18, 3,
+	               "Travelogue");
+		 List<BookDTO> l = new ArrayList<>();
+		 l.add(b1);
+		 l.add(b2);
+		 given(stockService.addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class))).willThrow(new RepeatedBookIsbnException("Tried to add book with repeated isbn."));
+		 
+		 String url = "/api/publisher/Publisher/stock/";
+		 String body = toJson(l);
+		 
+		 mvc.perform(post(url)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body)
+			).andExpect(status()
+				.isBadRequest());
+		 
+		 verify(stockService, VerificationModeFactory.times(1)).addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class));
 	 }
 
 	 @Test
