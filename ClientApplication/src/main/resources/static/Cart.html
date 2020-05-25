@@ -25,11 +25,11 @@
                         <a class="nav-link" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
                     </li>
                     <li class="dropdown">
-                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
-                            Welcome, Client
+                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
+
                         </button>
-                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                            <a class="dropdown-item" href="Cart.html"> <i class="fa fa-shopping-cart"></i> Your Cart</a>
+                        <div aria-labelledby="name" class="dropdown-menu">
+                            <a class="dropdown-item" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
                             <a class="dropdown-item" href="orders.html">Your Orders</a>
                             <a class="dropdown-item" onclick="clearUser()" href="login.html">LogOut</a>
                         </div>
@@ -85,6 +85,7 @@
 <script type="text/javascript" >
 
     function start() {
+        getUserInfo();
         getBy();
         getFinalPrice();
     }

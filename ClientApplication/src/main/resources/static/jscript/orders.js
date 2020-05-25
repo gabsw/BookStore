@@ -1,5 +1,5 @@
 function find() {
-    fetch(url + 'buyer/buyer1/orders')
+    fetch(url + 'buyer/' + getUserName()+'/orders')
         .then(res => res.json())
         .then((data) => {
             let output = '';

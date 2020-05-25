@@ -95,7 +95,7 @@ function createOrder() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "buyerUsername": "buyer1",
+            "buyerUsername": getUserName(),
             "address": document.getElementById('address').value,
             "paymentReference": ref(),
             "bookOrders": JSON.parse(jsontrying())

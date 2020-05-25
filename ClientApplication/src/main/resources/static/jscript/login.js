@@ -1,16 +1,16 @@
 function account() {
     let basicAuth = document.getElementById("inputEmail").value + ':'+ document.getElementById("inputPassword").value ;
     let encoded = btoa(basicAuth);
-    let autenticationHeader = 'Basic ' + encoded ;
-    askUser(autenticationHeader);
+    let authenticationHeader = 'Basic ' + encoded ;
+    askUser(authenticationHeader);
 }
 
-function askUser(autenticationHeader) {
+function askUser(authenticationHeader) {
     fetch(url + 'session/login', {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': autenticationHeader
+            'Authorization': authenticationHeader
         }
     })
         .then(res => res.json().then(json => ({
@@ -19,12 +19,12 @@ function askUser(autenticationHeader) {
             json
         }))
             .then(({ headers, status, json }) => {
-                console.log('JSON format :' + JSON.stringify(json));
-                console.log(status);
-                console.log(headers.get('Content-Type'));
-                getUser(json);
-                setCurrentToken(headers.get('x-auth-token'));
-                console.log(headers.get('x-auth-token'))
+                if (status == 200) {
+                    alert("Logged in! ")
+                    getUser(json);
+                    setCurrentToken(headers.get('x-auth-token'));
+                }
+               // console.log(headers.get('x-auth-token'))
             }))
 }
 //   return arr;
@@ -45,3 +45,11 @@ function getUser(json) {
     }
 }
 
+function wait(ms) {
+    var d = new Date();
+    var d2 = null;
+    do {
+        d2 = new Date();
+    }
+    while (d2 - d < ms);
+}
