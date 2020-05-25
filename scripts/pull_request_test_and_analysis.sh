@@ -9,4 +9,4 @@ echo $BASE_BRANCH_NAME
 
 mvn clean verify sonar:sonar --file bestofbooks/pom.xml -Dsonar.projectKey=gabsw_BookStore \
 	-Dsonar.organization=gabsw -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN \
-	-Dsonar.branch.name=$BRANCH_NAME -Dsonar.pullrequest.key=$PR_KEY -Dsonar.pullrequest.base=master
+	-Dsonar.pullrequest.key=$PR_KEY -Dsonar.pullrequest.base=master
