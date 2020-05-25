@@ -114,7 +114,7 @@
 				<version>3.4.0.905</version>
 				<configuration>
 				    <sonar.tests.exclusions>
-				        **/test/**
+				        **/test/**/*
 				    </sonar.tests.exclusions>
 				</configuration>
 			</plugin>
