@@ -26,7 +26,7 @@ public class SearchBookTest {
     driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<>();
-    driver.get("http://localhost:8081/");
+    driver.get("http://localhost:8080/");
     driver.manage().window().setSize(new Dimension(1848, 1053));
   }
   @After

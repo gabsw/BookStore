@@ -39,7 +39,7 @@ public class TotalcommissionsTest {
   }
   @Test
   public void totalcommissions() {
-    driver.get("http://localhost:8081/adminIndex.html");
+    driver.get("http://localhost:8080/adminIndex.html");
     driver.manage().window().setSize(new Dimension(1294, 741));
     assertThat(driver.findElement(By.cssSelector("h1")).getText(), is("Your Comissions"));
     assertThat(driver.findElement(By.id("commission_amount 1")).getText(), is("Amount: 2 €"));
