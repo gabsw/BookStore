@@ -31,6 +31,8 @@ public class SessionController {
 	@Autowired
 	private LoginServices loginService;
 	
+	private static String badAuthHeaderMessage = "Bad authorization header.";
+	
 	@GetMapping("/login")
 	public UserDto login(HttpServletRequest request) throws LoginFailedException, UserNotFoundException {
 		String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
@@ -38,7 +40,7 @@ public class SessionController {
 		String[] headerParts = auth.trim().split(" ");
 
 		if (headerParts.length != 2) {
-			throw new LoginFailedException("Bad authorization header");
+			throw new LoginFailedException(badAuthHeaderMessage);
 		} else if (!headerParts[0].equals("Basic")) {
 			throw new LoginFailedException("Unsupported authorization header type.");
 		}
@@ -46,7 +48,7 @@ public class SessionController {
 		String[] decodedTokenParts = new String(Base64.getDecoder().decode(headerParts[1])).split(":");
 
 		if (decodedTokenParts.length != 2) {
-			throw new LoginFailedException("Bad authorization header");
+			throw new LoginFailedException(badAuthHeaderMessage);
 		}
 		
 		String username = decodedTokenParts[0];
@@ -67,7 +69,7 @@ public class SessionController {
 		String[] headerParts = auth.trim().split(" ");
 
 		if (headerParts.length != 2) {
-			throw new RegistrationFailedException("Bad authorization header");
+			throw new RegistrationFailedException(badAuthHeaderMessage);
 		} else if (!headerParts[0].equals("Basic")) {
 			throw new RegistrationFailedException("Unsupported authorization header type.");
 		}
@@ -75,7 +77,7 @@ public class SessionController {
 		String[] decodedTokenParts = new String(Base64.getDecoder().decode(headerParts[1])).split(":");
 
 		if (decodedTokenParts.length != 2) {
-			throw new RegistrationFailedException("Bad authorization header.");
+			throw new RegistrationFailedException(badAuthHeaderMessage);
 		}
 		
 		String username = decodedTokenParts[0];

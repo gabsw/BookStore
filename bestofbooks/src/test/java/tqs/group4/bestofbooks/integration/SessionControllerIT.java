@@ -203,7 +203,6 @@ public class SessionControllerIT {
                 .isOk())
            .andExpect(content().json(toJson(dto)))
            .andExpect(header().exists("x-auth-token"));
-   
     }
     
     @Test
@@ -215,6 +214,25 @@ public class SessionControllerIT {
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
+    }
+    
+    @Test
+    void givenValidAuthHeaderAndDtoWithInvalidUserType_thenHttpStatusBadRequest() throws JsonProcessingException, Exception {
+    	String url = "/api/session/login";
+        UserDto dto = new UserDto("username", "NewUserType");
+        
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
     	String body = toJson(dto);
     	
     	mvc.perform(put(url)

@@ -72,18 +72,23 @@ public class UserDto implements Serializable{
 		if (attributes == null) {
 			if (other.attributes != null)
 				return false;
-		} else if (!attributes.equals(other.attributes))
+		}
+		else if (!attributes.equals(other.attributes))
 			return false;
 		if (userType == null) {
 			if (other.userType != null)
 				return false;
-		} else if (!userType.equals(other.userType))
+		}
+		else if (!userType.equals(other.userType))
 			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
 		}
-		return (username.equals(other.username));
+		else if (!username.equals(other.username)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

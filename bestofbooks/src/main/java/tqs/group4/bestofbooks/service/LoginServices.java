@@ -41,6 +41,9 @@ public class LoginServices {
 	
 	static String loginRequiredMessage = "Login required for this request.";
 	static String userForbiddenMessage = "User not allowed.";
+	static String buyer = "Buyer";
+	static String admin = "Admin";
+	static String publisher ="Publisher";
 	
 	public UserDto loginUser(String username, String password) throws LoginFailedException, UserNotFoundException {
 		String loginFailedMessage = "Login failed.";
@@ -56,7 +59,7 @@ public class LoginServices {
         		throw new LoginFailedException(loginFailedMessage);
         	}
         	Buyer b = optBuyer.get();
-        	return new UserDto(b.getUsername(),"Buyer");
+        	return new UserDto(b.getUsername(),buyer);
         }
         
         Optional<Admin> optAdmin = adminRepository.findById(username);
@@ -65,7 +68,7 @@ public class LoginServices {
         		throw new LoginFailedException(loginFailedMessage);
         	}
         	Admin a = optAdmin.get();
-        	return new UserDto(a.getUsername(),"Admin");
+        	return new UserDto(a.getUsername(),admin);
         }
         
         Optional<Publisher> optPublisher = publisherRepository.findByUsername(username);
@@ -74,7 +77,7 @@ public class LoginServices {
         		throw new LoginFailedException(loginFailedMessage);
         	}
         	Publisher p = optPublisher.get();
-        	UserDto dto = new UserDto(p.getUsername(),"Publisher");
+        	UserDto dto = new UserDto(p.getUsername(),publisher);
         	dto.addAttribute("name", p.getName());
         	dto.addAttribute("tin", p.getTin());
         	return dto;
@@ -88,23 +91,23 @@ public class LoginServices {
 		if (buyerRepository.existsById(newUser.getUsername()) || adminRepository.existsById(newUser.getUsername()) || publisherRepository.existsByUsername(newUser.getUsername())) {
 			throw new RepeatedUsernameException("Username already exists.");
 		}
-		if (newUser.getUserType().equals("Publisher") && publisherRepository.existsById(newUser.getAttributes().get("name"))) {
+		if (newUser.getUserType().equals(publisher) && publisherRepository.existsById(newUser.getAttributes().get("name"))) {
 			throw new RepeatedPublisherNameException("Publisher name already exists.");
 		}
 		
 		String passwordHash = Hashing.sha256()
 				  .hashString(password, StandardCharsets.UTF_8)
-				  .toString();;
+				  .toString();
 		
-		if (newUser.getUserType().equals("Buyer")) {
+		if (newUser.getUserType().equals(buyer)) {
 			Buyer b = new Buyer(newUser.getUsername(), passwordHash);
 			buyerRepository.save(b);
 		}
-		else if (newUser.getUserType().equals("Admin")) {
+		else if (newUser.getUserType().equals(admin)) {
 			Admin a = new Admin(newUser.getUsername(), passwordHash);
 			adminRepository.save(a);
 		}
-		else if (newUser.getUserType().equals("Publisher")) {
+		else if (newUser.getUserType().equals(publisher)) {
 			if (newUser.getAttributes().get("name") == null || newUser.getAttributes().get("tin") == null) {
 				throw new RegistrationFailedException("Invalid publisher creation arguments.");
 			}
@@ -123,16 +126,16 @@ public class LoginServices {
 	           throw new IllegalArgumentException("Username is not defined.");
 	       } else {
 	           if (buyerRepository.existsById(username)) {
-	           	return new UserDto(username,"Buyer");
+	           	return new UserDto(username,buyer);
 	           }
 	           else if (adminRepository.existsById(username)) {
-	           	return new UserDto(username,"Admin");
+	           	return new UserDto(username,admin);
 	           }
 	           else if (publisherRepository.existsByUsername(username)) {
 	           	Optional<Publisher> op = publisherRepository.findByUsername(username);
 	           	if (op.isPresent()) {
 	           		Publisher p = op.get();
-	           		UserDto dto = new UserDto(p.getUsername(),"Publisher");
+	           		UserDto dto = new UserDto(p.getUsername(), publisher);
 	            	dto.addAttribute("name", p.getName());
 	            	dto.addAttribute("tin", p.getTin());
 	            	return dto;
