@@ -1,40 +1,25 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 ###########################
-name: Java CI with Maven
+name: Master Tests on Push
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: user
-          POSTGRES_DB: book_store
-        #volumes:
-        #  - /home/runner/work/BookStore/BookStore/rdb/init.psql:/docker-entrypoint-initdb.d/init.sql
-        ports:
-        - 5432:5432
-        # needed because the postgres container does not provide a healthcheck//
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-    
     steps:
     - uses: actions/checkout@v1
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
-    - name: Fill DB
-      run: psql postgresql://user:user@localhost:5432/book_store < rdb/init.psql
+    - name: docker compose Postgres
+      run: |
+        docker-compose up -d postgres
+    
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -46,9 +31,20 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Test main project
-      run: mvn clean verify sonar:sonar --file bestofbooks/pom.xml -Dsonar.projectKey=DiogoSilveira6300_BookStore -Dsonar.organization=diogosilveira6300 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+      run: mvn clean verify sonar:sonar --file bestofbooks/pom.xml -Dsonar.projectKey=DiogoSilveira6300_BookStore -Dsonar.organization=diogosilveira6300 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.branch.name=${GITHUB_REF##*/}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/book_store
 
+    - name: docker compose service
+      run: |
+        docker-compose up -d main_application
+    - name: Install Google Chrome # Using shell script to install Google Chrome
+      run: |
+       chmod +x ./scripts/install_chrome.sh
+        ./scripts/install_chrome.sh
+    - name: Test main project
+      run: mvn test --file ClientApplication/pom.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
