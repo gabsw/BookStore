@@ -1,7 +1,6 @@
-let url = 'http://192.168.160.70:8080/api';
 
 function highest() {
-    fetch(url + '/books/available?sort=price,desc')
+    fetch(url + 'books/available?sort=price,desc')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -40,7 +39,7 @@ function highest() {
 }
 
 function highestNoLogin() {
-    fetch(url + '/books/available?sort=price,desc')
+    fetch(url + 'books/available?sort=price,desc')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -78,7 +77,7 @@ function highestNoLogin() {
 }
 
 function lowest() {
-    fetch(url + '/books/available?sort=price,asc')
+    fetch(url + 'books/available?sort=price,asc')
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -116,7 +115,7 @@ function lowest() {
         })
 }
 function lowestNoLogin() {
-    fetch(url + '/books/available?sort=price,asc')
+    fetch(url + 'books/available?sort=price,asc')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -162,7 +161,7 @@ function searchBooks() {
     } else if (document.getElementById("book_category").checked){
         add = 'category='
     } else { add = 'title='}
-    fetch(url+'/books/search?' + add + book_title)
+    fetch(url+'books/search?' + add + book_title)
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -212,7 +211,7 @@ function searchBooksNoLogin() {
     } else if (document.getElementById("book_category").checked){
         add = 'category='
     } else { add = 'title='}
-    fetch(url+'/books/search?' + add + book_title)
+    fetch(url+'books/search?' + add + book_title)
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -253,7 +252,7 @@ function searchBooksNoLogin() {
 }
 
 function getBooksNoLogin() {
-    fetch(url + '/books/available')
+    fetch(url + 'books/available')
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -295,7 +294,7 @@ function getBooksNoLogin() {
 }
 
 function getBooks(){
-    fetch(url + '/books/available')
+    fetch(url + 'books/available')
         .then(res => res.json())
         .then((data) => {
             let count = 0;
@@ -306,7 +305,7 @@ function getBooks(){
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title \`+count + \`">${book["title"]}</h5>
+                           <h5 class="mt-0 font-weight-bold mb-2" id="book_title `+count + `">${book["title"]}</h5>
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
@@ -317,7 +316,7 @@ function getBooks(){
                             </ul>
                             <div class="btn-group" style="width:100%">
                                 <a class="btn btn-info" href="details.html?isbn=${book.isbn}" role="button">More Details</a>
-                                <a class="btn btn-info"  onclick="myFunction()" role="button">Add To Cart</a>
+                                <a class="btn btn-info"  onclick="myFunction(${book.isbn})" role="button">Add To Cart</a>
                             </div>
                         </div>
                     </div>
@@ -333,6 +332,16 @@ function getBooks(){
         })
 }
 
-function myFunction() {
-    alert("Item Added To Cart!");
+
+let storeObj= [];
+function myFunction(isbn) {
+    storeObj.push(isbn);
+    console.log("Array " + storeObj);
+    localStorage.setItem('storage',JSON.stringify(storeObj));
 }
+
+
+
+
+
+

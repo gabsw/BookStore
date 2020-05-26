@@ -1,10 +1,9 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('isbn')
-const url = 'http://192.168.160.70:8080/api/books/isbn/' +product;
 
 window.onload = function getByIsbn(){
-    fetch(url)
+    fetch(url + 'books/isbn/' +product)
         .then((res) => res.json())
         .then((data) => {
                 let isbn = `${data.isbn}`;

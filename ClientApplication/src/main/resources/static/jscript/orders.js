@@ -1,7 +1,5 @@
-let url = 'http://192.168.160.70:8080/api/buyer/buyer1/orders';
-
 function find() {
-    fetch(url)
+    fetch(url + 'buyer/' + getUserName()+'/orders')
         .then(res => res.json())
         .then((data) => {
             let output = '';

@@ -7,6 +7,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <script src="jscript/orderDetails.js"></script>
+    <script src="jscript/config.js"></script>
 
 </head>
 <body>
@@ -23,13 +24,13 @@
                         <a class="nav-link" href="/"><i class="fa fa-shopping-cart"></i></a>
                     </li>
                     <li class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Welcome, Client
+                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
+
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="Cart.html"> <i class="fa fa-shopping-cart"></i> Your Cart</a>
+                        <div aria-labelledby="name" class="dropdown-menu">
+                            <a class="dropdown-item" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
                             <a class="dropdown-item" href="orders.html">Your Orders</a>
-                            <a class="dropdown-item" href="login.html">LogOut</a>
+                            <a class="dropdown-item" onclick="clearUser()" href="login.html">LogOut</a>
                         </div>
                     </li>
 
@@ -107,7 +108,11 @@
     <script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    document.onload = getById();
+    function start() {
+        getUserInfo();
+        getById();
+    }
+    document.onload = start();
 
 </script>
 

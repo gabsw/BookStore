@@ -8,6 +8,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/index.css" rel="stylesheet">
     <script src="jscript/clientIndex.js"></script>
+    <script src="jscript/config.js"></script>
 
 </head>
 <body>
@@ -24,13 +25,13 @@
                     <a class="nav-link" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
                 </li>
                 <li class="dropdown">
-                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="client_name" id="dropdownMenuButton" type="button">
-                        Welcome, Client
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
+
                     </button>
-                    <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                    <div aria-labelledby="name" class="dropdown-menu">
                         <a class="dropdown-item" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
                         <a class="dropdown-item" href="orders.html">Your Orders</a>
-                        <a class="dropdown-item" href="login.html">LogOut</a>
+                        <a class="dropdown-item" onclick="clearUser()" href="login.html">LogOut</a>
                     </div>
                 </li>
 
@@ -129,7 +130,12 @@
 <script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
- document.onload =getBooks();
+    function start() {
+        getUserInfo();
+        getBooks();
+    }
+ document.onload = start();
+
 </script>
 
 </body>

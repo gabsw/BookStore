@@ -1,9 +1,9 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('id');
-let url = 'http://192.168.160.70:8080/api/order/'+product;
+
 function getById(){
-    fetch(url)
+    fetch(url+ 'order/'+product)
         .then((res) => res.json())
         .then((data) => {
             let id = `${data["id"]}`;
