@@ -19,6 +19,7 @@ import tqs.group4.bestofbooks.exception.LoginFailedException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.mocks.OrderMocks;
+import tqs.group4.bestofbooks.mocks.PublisherMocks;
 import tqs.group4.bestofbooks.model.Admin;
 import tqs.group4.bestofbooks.model.Buyer;
 import tqs.group4.bestofbooks.model.Publisher;
@@ -353,22 +354,38 @@ public class LoginServicesTest {
 	@Test
 	void givenLoginWasNotProvided_whenCheckIfUserIsTheRightPublisher_thenLoginRequiredExceptionThrown() {
 		assertThrows(LoginRequiredException.class,
-				() -> loginService.checkIfUserIsTheRightPublisher("pub1",null));
+				() -> loginService.checkIfUserIsTheRightPublisher("Publisher 1",null));
 	}
 
 	@Test
-	void givenBuyerWasNotFound_whenCheckIfUserIsTheRightPublisher_thenForbiddenUserExceptionThrown() {
-		when(publisherRepository.existsById("pub1")).thenReturn(false);
+	void givenPublisherWasNotFound_whenCheckIfUserIsTheRightPublisher_thenForbiddenUserExceptionThrown() {
+		when(publisherRepository.existsByUsername("pub1")).thenReturn(false);
+		when(publisherRepository.findByUsername("pub1")).thenReturn(Optional.of(PublisherMocks.publisher1));
 
 		assertThrows(ForbiddenUserException.class,
-				() -> loginService.checkIfUserIsTheRightPublisher("pub1", "pub1"));
+				() -> loginService.checkIfUserIsTheRightPublisher("Publisher 1", "pub1"));
 	}
 
 	@Test
-	void givenBuyerMismatch_whenCheckIfUserIsTheRightPublisher_thenForbiddenUserExceptionThrown() {
-		when(buyerRepository.existsById("pub1")).thenReturn(true);
+	void givenPublisherMismatch_whenCheckIfUserIsTheRightPublisher_thenForbiddenUserExceptionThrown() {
+		when(publisherRepository.existsByUsername("pub1")).thenReturn(true);
+		when(publisherRepository.findByUsername("pub1")).thenReturn(Optional.of(PublisherMocks.publisher1));
 
 		assertThrows(ForbiddenUserException.class,
-				() -> loginService.checkIfUserIsTheRightPublisher("pub1", "username"));
+				() -> loginService.checkIfUserIsTheRightPublisher("Publisher 1", "username"));
 	}
+
+	@Test
+	void givenAllArgsAreValid_whenCheckIfUserIsTheRightBuyer_NoExceptionShouldBeThrown() {
+		when(buyerRepository.existsById("buyer1")).thenReturn(true);
+		assertDoesNotThrow(() -> loginService.checkIfUserIsTheRightBuyer("buyer1", "buyer1"));
+	}
+
+	@Test
+	void givenAllArgsAreValid_whenCheckIfUserIsTheRightPublisher_NoExceptionShouldBeThrown() {
+		when(publisherRepository.existsByUsername("pub1")).thenReturn(true);
+		when(publisherRepository.findByUsername("pub1")).thenReturn(Optional.of(PublisherMocks.publisher1));
+		assertDoesNotThrow(() -> loginService.checkIfUserIsTheRightPublisher("Publisher 1", "pub1"));
+	}
+
 }
