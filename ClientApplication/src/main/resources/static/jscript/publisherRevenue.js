@@ -1,5 +1,10 @@
 function getRevenues() {
-    fetch(  url+ 'publisher/'+getUserName()+ '/revenue')
+    fetch(url+ 'publisher/'+ getPubName()+ '/revenue',{
+        method: 'get',
+        headers: {
+            'x-auth-token': getCurrentUser()
+        }
+    })
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -33,7 +38,12 @@ function getRevenues() {
         })
 }
 function getRevenuesTotal() {
-    fetch(url + 'publisher/'+ getUserName() +' /revenue/total')
+    fetch(url + 'publisher/'+ getPubName() +'/revenue/total',{
+        method: 'get',
+        headers: {
+            'x-auth-token': getCurrentUser()
+        }
+    })
         .then(res => res.json())
         .then((data) => {
             document.getElementById('finalPrice').innerHTML = '<strong>Total: </strong> '+  data +'€';

@@ -7,7 +7,7 @@ function getCurrentUser() {
 }
 
 function clearUser() {
-   localStorage.clear()
+   localStorage.clear();
 }
 
 function setCurrentToken(token) {
@@ -25,11 +25,20 @@ function getUserInfo() {
         .then((body) => {
             setName(body.username);
             localStorage.setItem('userName',JSON.stringify(body.username));
+            if (body["attributes"].length !== 0) {
+                console.log(body["attributes"].name);
+                localStorage.removeItem('PubName');
+                localStorage.setItem('PubName',JSON.stringify(body["attributes"].name));
+            }
         } );
-};
+}
 
 function setName(name) {
     document.getElementById('name').innerHTML = name;
+}
+
+function getPubName() {
+    return JSON.parse(localStorage.getItem('PubName'));
 }
 
 function getUserName() {

@@ -3,7 +3,12 @@ const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('id');
 
 function getById(){
-    fetch(url+ 'order/'+product)
+    fetch(url+ 'order/'+product,{
+        method: 'get',
+        headers: {
+            'x-auth-token': getCurrentUser()
+        }
+    })
         .then((res) => res.json())
         .then((data) => {
             let id = `${data["id"]}`;
