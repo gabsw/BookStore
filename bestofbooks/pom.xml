@@ -15,7 +15,13 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.8</java.version>	
+	        <sonar.exclusions>
+	            **/test/**/*
+	        </sonar.exclusions>
+	        <sonar.test.exclusions>
+	            **/test/**/*
+	        </sonar.test.exclusions>
 	</properties>
 
 	<dependencies>
@@ -112,11 +118,6 @@
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.4.0.905</version>
-				<configuration>
-		            		<sonar.tests.exclusions>
-		                		**/test/*
-		            		</sonar.tests.exclusions>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
