@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,11 +30,13 @@ public class SearchBookIT {
 
   @Before
   public void setUp() {
-    driver = new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--headless", "--disable-gpu");
+    driver = new ChromeDriver(options);
     js = (JavascriptExecutor) driver;
     vars = new HashMap<>();
     driver.get("http://localhost:8080/");
-    driver.manage().window().setSize(new Dimension(1848, 1053));
+//    driver.manage().window().setSize(new Dimension(1848, 1053));
   }
   @After
   public void tearDown() {
