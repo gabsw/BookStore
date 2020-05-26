@@ -1,16 +1,8 @@
 package tqs.group4.bestofbooks.service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
-
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.common.hash.Hashing;
-
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
@@ -19,11 +11,15 @@ import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Admin;
 import tqs.group4.bestofbooks.model.Buyer;
-import tqs.group4.bestofbooks.model.Order;
 import tqs.group4.bestofbooks.model.Publisher;
 import tqs.group4.bestofbooks.repository.AdminRepository;
 import tqs.group4.bestofbooks.repository.BuyerRepository;
 import tqs.group4.bestofbooks.repository.PublisherRepository;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @Transactional
 @Service
