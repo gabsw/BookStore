@@ -27,7 +27,7 @@ jobs:
     - name: Install Google Chrome # Using shell script to install Google Chrome
       run: |
        chmod +x ./scripts/install_chrome.sh
-       ./scripts/install_chrome.shs
+       ./scripts/install_chrome.sh
     - uses: nanasess/setup-chromedriver@master
 
     - name: Cache Maven packages
