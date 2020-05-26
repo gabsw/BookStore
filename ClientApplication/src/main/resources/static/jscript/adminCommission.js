@@ -5,6 +5,7 @@ function getCommissions() {
             'x-auth-token': getCurrentUser()
         }
     })
+
         .then(res => res.json())
         .then((data) => {
             let count =0 ;
@@ -50,6 +51,7 @@ function getCommissionsTotal() {
             console.log(error)
         })
 }
+
 
 
 function lowestAmount() {
@@ -129,3 +131,4 @@ function highestAmount() {
             console.log(error)
         })
 }
+

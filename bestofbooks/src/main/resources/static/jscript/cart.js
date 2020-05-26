@@ -38,9 +38,7 @@ function getFinalPrice(){
     fetch(url + 'order/estimated-price' , {
         method: 'post',
         headers: {
-<<<<<<< HEAD
-            'Content-Type': 'application/json',
-            'x-auth-token' : getCurrentUser()
+            'Content-Type': 'application/json'
         },
         body: jsontrying()})
         .then(res => res.json())
@@ -52,13 +50,7 @@ function getFinalPrice(){
 function getBy(){
     let output = ``;
     for (let i= 0 ; i < result().size; i++) {
-
-        fetch(url+'books/isbn/' + Array.from(result().keys())[i],{
-            method: 'get',
-            headers: {
-                'x-auth-token': getCurrentUser()
-            }
-        })
+        fetch(url+'books/isbn/' + Array.from(result().keys())[i])
             .then((res) => res.json())
             .then((data) => {
                     output += `
@@ -101,7 +93,6 @@ function createOrder() {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'x-auth-token' : getCurrentUser()
         },
         body: JSON.stringify({
             "buyerUsername": getUserName(),
