@@ -37,6 +37,7 @@ jobs:
       run: |
        chmod +x ./scripts/install_chrome.sh
         ./scripts/install_chrome.sh
+    - uses: nanasess/setup-chromedriver@master
 
     - name: Test main project
       run: |
