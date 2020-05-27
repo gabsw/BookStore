@@ -17,6 +17,7 @@ import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.mocks.BookOrderMocks;
 import tqs.group4.bestofbooks.mocks.BuyerMock;
 import tqs.group4.bestofbooks.model.Order;
+import tqs.group4.bestofbooks.service.LoginServices;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import java.util.ArrayList;
@@ -24,8 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -41,7 +41,11 @@ public class OrdersControllerTest {
     @MockBean
     private OrderService orderService;
 
+    @MockBean
+    private LoginServices loginService;
+
     private Order order;
+    private OrderDTO orderDTO;
 
     private int quantity = 2;
     private IncomingBookOrderDTO incomingBookOrderDTO1 = new IncomingBookOrderDTO(BookMocks.onTheRoad.getIsbn(),
@@ -59,11 +63,13 @@ public class OrdersControllerTest {
                 10.00,
                 buyer1);
         order.setId(23);
+        orderDTO = OrderDTO.fromOrder(order);
     }
 
     @AfterEach
     public void after() {
         reset(orderService);
+        reset(loginService);
     }
 
     @Test
@@ -71,6 +77,7 @@ public class OrdersControllerTest {
         Integer existentId = order.getId();
         String url = "/api/order/" + existentId;
         given(orderService.getOrderById(existentId)).willReturn(OrderDTO.fromOrder(order));
+        doNothing().when(loginService).checkIfUserIsTheRightBuyerForOrder(orderDTO, "buyer1");
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -95,6 +102,7 @@ public class OrdersControllerTest {
     @Test
     void givenKnownBooks_whenComputePriceForIncomingOrder_thenReturnJson() throws Exception {
         String url = "/api/order/estimated-price";
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.computePriceForIncomingOrder(incomingBookOrderDTOList)).willReturn(100.50);
 
         mvc.perform(post(url)
@@ -110,6 +118,7 @@ public class OrdersControllerTest {
     @Test
     void givenBookNotFoundException_whenComputePriceForIncomingOrder_thenThrowHTTPStatusNotFound() throws Exception {
         String url = "/api/order/estimated-price";
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.computePriceForIncomingOrder(incomingBookOrderDTOList)).willThrow(new BookNotFoundException());
 
         mvc.perform(post(url)
@@ -126,7 +135,7 @@ public class OrdersControllerTest {
         order.addBookOrder(BookOrderMocks.bookOrder1);
         OrderDTO orderDTO = OrderDTO.fromOrder(order);
 
-
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.createOrderDTO(incomingOrderDTO)).willReturn(orderDTO);
 
         mvc.perform(post(url)
@@ -141,6 +150,8 @@ public class OrdersControllerTest {
     @Test
     void givenBookNotFoundException_whenCreateOrder_thenThrowHTTPStatusNotFound() throws Exception {
         String url = "/api/order/";
+
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.createOrderDTO(incomingOrderDTO)).willThrow(new BookNotFoundException());
 
         mvc.perform(post(url)
@@ -153,6 +164,8 @@ public class OrdersControllerTest {
     @Test
     void givenUserNotFoundException_whenCreateOrder_thenThrowHTTPStatusNotFound() throws Exception {
         String url = "/api/order/";
+
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.createOrderDTO(incomingOrderDTO)).willThrow(new UserNotFoundException());
 
         mvc.perform(post(url)
@@ -165,6 +178,8 @@ public class OrdersControllerTest {
     @Test
     void givenRepeatedPaymentReferenceException_whenCreateOrder_thenThrowHTTPStatusBadRequest() throws Exception {
         String url = "/api/order/";
+
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.createOrderDTO(incomingOrderDTO)).willThrow(new RepeatedPaymentReferenceException());
 
         mvc.perform(post(url)
@@ -177,6 +192,8 @@ public class OrdersControllerTest {
     @Test
     void givenNotEnoughStockException_whenCreateOrder_thenThrowHTTPStatusBadRequest() throws Exception {
         String url = "/api/order/";
+
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.createOrderDTO(incomingOrderDTO)).willThrow(new NotEnoughStockException());
 
         mvc.perform(post(url)
@@ -189,6 +206,8 @@ public class OrdersControllerTest {
     @Test
     void givenEmptyIncomingOrderException_whenCreateOrder_thenThrowHTTPStatusBadRequest() throws Exception {
         String url = "/api/order/";
+
+        doNothing().when(loginService).checkUserIsBuyer("buyer1");
         given(orderService.createOrderDTO(incomingOrderDTO)).willThrow(new EmptyIncomingOrderException());
 
         mvc.perform(post(url)

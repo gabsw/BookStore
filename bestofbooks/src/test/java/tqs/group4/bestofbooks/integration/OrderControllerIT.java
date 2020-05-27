@@ -12,11 +12,11 @@ import tqs.group4.bestofbooks.dto.IncomingBookOrderDTO;
 import tqs.group4.bestofbooks.dto.IncomingOrderDTO;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.mocks.BookMocks;
-import tqs.group4.bestofbooks.mocks.BookOrderMocks;
 import tqs.group4.bestofbooks.mocks.BuyerMock;
-import tqs.group4.bestofbooks.mocks.OrderMocks;
 import tqs.group4.bestofbooks.model.BookOrder;
+import tqs.group4.bestofbooks.model.Buyer;
 import tqs.group4.bestofbooks.model.Order;
+import tqs.group4.bestofbooks.utils.Auth;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -66,14 +66,17 @@ public class OrderControllerIT {
 
     @Test
     void givenExistentId_whenGetOrderByIsbn_thenReturnJson() throws Exception {
+        entityManager.persist(BuyerMock.buyer1);
         entityManager.persist(order);
         entityManager.flush();
 
         int existentId = 1;
         String url = "/api/order/" + existentId;
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status()
                 .isOk())
            .andExpect(content().json(toJson(OrderDTO.fromOrder(order))));
@@ -81,22 +84,31 @@ public class OrderControllerIT {
 
     @Test
     void givenBookNotFoundException_whenGetOrderByIsbn_thenThrowHTTPStatusNotFound() throws Exception {
+        entityManager.persist(BuyerMock.buyer1);
+        entityManager.flush();
+
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
+
         int unknownId = 123979;
         String url = "/api/order/" + unknownId;
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status().isNotFound());
     }
 
     @Test
     void givenKnownBooks_whenComputePriceForIncomingOrder_thenReturnJson() throws Exception {
+        entityManager.persist(BuyerMock.buyer1);
         entityManager.persist(BookMocks.onTheRoad);
         entityManager.flush();
         String url = "/api/order/estimated-price";
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
 
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(incomingBookOrderDTOList))
                 .characterEncoding("utf-8")
         ).andExpect(status()
@@ -106,11 +118,15 @@ public class OrderControllerIT {
 
     @Test
     void givenBookNotFoundException_whenComputePriceForIncomingOrder_thenThrowHTTPStatusNotFound() throws Exception {
+        entityManager.persist(BuyerMock.buyer1);
+        entityManager.flush();
         String url = "/api/order/estimated-price";
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
 
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(incomingBookOrderDTOList))
+                .header("x-auth-token", token)
                 .characterEncoding("utf-8")
         ).andExpect(status().isNotFound());
     }
@@ -122,6 +138,8 @@ public class OrderControllerIT {
         entityManager.persist(buyer1);
         entityManager.flush();
 
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
+
         double finalPrice = BookMocks.onTheRoad.getPrice() * 5;
         Order order = new Order("XYZ", "Address", finalPrice, buyer1);
         BookOrder bookOrder = new BookOrder(BookMocks.onTheRoad, order, 5);
@@ -131,6 +149,7 @@ public class OrderControllerIT {
 
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(incomingOrderDTO))
                 .characterEncoding("utf-8")
         ).andExpect(status().isCreated())
@@ -140,12 +159,14 @@ public class OrderControllerIT {
     @Test
     void givenBookNotFoundException_whenCreateOrder_thenThrowHTTPStatusNotFound() throws Exception {
         String url = "/api/order/";
-
         entityManager.persist(buyer1);
         entityManager.flush();
 
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
+
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(incomingOrderDTO))
                 .characterEncoding("utf-8")
         ).andExpect(status().isNotFound());
@@ -153,6 +174,10 @@ public class OrderControllerIT {
 
     @Test
     void givenUserNotFoundException_whenCreateOrder_thenThrowHTTPStatusNotFound() throws Exception {
+        Buyer mismatch = new Buyer("buyer3", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4");
+        entityManager.persist(mismatch);
+
+        String token = Auth.fetchToken(mvc, mismatch.getUsername(), "pw");
         String url = "/api/order/";
 
         entityManager.persist(BookMocks.onTheRoad);
@@ -160,6 +185,7 @@ public class OrderControllerIT {
 
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(incomingOrderDTO))
                 .characterEncoding("utf-8")
         ).andExpect(status().isNotFound());
@@ -171,12 +197,16 @@ public class OrderControllerIT {
 
         IncomingOrderDTO repeatedPaymentOrder = new IncomingOrderDTO(incomingBookOrderDTOList, BuyerMock.buyer1.getUsername(),
                 "AC%EWRGER684654165", "Address");
+        entityManager.persist(BuyerMock.buyer1);
         entityManager.persist(BookMocks.onTheRoad);
         entityManager.persist(order);
         entityManager.flush();
 
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
+
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(repeatedPaymentOrder))
                 .characterEncoding("utf-8")
         ).andExpect(status().isBadRequest());
@@ -196,8 +226,11 @@ public class OrderControllerIT {
         entityManager.persist(buyer1);
         entityManager.flush();
 
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
+
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(incomingOrderDTO))
                 .characterEncoding("utf-8")
         ).andExpect(status().isBadRequest());
@@ -214,8 +247,11 @@ public class OrderControllerIT {
         entityManager.persist(buyer1);
         entityManager.flush();
 
+        String token = Auth.fetchToken(mvc, BuyerMock.buyer1.getUsername(), "pw");
+
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
                 .content(toJson(emptyOrder))
                 .characterEncoding("utf-8")
         ).andExpect(status().isBadRequest());
