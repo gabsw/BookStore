@@ -12,15 +12,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
+import tqs.group4.bestofbooks.mocks.BookOrderMocks;
 import tqs.group4.bestofbooks.mocks.RevenueMocks;
 import tqs.group4.bestofbooks.model.Revenue;
 import tqs.group4.bestofbooks.repository.PublisherRepository;
 import tqs.group4.bestofbooks.repository.RevenueRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static tqs.group4.bestofbooks.dto.RevenueDTO.fromRevenue;
+import static tqs.group4.bestofbooks.service.RevenueService.REVENUE_PERCENTAGE;
 
 public class RevenueServiceTests {
     @Mock
@@ -75,5 +76,13 @@ public class RevenueServiceTests {
                 .thenReturn(500.0);
 
         assertEquals(500.0, service.getRevenuesTotalByPublisher(RevenueMocks.revenue1.getPublisherName()));
+    }
+
+    @Test
+    void testComputeRevenueAmountByBookOrderResults() {
+        double bookPrice = BookOrderMocks.bookOrder1.getBook().getPrice();
+        int orderQuantity = BookOrderMocks.bookOrder1.getQuantity();
+        assertEquals(bookPrice * orderQuantity * REVENUE_PERCENTAGE,
+                service.computeRevenueAmountByBookOrder(BookOrderMocks.bookOrder1));
     }
 }

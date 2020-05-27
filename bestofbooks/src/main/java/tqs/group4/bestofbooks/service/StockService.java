@@ -73,6 +73,13 @@ public class StockService {
         
 		return new StockDto(book.getIsbn(), newBook.getQuantity());
 	}
+
+	public void decreaseStockAfterSale(Book book, int quantitySold) {
+		Book newBook = new Book(book.getIsbn(), book.getTitle(), book.getAuthor(), book.getDescription(),
+				book.getPrice(), book.getQuantity() - quantitySold,
+				book.getCategory(), book.getPublisherName());
+		bookRepository.save(newBook);
+	}
 	
 	public BookDTOList addNewBook(String publisherName, List<BookDTO> newBooks, HttpServletRequest request) throws LoginRequiredException, ForbiddenUserException, UserNotFoundException, RepeatedBookIsbnException {
 		String username = loginService.getSessionUsername(request);

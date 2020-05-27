@@ -1,0 +1,33 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TQS Commission Epic",
+		"_postman_id": "b2f55a97-0903-6503-ea44-03aaf32cd1f1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get commissions",
+			"request": {
+				"url": "{{url}}/api/admin/commissions/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get total in commissions",
+			"request": {
+				"url": "{{url}}/api/admin/commissions/total",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
