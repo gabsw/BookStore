@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-public class SearchBookTitleTest {
+public class SearchBookTest {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -26,7 +26,7 @@ public class SearchBookTitleTest {
     driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<>();
-    driver.get("http://localhost:8081/");
+    driver.get("http://localhost:8080/");
     driver.manage().window().setSize(new Dimension(1848, 1053));
   }
   @After
@@ -35,8 +35,7 @@ public class SearchBookTitleTest {
   }
 
   @Test
-  public void searchBookTitle() throws InterruptedException {
-
+  public void searchBookTitle(){
     driver.findElement(By.id("findBook")).click();
     driver.findElement(By.id("findBook")).sendKeys("Book1");
     driver.findElement(By.id("book_title")).click();
@@ -47,8 +46,9 @@ public class SearchBookTitleTest {
     assertThat(driver.findElement(By.id("book_title 1")).getText(), is("Book1"));
   }
 
+
   @Test
-  public void searchBookCategory() throws InterruptedException {
+  public void searchBookCategory() {
     driver.findElement(By.id("findBook")).click();
     driver.findElement(By.id("findBook")).sendKeys("horror");
     driver.findElement(By.id("book_category")).click();
@@ -60,7 +60,7 @@ public class SearchBookTitleTest {
   }
 
   @Test
-  public void searchBookAuthor() throws InterruptedException {
+  public void searchBookAuthor(){
     driver.findElement(By.id("findBook")).click();
     driver.findElement(By.id("findBook")).sendKeys("someauthor");
     driver.findElement(By.id("book_author")).click();
@@ -73,7 +73,7 @@ public class SearchBookTitleTest {
 
 
   @Test
-  public void searchInexistingBook() throws InterruptedException {
+  public void searchInexistingBook() {
     driver.findElement(By.id("findBook")).click();
     driver.findElement(By.id("findBook")).sendKeys("nothing");
     driver.findElement(By.id("search_book")).click();
