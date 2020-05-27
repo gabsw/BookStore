@@ -43,6 +43,7 @@ import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.mocks.BookMocks;
+import tqs.group4.bestofbooks.mocks.BuyerMock;
 import tqs.group4.bestofbooks.mocks.PublisherMocks;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.model.BookOrder;
@@ -50,6 +51,7 @@ import tqs.group4.bestofbooks.model.Buyer;
 import tqs.group4.bestofbooks.model.Order;
 import tqs.group4.bestofbooks.model.Publisher;
 import tqs.group4.bestofbooks.model.Revenue;
+import tqs.group4.bestofbooks.utils.Auth;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
 classes = BestofbooksApplication.class)
@@ -70,6 +72,8 @@ public class PublisherControllerIT {
     private BookOrder bookOrder1;
     private BookOrder bookOrder2;
     private Order order1;
+    Publisher mismatch = new Publisher("penguin",
+            "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4", "Penguin Classics", "tin7");
 
 	@BeforeEach
     public void before() {
@@ -611,6 +615,8 @@ public class PublisherControllerIT {
         String knownPublisher = revenue1.getPublisherName();
         String url = "/api/publisher/" + knownPublisher + "/revenue";
 
+        String token = Auth.fetchToken(mvc, PublisherMocks.publisher1.getUsername(), "pw");
+
         Page<RevenueDTO> revenueDTOPage = new PageImpl<>(
                 Lists.newArrayList(RevenueDTO.fromRevenue(revenue1),
                         RevenueDTO.fromRevenue(revenue2)),
@@ -618,19 +624,25 @@ public class PublisherControllerIT {
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status()
                 .isOk())
            .andExpect(content().json(toJson(revenueDTOPage)));
     }
 
     @Test
-    void givenUnknownPublisherName_thenThrowHTTPStatusNotFound_forRevenues() throws Exception {
-        String unknownPublisher = "none";
-        String url = "/api/publisher/" + unknownPublisher + "/revenue";
+    void givenMismatchedPublisherName_thenThrowHTTPStatusForbidden_forRevenues() throws Exception {
+        entityManager.persist(mismatch);
+        entityManager.flush();
+        String knownPublisher = revenue1.getPublisherName();
+        String url = "/api/publisher/" + knownPublisher + "/revenue";
+
+        String token = Auth.fetchToken(mvc, mismatch.getUsername(), "pw");
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isNotFound());
+                .header("x-auth-token", token)
+        ).andExpect(status().isForbidden());
     }
 
     @Test
@@ -642,21 +654,28 @@ public class PublisherControllerIT {
         String knownPublisher = revenue1.getPublisherName();
         double totalRevenue = revenue1.getAmount() + revenue2.getAmount();
         String url = "/api/publisher/" + knownPublisher + "/revenue/total";
+        String token = Auth.fetchToken(mvc, PublisherMocks.publisher1.getUsername(), "pw");
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status()
                 .isOk())
            .andExpect(content().json(toJson(totalRevenue)));
     }
 
     @Test
-    void givenUnknownPublisherName_thenThrowHTTPStatusNotFound_forTotalInRevenues() throws Exception {
-        String unknownPublisher = "none";
-        String url = "/api/publisher/" + unknownPublisher + "/revenue/total";
+    void givenMismatchedPublisherName_thenThrowHTTPStatusForbidden_forTotalInRevenues() throws Exception {
+        entityManager.persist(mismatch);
+        entityManager.flush();
+	    String knownPublisher = revenue1.getPublisherName();
+        String url = "/api/publisher/" + knownPublisher + "/revenue/total";
+
+        String token = Auth.fetchToken(mvc, mismatch.getUsername(), "pw");
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isNotFound());
+                .header("x-auth-token", token)
+        ).andExpect(status().isForbidden());
     }
 }

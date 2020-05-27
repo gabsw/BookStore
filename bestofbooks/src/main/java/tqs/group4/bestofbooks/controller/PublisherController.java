@@ -27,6 +27,7 @@ import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.RepeatedBookIsbnException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
+import tqs.group4.bestofbooks.service.LoginServices;
 import tqs.group4.bestofbooks.service.StockService;
 import tqs.group4.bestofbooks.dto.BookDTO;
 import tqs.group4.bestofbooks.dto.BookListDTO;
@@ -45,8 +46,10 @@ public class PublisherController {
 
     @Autowired
     private RevenueService revenueService;
-	
-	
+
+    @Autowired
+    private LoginServices loginService;
+
 	@GetMapping("{publisherName}/stock")
     public Page<Book> getAvailableStock(@PathVariable String publisherName, Pageable pageable, HttpServletRequest request) throws UserNotFoundException, LoginRequiredException, ForbiddenUserException {
         
@@ -68,14 +71,17 @@ public class PublisherController {
 	}
 
     @GetMapping("/{publisherName}/revenue")
-    public Page<RevenueDTO> getRevenuesByPublisher(@PathVariable String publisherName, Pageable pageable)
-            throws UserNotFoundException {
+    public Page<RevenueDTO> getRevenuesByPublisher(@PathVariable String publisherName, Pageable pageable,
+                                                   HttpServletRequest request)
+            throws UserNotFoundException, LoginRequiredException, ForbiddenUserException {
+	    loginService.checkIfUserIsTheRightPublisher(publisherName, loginService.getSessionUsername(request));
         return revenueService.getRevenuesByPublisher(publisherName, pageable);
     }
 
     @GetMapping("/{publisherName}/revenue/total")
-    public Double getRevenuesTotalByPublisher(@PathVariable String publisherName)
-            throws UserNotFoundException {
+    public Double getRevenuesTotalByPublisher(@PathVariable String publisherName, HttpServletRequest request)
+            throws UserNotFoundException, LoginRequiredException, ForbiddenUserException {
+        loginService.checkIfUserIsTheRightPublisher(publisherName, loginService.getSessionUsername(request));
         return revenueService.getRevenuesTotalByPublisher(publisherName);
     }
 }

@@ -14,15 +14,22 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.mocks.CommissionMocks;
+import tqs.group4.bestofbooks.model.Admin;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.model.Commission;
 import tqs.group4.bestofbooks.model.Order;
+import tqs.group4.bestofbooks.utils.Auth;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -47,6 +54,8 @@ public class AdminControllerIT {
     private Commission commission2;
     private Order order1;
     private Order order2;
+    private Admin admin = new Admin("admin", "30c952fab122c3f9759f02a6d95c3758b246b4fee239957b2d4fee46e26170c4");
+
 
     @BeforeEach
     public void before() {
@@ -66,29 +75,38 @@ public class AdminControllerIT {
 
     @Test
     void givenCommissions_thenGetCommissionsTotal() throws Exception {
+        entityManager.persist(admin);
         entityManager.persist(order1);
         entityManager.persist(order2);
         entityManager.persist(commission1);
         entityManager.persist(commission2);
         entityManager.flush();
 
+        String token = Auth.fetchToken(mvc, "admin", "pw");
+
         Double expectedTotal = commission1.getAmount() + commission2.getAmount();
         String url = "/api/admin/commissions/total";
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status()
                 .isOk())
                 .andExpect(content().json(toJson(expectedTotal)));
-
     }
 
     @Test
     void givenNoCommissions_thenGetZeroAsTotal() throws Exception {
+        entityManager.persist(admin);
+        entityManager.flush();
+
+        String token = Auth.fetchToken(mvc, "admin", "pw");
+
         Double expectedTotal = 0.00;
         String url = "/api/admin/commissions/total";
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status()
                 .isOk())
                 .andExpect(content().json(toJson(expectedTotal)));
@@ -96,11 +114,14 @@ public class AdminControllerIT {
 
     @Test
     void givenCommissions_thenGetAllCommissions() throws Exception {
+        entityManager.persist(admin);
         entityManager.persist(order1);
         entityManager.persist(order2);
         entityManager.persist(commission1);
         entityManager.persist(commission2);
         entityManager.flush();
+
+        String token = Auth.fetchToken(mvc, "admin", "pw");
 
         Pageable p = PageRequest.of(0, 20);
         Page<Commission> commissionPage = new PageImpl<>(Lists.newArrayList(commission1, commission2), p, 2);
@@ -109,6 +130,7 @@ public class AdminControllerIT {
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth-token", token)
         ).andExpect(status()
                 .isOk())
            .andExpect(content().json(toJson(commissionPage)));

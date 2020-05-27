@@ -3,8 +3,7 @@ package tqs.group4.bestofbooks.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -55,14 +54,17 @@ import tqs.group4.bestofbooks.service.StockService;
 @WebMvcTest(PublisherController.class)
 public class PublisherControllerTests {
 
-	 @Autowired
-	 private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-	 @MockBean
-	 private StockService stockService;
+    @MockBean
+    private StockService stockService;
 
-	 @MockBean
+    @MockBean
     private RevenueService revenueService;
+
+	@MockBean
+	private LoginServices loginService;
 
     Pageable p = PageRequest.of(0, 20);
 
@@ -292,8 +294,9 @@ public class PublisherControllerTests {
 		 verify(stockService, VerificationModeFactory.times(1)).addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class));
 	 }
 
-	 @Test
+    @Test
     void givenExistentPublisherName_whenGetRevenuesByPublisherName_thenReturnJson() throws Exception {
+        doNothing().when(loginService).checkIfUserIsTheRightPublisher("Publisher 1", "pub1");
         String knownPublisher = RevenueMocks.revenue1.getPublisherName();
         String url = "/api/publisher/" + knownPublisher + "/revenue";
 
@@ -322,6 +325,7 @@ public class PublisherControllerTests {
 
     @Test
     void givenExistentPublisherName_whenGetTotalRevenuesByPublisherName_thenReturnJson() throws Exception {
+		doNothing().when(loginService).checkIfUserIsTheRightPublisher("Publisher 1", "pub1");
         String knownPublisher = RevenueMocks.revenue1.getPublisherName();
         String url = "/api/publisher/" + knownPublisher + "/revenue/total";
 
@@ -346,5 +350,5 @@ public class PublisherControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isNotFound());
     }
-    
+
 }
