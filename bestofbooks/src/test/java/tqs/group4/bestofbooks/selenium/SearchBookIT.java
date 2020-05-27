@@ -30,7 +30,6 @@ public class SearchBookIT {
 
   @Before
   public void setUp() {
-	System.setProperty("webdriver.chrome.driver","/home/edgar/Transferências/chromedriver_linux64/chromedriver");
 	ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless", "--disable-gpu");
     driver = new ChromeDriver(options);
