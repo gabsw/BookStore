@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,7 +36,7 @@ public class SessionController {
 	private static String badAuthHeaderMessage = "Bad authorization header.";
 	
 	@GetMapping("/login")
-	public UserDto login(HttpServletRequest request) throws LoginFailedException, UserNotFoundException {
+	public ResponseEntity<UserDto> login(HttpServletRequest request) throws LoginFailedException, UserNotFoundException {
 		String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
 		
 		String[] headerParts = auth.trim().split(" ");
@@ -58,11 +60,11 @@ public class SessionController {
 		
 		loginService.setSessionUsername(request, user.getUsername());
 
-		return user;
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@PutMapping("/login")
-	public UserDto register(HttpServletRequest request, @Valid @RequestBody UserDto newUser) throws RegistrationFailedException, RepeatedUsernameException, RepeatedPublisherNameException {
+	public ResponseEntity<UserDto> register(HttpServletRequest request, @Valid @RequestBody UserDto newUser) throws RegistrationFailedException, RepeatedUsernameException, RepeatedPublisherNameException {
 		
 		String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
 		
@@ -91,18 +93,18 @@ public class SessionController {
 		
 		loginService.setSessionUsername(request, username);
 		
-		return user;
+		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/user-info")
-	public UserDto getUserInfo(HttpServletRequest request) throws UserNotFoundException, LoginRequiredException{
+	public ResponseEntity<UserDto> getUserInfo(HttpServletRequest request) throws UserNotFoundException, LoginRequiredException{
 		String user = loginService.getSessionUsername(request);
 		
 		if (user == null) {
 			throw new LoginRequiredException("Login Required for this request.");
 		}
 		
-		return loginService.getUserDtoByUsername(user);
+		return new ResponseEntity<>(loginService.getUserDtoByUsername(user), HttpStatus.OK);
 	}
 	
 	

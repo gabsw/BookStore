@@ -196,7 +196,7 @@ public class SessionControllerTest {
                 .header("Authorization", header)
                 .content(body)
         ).andExpect(status()
-                .isOk())
+                .isCreated())
            .andExpect(content().json(toJson(dto)));
     	
     	verify(loginService, VerificationModeFactory.times(1)).registerUser(eq(dto), eq("password"));

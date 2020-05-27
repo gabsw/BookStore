@@ -24,6 +24,7 @@ import tqs.group4.bestofbooks.model.Buyer;
 import tqs.group4.bestofbooks.service.LoginServices;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -200,10 +201,32 @@ public class SessionControllerIT {
                 .header("Authorization", header)
                 .content(body)
         ).andExpect(status()
-                .isOk())
+                .isCreated())
            .andExpect(content().json(toJson(dto)))
            .andExpect(header().exists("x-auth-token"));
     }
+    
+    @Test
+    void givenValidUserDtoAndAuthHeaderInconsistentUsername_whenRegister_thenHttpStatusBadRequest() throws Exception {
+    	String url = "/api/session/login";
+    	
+    	UserDto dto = new UserDto("username123", "Buyer");
+        
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
+    }
+    
+    
     
     @Test
     void givenInvalidAuthorizationHeader_whenRegister_thenHttpStatusBadRequest() throws Exception {
@@ -225,7 +248,7 @@ public class SessionControllerIT {
     }
     
     @Test
-    void givenValidAuthHeaderAndDtoWithInvalidUserType_thenHttpStatusBadRequest() throws JsonProcessingException, Exception {
+    void givenValidAuthHeaderAndDtoWithInvalidUserType_whenRegister_thenHttpStatusBadRequest() throws JsonProcessingException, Exception {
     	String url = "/api/session/login";
         UserDto dto = new UserDto("username", "NewUserType");
         
