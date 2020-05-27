@@ -35,7 +35,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 
 import tqs.group4.bestofbooks.dto.BookDTO;
-import tqs.group4.bestofbooks.dto.BookDTOList;
+import tqs.group4.bestofbooks.dto.BookListDTO;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.dto.UserDto;
@@ -196,6 +196,7 @@ public class PublisherControllerTests {
 	 
 	 @Test
 	 void givenValidPublisherTokenAndValidNameAndValidBookDTOList_whenAddBooks_thenStatusNoContent() throws Exception {
+		 String publisherName = "Publisher";
 		 BookDTO b1 = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
 	                "Travelogue");
 		 BookDTO b2 = new BookDTO("1234567891234", "Title 2", "Author 2", "Description 2", 18, 3,
@@ -203,7 +204,10 @@ public class PublisherControllerTests {
 		 List<BookDTO> l = new ArrayList<>();
 		 l.add(b1);
 		 l.add(b2);
-		 BookDTOList input = new BookDTOList(l);
+		 List<Book> lb = new ArrayList<>();
+		 lb.add(b1.getBookObject(publisherName));
+		 lb.add(b2.getBookObject(publisherName));
+		 BookListDTO input = new BookListDTO(lb);
 		 given(stockService.addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class))).willReturn(input);
 		 
 		 String url = "/api/publisher/Publisher/stock/";

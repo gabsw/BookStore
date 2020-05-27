@@ -4,28 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDTOList implements Serializable{
-	
-	private List<BookDTO> books;
+import tqs.group4.bestofbooks.model.Book;
 
-	public BookDTOList(List<BookDTO> l) {
+public class BookListDTO implements Serializable{
+	
+	private List<Book> books;
+
+	public BookListDTO(List<Book> l) {
 		super();
 		this.books = l;
 	}
 	
-	public BookDTOList() {
+	public BookListDTO() {
 		this.books = new ArrayList<>();
 	}
 	
-	public void addBookDTO(BookDTO dto) {
+	public void addBook(Book dto) {
 		this.books.add(dto);
 	}
 
-	public List<BookDTO> getBooks() {
+	public List<Book> getBooks() {
 		return books;
 	}
 
-	public void setBooks(List<BookDTO> l) {
+	public void setBooks(List<Book> l) {
 		this.books = l;
 	}
 
@@ -45,7 +47,7 @@ public class BookDTOList implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BookDTOList other = (BookDTOList) obj;
+		BookListDTO other = (BookListDTO) obj;
 		if (books == null) {
 			if (other.books != null)
 				return false;

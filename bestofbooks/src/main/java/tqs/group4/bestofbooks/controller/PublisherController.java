@@ -29,7 +29,7 @@ import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.service.StockService;
 import tqs.group4.bestofbooks.dto.BookDTO;
-import tqs.group4.bestofbooks.dto.BookDTOList;
+import tqs.group4.bestofbooks.dto.BookListDTO;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.service.RevenueService;
 
@@ -61,8 +61,8 @@ public class PublisherController {
 	}
 	
 	@PostMapping("{publisherName}/stock")
-	public ResponseEntity<BookDTOList> addBooks(@PathVariable String publisherName, @Valid @RequestBody List<BookDTO> newBooks, HttpServletRequest request) throws LoginRequiredException, ForbiddenUserException, UserNotFoundException, RepeatedBookIsbnException {
-		BookDTOList dtoList = stockService.addNewBook(publisherName, newBooks, request);
+	public ResponseEntity<BookListDTO> addBooks(@PathVariable String publisherName, @Valid @RequestBody List<BookDTO> newBooks, HttpServletRequest request) throws LoginRequiredException, ForbiddenUserException, UserNotFoundException, RepeatedBookIsbnException {
+		BookListDTO dtoList = stockService.addNewBook(publisherName, newBooks, request);
 		
 		return new ResponseEntity<>(dtoList, HttpStatus.CREATED);
 	}

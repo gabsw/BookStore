@@ -38,7 +38,7 @@ import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.dto.BookDTO;
-import tqs.group4.bestofbooks.dto.BookDTOList;
+import tqs.group4.bestofbooks.dto.BookListDTO;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
@@ -394,7 +394,7 @@ public class PublisherControllerIT {
 	@Test
 	void givenSuccessfulLoginAndMatchingNameAndValidBookDTOList_whenAddBooks_thenStatusNoContent() throws Exception {
         String loginUrl = "/api/session/login";
-    	
+        String publisherName = "Viking Press";
     	String auth = "viking:pw";
     	byte[] encodedAuth = Base64.getEncoder().encode( 
                 auth.getBytes(Charset.forName("US-ASCII")));
@@ -410,12 +410,15 @@ public class PublisherControllerIT {
                 "Travelogue");
 		BookDTO b2 = new BookDTO("1234567892546", "Title 2", "Author 2", "Description 2", 18, 3,
                 "Travelogue");
-    	List<BookDTO> l = new ArrayList<>();
+		List<BookDTO> l = new ArrayList<>();
 		l.add(b1);
 		l.add(b2);
-		BookDTOList input = new BookDTOList(l);
+		List<Book> lb = new ArrayList<>();
+		lb.add(b1.getBookObject(publisherName));
+		lb.add(b2.getBookObject(publisherName));
+		BookListDTO input = new BookListDTO(lb);
         
-        String publisherName = "Viking Press";
+        
         String url = "/api/publisher/" + publisherName + "/stock";
         String body = toJson(l);
         
