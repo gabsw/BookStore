@@ -47,7 +47,7 @@ public class BookListDTOTest {
 		
 		assertEquals(dto.hashCode(), dto1.hashCode());
 		assertNotEquals(dto.hashCode(), dto2.hashCode());
-		/*dto2.setBooks(null);
+		/*dto2.setBooks(null);a
 		assertNotEquals(dto.hashCode(), dto2.hashCode());*/
 	}
 	
