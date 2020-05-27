@@ -35,6 +35,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 
 import tqs.group4.bestofbooks.dto.BookDTO;
+import tqs.group4.bestofbooks.dto.BookDTOList;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.dto.UserDto;
@@ -202,6 +203,8 @@ public class PublisherControllerTests {
 		 List<BookDTO> l = new ArrayList<>();
 		 l.add(b1);
 		 l.add(b2);
+		 BookDTOList input = new BookDTOList(l);
+		 given(stockService.addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class))).willReturn(input);
 		 
 		 String url = "/api/publisher/Publisher/stock/";
 		 String body = toJson(l);
@@ -210,7 +213,8 @@ public class PublisherControllerTests {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(body)
 			).andExpect(status()
-				.isNoContent());
+				.isCreated())
+		 	.andExpect(content().json(toJson(input)));
 		 
 		 verify(stockService, VerificationModeFactory.times(1)).addNewBook(eq("Publisher"), eq(l), any(HttpServletRequest.class));
 	 }

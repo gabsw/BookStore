@@ -26,6 +26,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.google.common.collect.Lists;
 
 import tqs.group4.bestofbooks.dto.BookDTO;
+import tqs.group4.bestofbooks.dto.BookDTOList;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
@@ -208,14 +209,15 @@ public class StockServiceTest {
 		UserDto dto = new UserDto("publisher", "Publisher");
 		dto.addAttribute("name", "Publisher");
 		dto.addAttribute("tin", "PublisherTIN");
+		BookDTOList input = new BookDTOList(l);
 		
         when(loginService.getSessionUsername(any(HttpServletRequest.class))).thenReturn("publisher");
         when(loginService.getUserDtoByUsername("publisher")).thenReturn(dto);
         when(bookRepository.existsByIsbn(any(String.class))).thenReturn(false);
         
-        List<BookDTO> returnValue = service.addNewBook("Publisher", l, new MockHttpServletRequest());
+        BookDTOList returnValue = service.addNewBook("Publisher", l, new MockHttpServletRequest());
         
-        assertEquals(l, returnValue);
+        assertEquals(input, returnValue);
 	}
 	
 	@Test

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import tqs.group4.bestofbooks.dto.BookDTO;
+import tqs.group4.bestofbooks.dto.BookDTOList;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
@@ -73,7 +74,7 @@ public class StockService {
 		return new StockDto(book.getIsbn(), newBook.getQuantity());
 	}
 	
-	public List<BookDTO> addNewBook(String publisherName, List<BookDTO> newBooks, HttpServletRequest request) throws LoginRequiredException, ForbiddenUserException, UserNotFoundException, RepeatedBookIsbnException {
+	public BookDTOList addNewBook(String publisherName, List<BookDTO> newBooks, HttpServletRequest request) throws LoginRequiredException, ForbiddenUserException, UserNotFoundException, RepeatedBookIsbnException {
 		String username = loginService.getSessionUsername(request);
 		loginService.checkUserIsPublisher(username);
         UserDto dto = loginService.getUserDtoByUsername(username);
@@ -97,7 +98,7 @@ public class StockService {
     	   bookRepository.save(b.getBookObject(publisherName));
        }
 		
-       return newBooks;
+       return new BookDTOList(newBooks);
 	}
 	
 }

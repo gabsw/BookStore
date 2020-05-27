@@ -38,6 +38,7 @@ import com.google.common.hash.Hashing;
 
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.dto.BookDTO;
+import tqs.group4.bestofbooks.dto.BookDTOList;
 import tqs.group4.bestofbooks.dto.RevenueDTO;
 import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
@@ -403,6 +404,7 @@ public class PublisherControllerIT {
     	List<BookDTO> l = new ArrayList<>();
 		l.add(b1);
 		l.add(b2);
+		BookDTOList input = new BookDTOList(l);
         
         String publisherName = "Viking Press";
         String url = "/api/publisher/" + publisherName + "/stock";
@@ -413,7 +415,8 @@ public class PublisherControllerIT {
                 .header("x-auth-token", token)
                 .content(body)
         ).andExpect(status()
-                .isNoContent());
+                .isCreated())
+        .andExpect(content().json(toJson(input)));
 	}
 	
 	@Test
