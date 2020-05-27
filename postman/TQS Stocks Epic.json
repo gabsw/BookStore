@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4e9ce025-4c95-4714-b4cb-a75adc44f8dc",
+		"_postman_id": "329c0898-c074-4fb5-b9b1-fbe4d67b8d37",
 		"name": "TQS Stocks Epic",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -34,11 +34,8 @@
 		},
 		{
 			"name": "put/add stock to a book",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "x-auth-token",
@@ -68,6 +65,42 @@
 					]
 				},
 				"description": "Adiciona o stock a um livro. Os argumentos estão no body, sendo o \"isbn\" o identificador do livro e \"quantity\" a quantidade a ser somada de stock a um livro.\nEstes atributos são os atributos da classe StockDto.\nPara este pedido ser realizado é necessário a presença do token de autenticação no header(que está vazio neste pedido)."
+			},
+			"response": []
+		},
+		{
+			"name": "add a new book/books to a publishers stock",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "c9842693-6e4f-4441-86bc-8dfb470d14ad",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"isbn\": \"1234567891234\",\n        \"title\": \"Title 1\",\n        \"author\": \"Author 1\",\n        \"description\": \"A description\",\n        \"price\": 20,\n        \"quantity\": 13,\n        \"category\": \"Travelogue\"\n    },\n    {\n        \"isbn\": \"1234567891235\",\n        \"title\": \"Title 2\",\n        \"author\": \"Author 2\",\n        \"description\": \"A description2\",\n        \"price\": 18,\n        \"quantity\": 17,\n        \"category\": \"Travelogue\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/publisher/Publisher 1/stock",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"publisher",
+						"Publisher 1",
+						"stock"
+					]
+				},
+				"description": "Adiciona um ou mais livros ao stock de uma publisher. O body do pedido é uma lista de BookDTO, que têm o formato do body deste pedido e a resposta é a lista de livros criados.\nEste pedido já está protegido pelos mecanismos de autenticação pelo que o token de autenticação tem de estar presente no pedido."
 			},
 			"response": []
 		}
