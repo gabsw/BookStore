@@ -103,6 +103,8 @@ public class BookDTOTest {
 		BookDTO sameDto = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
                 "Travelogue");
 		assertEquals(dto.hashCode(), sameDto.hashCode());
+		BookDTO nullDto = new BookDTO(null, null, null, null, 10, 10, null);
+		Assertions.assertNotEquals(dto.hashCode(), nullDto.hashCode());
 	}
 	
 	@Test
@@ -113,6 +115,37 @@ public class BookDTOTest {
 		BookDTO sameDto = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
                 "Travelogue");
 		assertEquals(true, sameDto.equals(dto));
+		assertEquals(true, dto.equals(dto));
+		assertEquals(false, dto.equals(null));
+		assertEquals(false, dto.equals(new UserDto("username", "Buyer")));
+		sameDto.setTitle("AnotherTitle");
+		assertEquals(false, dto.equals(sameDto));
+		dto.setTitle(null);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setTitle(null);
+		assertEquals(true, dto.equals(sameDto));
+		sameDto.setQuantity(10);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setPrice(10);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setIsbn("1234567896482");
+		assertEquals(false, dto.equals(sameDto));
+		dto.setIsbn(null);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setIsbn(null);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setDescription("New Description");
+		assertEquals(false, dto.equals(sameDto));
+		dto.setDescription(null);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setDescription(null);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setCategory("NewCategory");
+		assertEquals(false, dto.equals(sameDto));
+		dto.setCategory(null);
+		assertEquals(false, dto.equals(sameDto));
+		sameDto.setCategory(null);
+		assertEquals(false, dto.equals(sameDto));
 	}
 	
 	@Test
