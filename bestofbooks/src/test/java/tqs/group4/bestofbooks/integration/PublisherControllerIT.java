@@ -201,7 +201,16 @@ public class PublisherControllerIT {
 	
 	@Test
 	void givenSuccessfulLoginAndMatchingNameAndValidStockDto_whenupdateAvailableStock_thenReturnJson() throws Exception {
-		entityManager.persist(BookMocks.onTheRoad);
+		Book onTheRoad = new Book(
+	            "9780140042597",
+	            "On the road",
+	            "Jack Kerouac",
+	            "A fictionalised account of his own journeys acrossAmerica with his friend Neal Cassady",
+	            12,
+	            20,
+	            "Travelogue",
+	            "Viking Press");
+		entityManager.persist(onTheRoad);
         entityManager.flush();
         
         String loginUrl = "/api/session/login";
@@ -218,8 +227,8 @@ public class PublisherControllerIT {
     	
     	String token = result.getResponse().getHeader("x-auth-token");
 
-        StockDto inStockDto = new StockDto(BookMocks.onTheRoad.getIsbn(), 5);
-        StockDto outStockDto = new StockDto(BookMocks.onTheRoad.getIsbn(), 25);
+        StockDto inStockDto = new StockDto(onTheRoad.getIsbn(), 5);
+        StockDto outStockDto = new StockDto(onTheRoad.getIsbn(), 25);
         
         
         String publisherName = "Viking Press";

@@ -91,7 +91,16 @@ public class BookServiceTests {
 
     @Test
     void whenBookHasEnoughCopies_checkIfBookHasEnoughCopiesMustBeTrue() {
-        assertTrue(service.checkIfBookHasEnoughCopies(BookMocks.onTheRoad, 20));
+    	Book onTheRoad = new Book(
+	            "9780140042597",
+	            "On the road",
+	            "Jack Kerouac",
+	            "A fictionalised account of his own journeys acrossAmerica with his friend Neal Cassady",
+	            12,
+	            20,
+	            "Travelogue",
+	            "Viking Press");
+        assertTrue(service.checkIfBookHasEnoughCopies(onTheRoad, 19));
     }
 
     @Test

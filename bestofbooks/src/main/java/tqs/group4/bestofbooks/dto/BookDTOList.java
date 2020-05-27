@@ -21,11 +21,11 @@ public class BookDTOList implements Serializable{
 		this.books.add(dto);
 	}
 
-	public List<BookDTO> getL() {
+	public List<BookDTO> getBooks() {
 		return books;
 	}
 
-	public void setL(List<BookDTO> l) {
+	public void setBooks(List<BookDTO> l) {
 		this.books = l;
 	}
 
@@ -49,7 +49,8 @@ public class BookDTOList implements Serializable{
 		if (books == null) {
 			if (other.books != null)
 				return false;
-		} else if (!books.equals(other.books))
+		}
+		else if (!books.equals(other.books))
 			return false;
 		return true;
 	}

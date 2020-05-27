@@ -116,7 +116,7 @@ public class BookDTO implements Serializable{
 	}
 
 	public Book getBookObject(String publisherName) {
-		Book b = new Book(this.getIsbn(),
+		return new Book(this.getIsbn(),
 				this.getTitle(),
 				this.getAuthor(),
 				this.getDescription(),
@@ -124,7 +124,6 @@ public class BookDTO implements Serializable{
 				this.getQuantity(),
 				this.getCategory(),
 				publisherName);
-		return b;
 	}
 
 
@@ -157,22 +156,26 @@ public class BookDTO implements Serializable{
 		if (author == null) {
 			if (other.author != null)
 				return false;
-		} else if (!author.equals(other.author))
+		}
+		else if (!author.equals(other.author))
 			return false;
 		if (category == null) {
 			if (other.category != null)
 				return false;
-		} else if (!category.equals(other.category))
+		}
+		else if (!category.equals(other.category))
 			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
-		} else if (!description.equals(other.description))
+		}
+		else if (!description.equals(other.description))
 			return false;
 		if (isbn == null) {
 			if (other.isbn != null)
 				return false;
-		} else if (!isbn.equals(other.isbn))
+		}
+		else if (!isbn.equals(other.isbn))
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
@@ -181,7 +184,8 @@ public class BookDTO implements Serializable{
 		if (title == null) {
 			if (other.title != null)
 				return false;
-		} else if (!title.equals(other.title))
+		}
+		else if (!title.equals(other.title))
 			return false;
 		return true;
 	}

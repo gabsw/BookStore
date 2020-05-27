@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tqs.group4.bestofbooks.model.Book;
+
 public class BookDTOTest {
 
 	private BookDTO dto;
@@ -111,6 +113,19 @@ public class BookDTOTest {
 		BookDTO sameDto = new BookDTO("1234567891234", "Title 1", "Author 1", "Description 1", 20, 5,
                 "Travelogue");
 		assertEquals(true, sameDto.equals(dto));
+	}
+	
+	@Test
+	public void testGetBookObject() {
+		Book b = dto.getBookObject("Publisher");
+		assertEquals(dto.getIsbn(), b.getIsbn());
+		assertEquals(dto.getTitle(), b.getTitle());
+		assertEquals(dto.getAuthor(), b.getAuthor());
+		assertEquals(dto.getDescription(), b.getDescription());
+		assertEquals(dto.getPrice(), b.getPrice());
+		assertEquals(dto.getQuantity(), b.getQuantity());
+		assertEquals(dto.getCategory(), b.getCategory());
+		assertEquals("Publisher", b.getPublisherName());
 	}
 	
 }
