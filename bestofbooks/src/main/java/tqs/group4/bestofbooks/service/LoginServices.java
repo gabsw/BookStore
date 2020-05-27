@@ -1,16 +1,9 @@
 package tqs.group4.bestofbooks.service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
-
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.common.hash.Hashing;
-
+import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
@@ -25,6 +18,11 @@ import tqs.group4.bestofbooks.model.Publisher;
 import tqs.group4.bestofbooks.repository.AdminRepository;
 import tqs.group4.bestofbooks.repository.BuyerRepository;
 import tqs.group4.bestofbooks.repository.PublisherRepository;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -50,9 +48,9 @@ public class LoginServices {
 		if (username == null || password == null) {
             throw new IllegalArgumentException("User (password or username) is not defined.");
         }
-		String passwordHash  = Hashing.sha256()
-				  .hashString(password, StandardCharsets.UTF_8)
-				  .toString();
+        String passwordHash = Hashing.sha256()
+                                     .hashString(password, StandardCharsets.UTF_8)
+                                     .toString();
         Optional<Buyer> optBuyer = buyerRepository.findById(username);
         if (optBuyer.isPresent()) {
         	if (!optBuyer.get().getPasswordHash().equals(passwordHash)) {
@@ -61,7 +59,7 @@ public class LoginServices {
         	Buyer b = optBuyer.get();
         	return new UserDto(b.getUsername(),buyer);
         }
-        
+
         Optional<Admin> optAdmin = adminRepository.findById(username);
         if (optAdmin.isPresent()) {
         	if (!optAdmin.get().getPasswordHash().equals(passwordHash)) {
@@ -70,7 +68,7 @@ public class LoginServices {
         	Admin a = optAdmin.get();
         	return new UserDto(a.getUsername(),admin);
         }
-        
+
         Optional<Publisher> optPublisher = publisherRepository.findByUsername(username);
         if (optPublisher.isPresent()) {
         	if (!optPublisher.get().getPasswordHash().equals(passwordHash)) {
@@ -82,7 +80,7 @@ public class LoginServices {
         	dto.addAttribute("tin", p.getTin());
         	return dto;
         }
-        
+
         throw new UserNotFoundException("User not found " + username);
 	}
 	
@@ -164,27 +162,52 @@ public class LoginServices {
 		 }
 	 }
 	}
-	
-	public void checkUserIsAdmin(String username) throws LoginRequiredException, ForbiddenUserException {
-	 if (username == null) {
-		 throw new LoginRequiredException(loginRequiredMessage);
-	    }
-	 else {
-		 if (!adminRepository.existsById(username)) {
-			throw new ForbiddenUserException(userForbiddenMessage); 
-		 }
-	 }
-	}
-	
-	public void checkUserIsPublisher(String username) throws LoginRequiredException, ForbiddenUserException {
-	 if (username == null) {
-		 throw new LoginRequiredException(loginRequiredMessage);
-	    }
-	 else {
-		 if (!publisherRepository.existsByUsername(username)) {
-			throw new ForbiddenUserException(userForbiddenMessage); 
-		 }
-	 }
-	}
 
+    public void checkUserIsAdmin(String username) throws LoginRequiredException, ForbiddenUserException {
+        if (username == null) {
+            throw new LoginRequiredException(loginRequiredMessage);
+        } else {
+            if (!adminRepository.existsById(username)) {
+                throw new ForbiddenUserException(userForbiddenMessage);
+            }
+        }
+    }
+
+    public void checkUserIsPublisher(String username) throws LoginRequiredException, ForbiddenUserException {
+        if (username == null) {
+            throw new LoginRequiredException(loginRequiredMessage);
+        } else {
+            if (!publisherRepository.existsByUsername(username)) {
+                throw new ForbiddenUserException(userForbiddenMessage);
+            }
+        }
+    }
+
+    public void checkIfUserIsTheRightBuyer(String endpointUsername, String sessionUsername)
+            throws ForbiddenUserException, LoginRequiredException {
+        checkUserIsBuyer(sessionUsername);
+        if (!endpointUsername.equals(sessionUsername)) {
+            throw new ForbiddenUserException("Buyer mismatch.");
+        }
+    }
+
+    public void checkIfUserIsTheRightBuyerForOrder(OrderDTO orderDTO, String sessionUsername)
+            throws ForbiddenUserException, LoginRequiredException {
+        checkUserIsBuyer(sessionUsername);
+        if (!orderDTO.getBuyerName().equals(sessionUsername)) {
+            throw new ForbiddenUserException("Username does not match the order's buyer.");
+        }
+    }
+
+    public void checkIfUserIsTheRightPublisher(String endpointName, String sessionUsername)
+            throws ForbiddenUserException, LoginRequiredException {
+        checkUserIsPublisher(sessionUsername);
+        Optional<Publisher> optionalPublisher = publisherRepository.findByUsername(sessionUsername);
+        if (optionalPublisher.isPresent()) {
+            Publisher publisher = optionalPublisher.get();
+            if (!publisher.getName().equals(endpointName)) {
+                throw new ForbiddenUserException("Publisher mismatch.");
+            }
+        }
+    }
 }

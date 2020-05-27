@@ -15,7 +15,13 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.8</java.version>	
+	        <sonar.exclusions>
+	            **/test/**/*
+	        </sonar.exclusions>
+	        <sonar.test.exclusions>
+	            **/test/**/*
+	        </sonar.test.exclusions>
 	</properties>
 
 	<dependencies>
@@ -58,18 +64,11 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
   			<groupId>org.apache.commons</groupId>
@@ -92,6 +91,20 @@
             <artifactId>spring-session-jdbc</artifactId>
             <version>1.3.1.RELEASE</version>
         </dependency>
+          <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>3.141.59</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- selenium / junit integration -->
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>selenium-jupiter</artifactId>
+                <version>3.3.4</version>
+                <scope>test</scope>
+            </dependency>
 	</dependencies>
 
 	<build>
@@ -107,16 +120,19 @@
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>2.22.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.4.0.905</version>
-				<configuration>
-		            <sonar.tests.exclusions>
-		                **/test/*
-		            </sonar.tests.exclusions>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>

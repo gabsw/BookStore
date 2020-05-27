@@ -25,7 +25,7 @@ import tqs.group4.bestofbooks.exception.RepeatedUsernameException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.service.LoginServices;
 
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "x-auth-token")
 @RestController
 @RequestMapping("/api/session")
 public class SessionController {

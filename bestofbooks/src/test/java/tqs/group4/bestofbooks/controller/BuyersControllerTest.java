@@ -12,13 +12,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.exception.OrderNotFoundException;
 import tqs.group4.bestofbooks.mocks.OrderMocks;
+import tqs.group4.bestofbooks.service.LoginServices;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,11 +32,15 @@ public class BuyersControllerTest {
     @MockBean
     private OrderService orderService;
 
+    @MockBean
+    private LoginServices loginService;
+
     private List<OrderDTO> orders = Lists.newArrayList(OrderDTO.fromOrder(OrderMocks.order1));
 
     @AfterEach
     public void after() {
         reset(orderService);
+        reset(loginService);
     }
 
     @Test
@@ -44,6 +48,7 @@ public class BuyersControllerTest {
         String existentBuyer = "buyer1";
         String url = "/api/buyer/" + existentBuyer + "/orders";
         given(orderService.getOrderByBuyerUsername(existentBuyer)).willReturn(orders);
+        doNothing().when(loginService).checkIfUserIsTheRightBuyer("buyer1", "buyer1");
 
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)
