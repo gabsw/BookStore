@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Best Of Books</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="jscript/adminCommission.js"></script>
+    <script src="jscript/config.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="adminIndex.html">
+        <img src="images/Logo-removebg-preview.png" width="100"/>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <div class="pull-right">
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
+                    </button>
+                    <div aria-labelledby="name" class="dropdown-menu">
+                        <a class="dropdown-item" onclick="clearUser()" href="login.html">LogOut</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container py-5">
+    <div class="text-center"><h1>Add Book to Stock</h1></div>
+    <p></p>
+    <p></p>
+    <div class="row" >
+
+
+        <div class="col-lg-8 mx-auto">
+            <!-- List group-->
+            <form>
+                <div class="form-group">
+                    <label for="create_ISBN">ISBN</label>
+                    <input type="text" class="form-control" minlength="13" maxlength="13" id="create_ISBN" placeholder="Ex: 1111111111112">
+                </div>
+                <div class="form-group">
+                    <label for="create_Title">Title</label>
+                    <input type="text" class="form-control" id="create_Title" placeholder="Ex: Book 1">
+                </div>
+                <div class="form-group">
+                    <label for="create_Author">Author</label>
+                    <input type="text" class="form-control" id="create_Author" placeholder="Ex: SomeAuthor">
+                </div>
+                <div class="form-group">
+                    <label for="create_Category">Category</label>
+                    <input type="text" class="form-control" id="create_Category" placeholder="Ex: CategoryName">
+                </div>
+                <div class="form-group">
+                    <label for="create_Description">Description</label>
+                    <textarea class="form-control" id="create_Description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="create_Price">Price</label>
+                    <input type="number" class="form-control" step="any" id="create_Price" >
+                </div>
+                <div class="form-group">
+                    <label for="create_Quantity">Quantity</label>
+                    <input type="number" class="form-control"  id="create_Quantity" >
+                </div>
+                <button type="submit"  onclick="" class="btn btn-primary">Add Book</button>
+            </form>
+            <!-- End -->
+        </div>
+    </div>
+</div>
+
+
+<script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    function start() {
+        getUserInfo();
+
+    }
+    document.onload = start();
+
+</script>
+</body>
+</html>

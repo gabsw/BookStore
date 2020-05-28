@@ -38,7 +38,6 @@ function getFinalPrice(){
     fetch(url + 'order/estimated-price' , {
         method: 'post',
         headers: {
-<<<<<<< HEAD
             'Content-Type': 'application/json',
             'x-auth-token' : getCurrentUser()
         },
