@@ -36,7 +36,7 @@ public class OrderService {
     private BookService bookService;
 
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
     @Autowired
     private StockService stockService;
@@ -89,7 +89,7 @@ public class OrderService {
                 request.getPaymentReference(),
                 request.getAddress(),
                 finalPrice,
-                userService.getBuyerFromUsername(request.getBuyerUsername())
+                loginService.getBuyerFromUsername(request.getBuyerUsername())
         );
     }
 

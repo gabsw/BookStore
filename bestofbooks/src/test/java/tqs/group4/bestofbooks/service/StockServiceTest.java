@@ -31,7 +31,6 @@ import tqs.group4.bestofbooks.dto.StockDto;
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.BookNotFoundException;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
-import tqs.group4.bestofbooks.exception.LoginFailedException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.RepeatedBookIsbnException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
@@ -45,7 +44,7 @@ public class StockServiceTest {
     private BookRepository bookRepository;
 	
 	@Mock
-	private LoginServices loginService;
+	private LoginService loginService;
 	
 	@InjectMocks
     private StockService service;

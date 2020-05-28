@@ -31,7 +31,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.collect.Lists;
 
 import tqs.group4.bestofbooks.dto.BookDTO;
 import tqs.group4.bestofbooks.dto.BookListDTO;
@@ -43,11 +42,9 @@ import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.RepeatedBookIsbnException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
-import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.mocks.RevenueMocks;
 import tqs.group4.bestofbooks.model.Book;
-import tqs.group4.bestofbooks.service.BookService;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 import tqs.group4.bestofbooks.service.RevenueService;
 import tqs.group4.bestofbooks.service.StockService;
 
@@ -64,7 +61,7 @@ public class PublisherControllerTests {
     private RevenueService revenueService;
 
 	@MockBean
-	private LoginServices loginService;
+	private LoginService loginService;
 
     Pageable p = PageRequest.of(0, 20);
 

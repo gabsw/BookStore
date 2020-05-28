@@ -11,7 +11,7 @@ import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.model.Commission;
 import tqs.group4.bestofbooks.service.CommissionService;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +23,7 @@ public class AdminController {
     private CommissionService commissionService;
 
     @Autowired
-    private LoginServices loginService;
+    private LoginService loginService;
 
     @GetMapping("/")
     public Page<Commission> getCommissions(Pageable pageable, HttpServletRequest request)

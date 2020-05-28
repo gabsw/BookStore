@@ -1,46 +1,29 @@
 package tqs.group4.bestofbooks.integration;
 
-import org.junit.jupiter.api.AfterEach;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.hash.Hashing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.hash.Hashing;
-
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.dto.UserDto;
-import tqs.group4.bestofbooks.exception.LoginFailedException;
-import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Buyer;
-import tqs.group4.bestofbooks.service.LoginServices;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static tqs.group4.bestofbooks.utils.Json.toJson;
-
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static tqs.group4.bestofbooks.utils.Json.toJson;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
