@@ -212,10 +212,10 @@ public class LoginService {
     }
 
 	public Buyer getBuyerFromUsername(String username) throws UserNotFoundException {
-		Optional<Buyer> buyer = buyerRepository.findById(username);
-		if (!buyer.isPresent()) {
+		Optional<Buyer> buyerFromDB = buyerRepository.findById(username);
+		if (!buyerFromDB.isPresent()) {
 			throw new UserNotFoundException("Buyer " + username + " was not found.");
 		}
-		return buyer.get();
+		return buyerFromDB.get();
 	}
 }
