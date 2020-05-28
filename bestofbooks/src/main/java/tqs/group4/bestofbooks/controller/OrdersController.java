@@ -9,7 +9,7 @@ import tqs.group4.bestofbooks.dto.IncomingBookOrderDTO;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.dto.IncomingOrderDTO;
 import tqs.group4.bestofbooks.exception.*;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class OrdersController {
     private OrderService service;
 
     @Autowired
-    private LoginServices loginService;
+    private LoginService loginService;
 
     @GetMapping(value="/{id}")
     public OrderDTO getOrderById(@PathVariable int id, HttpServletRequest request)

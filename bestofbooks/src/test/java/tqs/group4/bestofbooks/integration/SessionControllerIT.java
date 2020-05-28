@@ -1,43 +1,29 @@
 package tqs.group4.bestofbooks.integration;
 
-import org.junit.jupiter.api.AfterEach;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.hash.Hashing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.hash.Hashing;
-
 import tqs.group4.bestofbooks.BestofbooksApplication;
 import tqs.group4.bestofbooks.dto.UserDto;
-import tqs.group4.bestofbooks.exception.LoginFailedException;
-import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Buyer;
-import tqs.group4.bestofbooks.service.LoginServices;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static tqs.group4.bestofbooks.utils.Json.toJson;
-
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static tqs.group4.bestofbooks.utils.Json.toJson;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -51,6 +37,11 @@ public class SessionControllerIT {
 	
 	@Autowired
     private EntityManager entityManager;
+	
+	@BeforeEach
+	public void before() {
+		entityManager.createNativeQuery("TRUNCATE books, orders, commissions, publishers, books_orders, revenues, buyers, admin").executeUpdate();
+	}
 
 	
     @Test
@@ -175,6 +166,87 @@ public class SessionControllerIT {
     	.andExpect(status()
                 .isUnauthorized());
     	
+    }
+    
+    @Test
+    void givenValidAuthHeaderAndDto_whenRegister_thenReturnCreatedUserDto() throws JsonProcessingException, Exception {
+    	String url = "/api/session/login";
+        UserDto dto = new UserDto("username", "Buyer");
+        
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isCreated())
+           .andExpect(content().json(toJson(dto)))
+           .andExpect(header().exists("x-auth-token"));
+    }
+    
+    @Test
+    void givenValidUserDtoAndAuthHeaderInconsistentUsername_whenRegister_thenHttpStatusBadRequest() throws Exception {
+    	String url = "/api/session/login";
+    	
+    	UserDto dto = new UserDto("username123", "Buyer");
+        
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
+    }
+    
+    
+    
+    @Test
+    void givenInvalidAuthorizationHeader_whenRegister_thenHttpStatusBadRequest() throws Exception {
+    	String url = "/api/session/login";
+    	UserDto dto = new UserDto("username", "Buyer");
+
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
+    }
+    
+    @Test
+    void givenValidAuthHeaderAndDtoWithInvalidUserType_whenRegister_thenHttpStatusBadRequest() throws JsonProcessingException, Exception {
+    	String url = "/api/session/login";
+        UserDto dto = new UserDto("username", "NewUserType");
+        
+    	String auth = "username:password";
+    	byte[] encodedAuth = Base64.getEncoder().encode( 
+                auth.getBytes(Charset.forName("US-ASCII")));
+    	String header = "Basic " + new String( encodedAuth );
+    	String body = toJson(dto);
+    	
+    	mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", header)
+                .content(body)
+        ).andExpect(status()
+                .isBadRequest());
     }
 	
 }

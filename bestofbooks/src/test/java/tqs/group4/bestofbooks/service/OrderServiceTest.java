@@ -35,7 +35,7 @@ public class OrderServiceTest {
     private OrderRepository orderRepository;
 
     @Mock
-    private UserService userService;
+    private LoginService loginService;
 
     @Mock
     private BookService bookService;
@@ -195,7 +195,7 @@ public class OrderServiceTest {
     @Test
     void testCreateOrder_WhenBooksAndBuyerAreKnown() throws BookNotFoundException, UserNotFoundException {
         when(bookService.computeFinalPriceFromIncomingOrder(incomingBookOrderDTOList)).thenReturn(100.00);
-        when(userService.getBuyerFromUsername(BuyerMock.buyer1.getUsername())).thenReturn(BuyerMock.buyer1);
+        when(loginService.getBuyerFromUsername(BuyerMock.buyer1.getUsername())).thenReturn(BuyerMock.buyer1);
 
         Order expected = new Order("XYZ", "Address", 100.00, buyer1);
         Order created = orderService.createOrder(incomingOrderDTO);
@@ -211,7 +211,7 @@ public class OrderServiceTest {
     @Test
     public void testCreateOrder_WhenBuyerIsUnknown_throwUserNotFoundException() throws BookNotFoundException, UserNotFoundException {
         when(bookService.computeFinalPriceFromIncomingOrder(incomingBookOrderDTOList)).thenReturn(100.00);
-        when(userService.getBuyerFromUsername(BuyerMock.buyer1.getUsername())).thenThrow(new UserNotFoundException());
+        when(loginService.getBuyerFromUsername(BuyerMock.buyer1.getUsername())).thenThrow(new UserNotFoundException());
 
         assertThrows(UserNotFoundException.class,
                 () -> {
@@ -223,7 +223,7 @@ public class OrderServiceTest {
     @Test
     public void testCreateOrder_WhenBookIsUnknown_throwBookNotFoundException() throws BookNotFoundException, UserNotFoundException {
         when(bookService.computeFinalPriceFromIncomingOrder(incomingBookOrderDTOList)).thenThrow(new BookNotFoundException());
-        when(userService.getBuyerFromUsername(BuyerMock.buyer1.getUsername())).thenReturn(BuyerMock.buyer1);
+        when(loginService.getBuyerFromUsername(BuyerMock.buyer1.getUsername())).thenReturn(BuyerMock.buyer1);
 
         assertThrows(BookNotFoundException.class,
                 () -> {
