@@ -24,6 +24,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="Stock.html">See Stock</a>
+                        <a class="dropdown-item" href="addBook.html">Add Book</a>
                         <a class="dropdown-item" href="updateStock.html">Update Stock</a>
                         <a class="dropdown-item" href="publisherIndex.html">Revenues</a>
                         <a class="dropdown-item" onclick="clearUser()"  href="login.html">LogOut</a>
@@ -61,9 +62,12 @@
 
         <tr>
             <td colspan="5" style="text-align: left;">
-                <input type="button" class="btn btn-lg btn-info " id="updateStock"  onclick="updateBooks()" value="Update" />
+                <input type="button" class="btn btn-lg btn-block" id="updateStock"  onclick="updateBooks()" value="Update" />
             </td>
         </tr>
+        <td colspan="5" style="text-align: left;">
+            <a type="button" class="btn btn-lg btn-block" href="Stock.html" >Go Back</a>
+        </td>
         </tfoot>
     </table>
 

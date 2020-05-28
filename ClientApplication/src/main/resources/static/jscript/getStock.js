@@ -19,6 +19,7 @@ function getStock() {
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
+                                <li class="list-group-item" id="book_isbn `+count + `">ISBN: ${book.isbn} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_description `+count + `">Description: ${book["description"]}</li>
                                 <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} €</strong></li>
