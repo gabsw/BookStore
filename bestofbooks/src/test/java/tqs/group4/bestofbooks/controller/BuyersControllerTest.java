@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.exception.OrderNotFoundException;
 import tqs.group4.bestofbooks.mocks.OrderMocks;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class BuyersControllerTest {
     private OrderService orderService;
 
     @MockBean
-    private LoginServices loginService;
+    private LoginService loginService;
 
     private List<OrderDTO> orders = Lists.newArrayList(OrderDTO.fromOrder(OrderMocks.order1));
 

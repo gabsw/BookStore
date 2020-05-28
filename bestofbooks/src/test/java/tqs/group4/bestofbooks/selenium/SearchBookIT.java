@@ -30,7 +30,7 @@ public class SearchBookIT {
 
   @Before
   public void setUp() {
-    ChromeOptions options = new ChromeOptions();
+	ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless", "--disable-gpu");
     driver = new ChromeDriver(options);
     js = (JavascriptExecutor) driver;

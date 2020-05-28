@@ -17,7 +17,7 @@ import tqs.group4.bestofbooks.model.Buyer;
 
 @SpringBootTest
 @Transactional
-public class BuyerRepositoryTest {
+public class BuyerRepositoryIT {
 	
 	@Autowired
     private EntityManager entityManager;

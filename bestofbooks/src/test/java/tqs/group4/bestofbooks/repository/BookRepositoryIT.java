@@ -109,4 +109,17 @@ public class BookRepositoryIT {
         
         assertEquals(bookPage, queryResults);
     }
+    
+    @Test
+    public void givenExistentBookIsbn_whenExistsByIsbn_thenReturnTrue() {
+    	entityManager.persist(BookMocks.infiniteJest);
+        entityManager.flush();
+        
+        assertEquals(true, bookRepository.existsByIsbn(BookMocks.infiniteJest.getIsbn()));
+    }
+    
+    @Test
+    public void givenInexistentBookIsbn_whenExistsByIsbn_thenReturnFalse() {
+    	assertEquals(false, bookRepository.existsByIsbn(BookMocks.infiniteJest.getIsbn()));
+    }
 }
