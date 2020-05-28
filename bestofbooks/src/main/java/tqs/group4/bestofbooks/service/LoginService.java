@@ -26,7 +26,7 @@ import java.util.Optional;
 
 @Transactional
 @Service
-public class LoginServices {
+public class LoginService {
 	
 	@Autowired
 	AdminRepository adminRepository;
@@ -204,10 +204,18 @@ public class LoginServices {
         checkUserIsPublisher(sessionUsername);
         Optional<Publisher> optionalPublisher = publisherRepository.findByUsername(sessionUsername);
         if (optionalPublisher.isPresent()) {
-            Publisher publisher = optionalPublisher.get();
-            if (!publisher.getName().equals(endpointName)) {
+            Publisher publisherFromDB = optionalPublisher.get();
+            if (!publisherFromDB.getName().equals(endpointName)) {
                 throw new ForbiddenUserException("Publisher mismatch.");
             }
         }
     }
+
+	public Buyer getBuyerFromUsername(String username) throws UserNotFoundException {
+		Optional<Buyer> buyer = buyerRepository.findById(username);
+		if (!buyer.isPresent()) {
+			throw new UserNotFoundException("Buyer " + username + " was not found.");
+		}
+		return buyer.get();
+	}
 }

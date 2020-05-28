@@ -39,6 +39,7 @@ public class SwaggerConfig {
                               .forPaths(PathSelectors.ant("api/order/**"))
                               .forPaths(PathSelectors.ant("api/buyer/**"))
                               .forPaths(PathSelectors.ant("api/publisher/**"))
+                              .forPaths(PathSelectors.ant("/api/session/user-info"))
                               .build();
     }
 

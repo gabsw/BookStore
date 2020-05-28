@@ -18,7 +18,7 @@ import static tqs.group4.bestofbooks.mocks.BuyerMock.buyer1;
 
 @SpringBootTest
 @Transactional
-class CommissionRepositoryTest {
+class CommissionRepositoryIT {
 
     @Autowired
     private EntityManager entityManager;
