@@ -100,7 +100,7 @@ public class BookServiceTests {
 	            20,
 	            "Travelogue",
 	            "Viking Press");
-        assertTrue(service.checkIfBookHasEnoughCopies(onTheRoad, 19));
+        assertTrue(service.checkIfBookHasEnoughCopies(onTheRoad, 20));
     }
 
     @Test
