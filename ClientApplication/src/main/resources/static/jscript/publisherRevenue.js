@@ -1,5 +1,5 @@
-function getRevenues() {
-    fetch(url+ 'publisher/'+ getPubName()+ '/revenue',{
+function getRevenues(name) {
+    fetch(url+ 'publisher/'+ name+ '/revenue',{
         method: 'get',
         headers: {
             'x-auth-token': getCurrentUser()
@@ -37,8 +37,8 @@ function getRevenues() {
             console.log(error)
         })
 }
-function getRevenuesTotal() {
-    fetch(url + 'publisher/'+ getPubName() +'/revenue/total',{
+function getRevenuesTotal(name) {
+    fetch(url + 'publisher/'+ name +'/revenue/total',{
         method: 'get',
         headers: {
             'x-auth-token': getCurrentUser()

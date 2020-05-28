@@ -107,35 +107,7 @@
                 calc();
             });
 
-            $('#tab_logic tbody').on('keyup change', function () {
-                calc();
-            });
-            $('#tax').on('keyup change', function () {
-                calc_total();
-            });
 
-
-        });
-
-        function calc() {
-            $('#tab_logic tbody tr').each(function (i, element) {
-                var html = $(this).html();
-                if (html != '') {
-                    var qty = $(this).find('.qty').val();
-                    var price = $(this).find('.price').val();
-                    $(this).find('.total').val(qty * price);
-
-                    calc_total();
-                }
-            });
-        }
-
-        function calc_total() {
-            total = 0;
-            $('.total').each(function () {
-                total += parseInt($(this).val());
-            });
-            $('#total_amount').val((total).toFixed(2));
         }
     </script>
     <!-- Modal for Purchase -->
