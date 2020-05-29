@@ -22,17 +22,19 @@ import static java.util.Collections.singletonList;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    private final String token = "x-auth-token";
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .securitySchemes(Lists.newArrayList(
-                        new ApiKey("x-auth-token", "x-auth-token", HEADER.name()),
+                        new ApiKey(token, token, HEADER.name()),
                         basicAuthScheme()))
                 .securityContexts(Lists.newArrayList(
                         SecurityContext.builder()
                                        .securityReferences(
                                                singletonList(SecurityReference.builder()
-                                                                              .reference("x-auth-token")
+                                                                              .reference(token)
                                                                               .scopes(new AuthorizationScope[0])
                                                                               .build()))
                                        .forPaths(paths())
