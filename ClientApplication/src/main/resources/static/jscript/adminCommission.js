@@ -20,7 +20,7 @@ function getCommissions() {
                             <h5 class="mt-0 font-weight-bold mb-2" id="commission_title `+count + `">Commission #${commission["id"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="commission_amount `+count + `">Amount: ${commission["amount"]} €</li>
+                            <li class="list-group-item" id="commission_amount `+count + `">Amount: ${commission["amount"]}  &euro;</li>
                             <li class="list-group-item" id="commission_order `+count + `">Order ID: ${commission.orderId} </li>
                             </ul>
                         </div>
@@ -45,7 +45,7 @@ function getCommissionsTotal() {
     })
         .then(res => res.json())
         .then((data) => {
-            document.getElementById('finalPrice').innerHTML = '<strong>Commission Total:</strong> '+  data +'€';
+            document.getElementById('finalPrice').innerHTML = '<strong>Commission Total:</strong> '+  data +' &euro;';
         })
         .catch((error) => {
             console.log(error)
@@ -76,7 +76,7 @@ function lowestAmount() {
                             <h5 class="mt-0 font-weight-bold mb-2" id="commission_title `+count + `">Commission #${commission["id"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="commission_amount `+count + `">Amount: ${commission["amount"]} €</li>
+                            <li class="list-group-item" id="commission_amount `+count + `">Amount: ${commission["amount"]}  &euro;</li>
                             <li class="list-group-item" id="commission_order `+count + `">Order ID: ${commission.orderId} </li>
                             </ul>
                         </div>
@@ -115,7 +115,7 @@ function highestAmount() {
                             <h5 class="mt-0 font-weight-bold mb-2" id="commission_title `+count + `">Commission #${commission["id"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="commission_amount `+count + `">Amount: ${commission["amount"]} €</li>
+                            <li class="list-group-item" id="commission_amount `+count + `">Amount: ${commission["amount"]}  &euro;</li>
                             <li class="list-group-item" id="commission_order `+count + `">Order ID: ${commission.orderId} </li>
                             </ul>
                         </div>

@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="css/login.css">
     <script src="jscript/register.js"></script>
+    <script src="jscript/config.js"></script>
 </head>
 <body class="text-center">
     <form class="form-signin">
@@ -20,15 +21,15 @@
                 </div>
             </div>
         </div>
-        <label for="inputEmail" class="sr-only">Username</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Username" >
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="email" id="inputUsername" class="form-control" placeholder="Username" >
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" >
         <div class="form-group" >
             <label for="example">What Are You?</label>
             <select class="form-control" id="example" onchange="checkvalue(this.value)">
                 <option value="Admin">Admin</option>
-                <option value="Client">Client</option>
+                <option value="Buyer">Client</option>
                 <option value="Publisher">Publisher</option>
             </select>
         </div>
@@ -38,7 +39,7 @@
         <input type="text" id="inputTin" class="form-control" placeholder="Ex: 507 979 834" style='display:none'>
         <p></p>
 
-        <a href="#" class="btn btn-lg btn-primary btn-block" id="createAccount"  onclick="account()" role="button">Create Account</a>
+        <a href="#" class="btn btn-lg btn-primary btn-block" id="createAccount"  onclick="register()" role="button">Create Account</a>
 
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="login.html">Already have an account? Sign In</a>

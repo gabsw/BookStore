@@ -22,7 +22,7 @@ function getStock() {
                                 <li class="list-group-item" id="book_isbn `+count + `">ISBN: ${book.isbn} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_description `+count + `">Description: ${book["description"]}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} €</strong></li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}  &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Quantity:</strong> ${book.quantity}</li>
                             </ul>
 

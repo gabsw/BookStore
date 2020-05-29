@@ -17,7 +17,7 @@ function highest() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong> €</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}  &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -56,7 +56,7 @@ function highestNoLogin() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong> €</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong> </li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -94,7 +94,7 @@ function lowest() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong>€</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -132,7 +132,7 @@ function lowestNoLogin() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong>€</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong> &euro;</li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -180,7 +180,7 @@ function searchBooks() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong>€</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -231,7 +231,7 @@ function searchBooksNoLogin() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong>€</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -271,7 +271,7 @@ function getBooksNoLogin() {
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong>€</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">
@@ -311,7 +311,7 @@ function getBooks(){
                                 <li class="list-group-item" id="book_author `+count + `">Author: ${book.author} </li>
                                 <li class="list-group-item" id="book_category `+count + `">Category: ${book.category} </li>
                                 <li class="list-group-item" id="book_pub `+count + `">Publisher: ${book.publisherName}</li>
-                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price}</strong>€</li>
+                                <li class="list-group-item" id="book_price `+count + `">Price: <strong>${book.price} &euro;</strong></li>
                                 <li class="list-group-item" id="book_qt `+count + `"><strong>Available:</strong> ${book.quantity}</li>
                             </ul>
                             <div class="btn-group" style="width:100%">

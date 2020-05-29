@@ -19,7 +19,7 @@ function getRevenues(name) {
                             <h5 class="mt-0 font-weight-bold mb-2" id="revenue_title `+count + `">Revenue #${revenue["id"]}</h5>
 
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="revenue_amount `+count + `">Amount: ${revenue["amount"]} €</li>
+                            <li class="list-group-item" id="revenue_amount `+count + `">Amount: ${revenue["amount"]}  &euro;</li>
                             <li class="list-group-item" id="revenue_order `+count + `">Order ID: ${revenue.orderId} </li>
                             <li class="list-group-item" id="revenue_isbn `+count + `">ISBN : ${revenue.isbn} </li>
 
@@ -47,7 +47,7 @@ function getRevenuesTotal(name) {
 
         .then(res => res.json())
         .then((data) => {
-            document.getElementById('finalPrice').innerHTML = '<strong>Total: </strong> '+  data +'€';
+            document.getElementById('finalPrice').innerHTML = '<strong>Total: </strong> '+  data +' &euro;';
         })
         .catch((error) => {
             console.log(error)

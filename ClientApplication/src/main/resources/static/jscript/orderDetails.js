@@ -19,7 +19,7 @@ function getById(){
             let buyer_address = `${data.address}`;
             document.getElementById('buyer_address').innerHTML ="Address: " +buyer_address;
             let total = `${data.finalPrice}`;
-            document.getElementById('total_price').innerHTML ="<strong>" + total + " € </strong>";
+            document.getElementById('total_price').innerHTML ="<strong>" + total + "  &euro; </strong>";
 
             let output = '';
             data["bookOrders"].forEach(function (order) {
