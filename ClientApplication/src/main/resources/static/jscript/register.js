@@ -6,9 +6,11 @@ function register() {
     let body_text =  '{' +
         '\"username\"' + '\:"' + document.getElementById('inputUsername').value +'\",' +
         '\"userType\"' + '\:"' + document.getElementById('example').value +'\",' +
-        '\"atributes\"' + ':'+ atributes()
+        '\"attributes\"' + ':'+ atributes()
         + '}';
-    registerUser(authenticationHeader,body_text);
+
+ //   console.log(body_text);
+   registerUser(authenticationHeader,body_text);
 }
 
 

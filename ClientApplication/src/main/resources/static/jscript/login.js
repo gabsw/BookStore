@@ -19,12 +19,11 @@ function askUser(authenticationHeader) {
             json
         }))
             .then(({ headers, status, json }) => {
-                if (status == 200) {
-                    alert("Logged in! ")
+                if (status === 200) {
+                    alert("Logged in! ");
                     getUser(json);
                     setCurrentToken(headers.get('x-auth-token'));
                 }
-               // console.log(headers.get('x-auth-token'))
             }))
 }
 //   return arr;
@@ -43,13 +42,4 @@ function getUser(json) {
     else {
         alert("Not defined!");
     }
-}
-
-function wait(ms) {
-    var d = new Date();
-    var d2 = null;
-    do {
-        d2 = new Date();
-    }
-    while (d2 - d < ms);
 }

@@ -17,11 +17,18 @@ function createNewBook () {
         },
         body:  body_text
     })
-        .then(function (res) {
-            return res.json();
-        })
-        .then(function (data) {
-            alert("Book Added to Stock!")
-        })
+        .then(res => res.json().then(json => ({
+            headers: res.headers,
+            status: res.status,
+            json
+        }))
+            .then(({ headers, status, json }) => {
+                console.log(status)
+                if (status === 201) {
+                    alert("Book Created");
+                }
+            }))
+
+
 
 }
