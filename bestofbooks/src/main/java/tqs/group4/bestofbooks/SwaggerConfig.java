@@ -87,7 +87,7 @@ public class SwaggerConfig {
             "\n\n\n Authentication Guide: " +
             "\n 1) Fill the Basic Authorization fields with the user credentials of your choice;" +
             "\n 2) Place a GET Request in the api/session/login endpoint;" +
-            "\n 3) A successful request will return you an x-auth-token;" +
+            "\n 3) A successful request will return you a x-auth-token in the response headers;" +
             "\n 4) Copy the x-auth-token and place it in the x-auth-token (apiKey) authorization;" +
             "\n 5) Now you will be able to access all the endpoints that are protected.";
 }
