@@ -17,7 +17,7 @@ import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.mocks.BookOrderMocks;
 import tqs.group4.bestofbooks.mocks.BuyerMock;
 import tqs.group4.bestofbooks.model.Order;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class OrdersControllerTest {
     private OrderService orderService;
 
     @MockBean
-    private LoginServices loginService;
+    private LoginService loginService;
 
     private Order order;
     private OrderDTO orderDTO;

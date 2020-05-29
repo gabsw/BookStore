@@ -27,7 +27,7 @@ import tqs.group4.bestofbooks.exception.LoginRequiredException;
 import tqs.group4.bestofbooks.exception.RepeatedBookIsbnException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
 import tqs.group4.bestofbooks.model.Book;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 import tqs.group4.bestofbooks.service.StockService;
 import tqs.group4.bestofbooks.dto.BookDTO;
 import tqs.group4.bestofbooks.dto.BookListDTO;
@@ -48,7 +48,7 @@ public class PublisherController {
     private RevenueService revenueService;
 
     @Autowired
-    private LoginServices loginService;
+    private LoginService loginService;
 
 	@GetMapping("{publisherName}/stock")
     public Page<Book> getAvailableStock(@PathVariable String publisherName, Pageable pageable, HttpServletRequest request) throws UserNotFoundException, LoginRequiredException, ForbiddenUserException {

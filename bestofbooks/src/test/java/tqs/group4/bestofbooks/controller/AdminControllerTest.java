@@ -13,15 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import tqs.group4.bestofbooks.mocks.BookMocks;
 import tqs.group4.bestofbooks.mocks.CommissionMocks;
-import tqs.group4.bestofbooks.model.Book;
 import tqs.group4.bestofbooks.model.Commission;
-import tqs.group4.bestofbooks.service.BookService;
 import tqs.group4.bestofbooks.service.CommissionService;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -38,7 +34,7 @@ class AdminControllerTest {
     private CommissionService commissionService;
 
     @MockBean
-    private LoginServices loginService;
+    private LoginService loginService;
 
     @AfterEach
     public void after() {

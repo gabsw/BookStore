@@ -20,7 +20,7 @@ import tqs.group4.bestofbooks.model.Publisher;
 
 @SpringBootTest
 @Transactional
-public class PublisherRepositoryTest {
+public class PublisherRepositoryIT {
 
 	@Autowired
     private EntityManager entityManager;

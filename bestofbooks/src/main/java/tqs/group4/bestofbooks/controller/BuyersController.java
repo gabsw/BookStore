@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tqs.group4.bestofbooks.dto.OrderDTO;
 import tqs.group4.bestofbooks.exception.ForbiddenUserException;
 import tqs.group4.bestofbooks.exception.LoginRequiredException;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 import tqs.group4.bestofbooks.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class BuyersController {
     private OrderService orderService;
 
     @Autowired
-    private LoginServices loginService;
+    private LoginService loginService;
 
     @GetMapping("/{buyerUsername}/orders")
     public List<OrderDTO> getOrdersByBuyerUsername(@PathVariable String buyerUsername, HttpServletRequest request)
