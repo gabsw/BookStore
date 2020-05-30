@@ -41,7 +41,7 @@ public class RevenueDTO {
 
     public static RevenueDTO fromRevenue(Revenue revenue) {
         return new RevenueDTO(revenue.getId(), revenue.getAmount(), revenue.getPublisherName(),
-                revenue.getBookOrder().getId(), revenue.getBookOrder().getBook().getIsbn());
+                revenue.getBookOrder().getOrder().getId(), revenue.getBookOrder().getBook().getIsbn());
     }
 
     @Override

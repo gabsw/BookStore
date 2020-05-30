@@ -1,10 +1,8 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "e66cc49a-96a1-479d-80c4-596c870c5369",
 		"name": "TQS Login",
-		"_postman_id": "dd3cc331-c1ab-53ba-d727-56dbc47a2221",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -17,21 +15,30 @@
 						"exec": [
 							"let auth_token = postman.getResponseHeader(\"x-auth-token\");",
 							"postman.setEnvironmentVariable(\"auth_token\", auth_token);"
-						]
+						],
+						"id": "cafcf610-a6ac-4c5d-9695-235812b7f374"
 					}
 				}
 			],
 			"request": {
-				"url": "{{url}}/api/session/login",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Basic YnV5ZXIxOnB3",
-						"description": ""
+						"value": "Basic YnV5ZXIxOnB3"
 					}
 				],
-				"body": {},
+				"url": {
+					"raw": "{{url}}/api/session/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"session",
+						"login"
+					]
+				},
 				"description": "Login de utilizador"
 			},
 			"response": []
@@ -39,19 +46,63 @@
 		{
 			"name": "User info",
 			"request": {
-				"url": "{{url}}/api/session/user-info",
 				"method": "GET",
 				"header": [
 					{
 						"key": "x-auth-token",
-						"value": "{{auth_token}}",
-						"description": ""
+						"value": "{{auth_token}}"
 					}
 				],
-				"body": {},
-				"description": ""
+				"url": {
+					"raw": "{{url}}/api/session/user-info",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"session",
+						"user-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Basic bmV3QnV5ZXJVc2VyOnB3"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"newBuyerUser\",\n    \"userType\": \"Buyer\",\n    \"attributes\": {}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}:8080/api/session/login",
+					"host": [
+						"{{url}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"session",
+						"login"
+					]
+				},
+				"description": "Este pedido cria um utilizador novo. O body tem o formato JSON do UserDto do utilizador a criar. Além disso também é necessário enviar o header Authorization no mesmo formato que o login. A resposta com sucesso tem o mesmo conteúdo do utilizador enviado/User Dto e a resposta também contém um token no header, para que o tuilizador possa fazer login logo através do registo."
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

@@ -33,6 +33,12 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
+    - name: Install Google Chrome # Using shell script to install Google Chrome
+      run: |
+       chmod +x ./scripts/install_chrome.sh
+        ./scripts/install_chrome.sh
+    - uses: nanasess/setup-chromedriver@master
+
     - name: Test main project
       run: |
         chmod +x ./scripts/pull_request_test_and_analysis.sh
@@ -41,15 +47,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/book_store
-
-    - name: docker compose service
-      run: |
-        docker-compose up -d main_application
-    - name: Install Google Chrome # Using shell script to install Google Chrome
-      run: |
-       chmod +x ./scripts/install_chrome.sh
-        ./scripts/install_chrome.sh
-    - name: Test main project
-      run: mvn test --file ClientApplication/pom.xml
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
