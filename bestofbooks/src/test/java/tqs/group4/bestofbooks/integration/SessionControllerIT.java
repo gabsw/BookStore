@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static tqs.group4.bestofbooks.utils.Json.toJson;
 
@@ -170,7 +170,7 @@ public class SessionControllerIT {
     
     @Test
     void givenValidAuthHeaderAndDto_whenRegister_thenReturnCreatedUserDto() throws JsonProcessingException, Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
         UserDto dto = new UserDto("username", "Buyer");
         
     	String auth = "username:password";
@@ -179,7 +179,7 @@ public class SessionControllerIT {
     	String header = "Basic " + new String( encodedAuth );
     	String body = toJson(dto);
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -191,7 +191,7 @@ public class SessionControllerIT {
     
     @Test
     void givenValidUserDtoAndAuthHeaderInconsistentUsername_whenRegister_thenHttpStatusBadRequest() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
     	
     	UserDto dto = new UserDto("username123", "Buyer");
         
@@ -201,7 +201,7 @@ public class SessionControllerIT {
     	String header = "Basic " + new String( encodedAuth );
     	String body = toJson(dto);
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -213,7 +213,7 @@ public class SessionControllerIT {
     
     @Test
     void givenInvalidAuthorizationHeader_whenRegister_thenHttpStatusBadRequest() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
     	UserDto dto = new UserDto("username", "Buyer");
 
     	String auth = "username:password";
@@ -222,7 +222,7 @@ public class SessionControllerIT {
     	String header = new String( encodedAuth );
     	String body = toJson(dto);
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -232,7 +232,7 @@ public class SessionControllerIT {
     
     @Test
     void givenValidAuthHeaderAndDtoWithInvalidUserType_whenRegister_thenHttpStatusBadRequest() throws JsonProcessingException, Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
         UserDto dto = new UserDto("username", "NewUserType");
         
     	String auth = "username:password";
@@ -241,7 +241,7 @@ public class SessionControllerIT {
     	String header = "Basic " + new String( encodedAuth );
     	String body = toJson(dto);
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)

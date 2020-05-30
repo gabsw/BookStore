@@ -9,12 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
@@ -32,8 +27,6 @@ public class SessionController {
 
 	@Autowired
 	private LoginService loginService;
-	
-	private static String badAuthHeaderMessage = "Bad authorization header.";
 	
 	private static String badAuthHeaderMessage = "Bad authorization header.";
 	
@@ -65,7 +58,7 @@ public class SessionController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
-	@PutMapping("/login")
+	@PostMapping("/register")
 	public ResponseEntity<UserDto> register(HttpServletRequest request, @Valid @RequestBody UserDto newUser) throws RegistrationFailedException, RepeatedUsernameException, RepeatedPublisherNameException {
 		
 		String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
