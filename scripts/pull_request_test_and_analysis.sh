@@ -7,6 +7,6 @@ echo $PR_KEY
 echo $BASE_BRANCH_NAME
 
 
-mvn clean verify sonar:sonar --file bestofbooks/pom.xml -Dsonar.projectKey=DiogoSilveira6300_BookStore \
-	-Dsonar.organization=diogosilveira6300 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN \
+mvn clean verify sonar:sonar --file bestofbooks/pom.xml -Dsonar.projectKey=gabsw_BookStore \
+	-Dsonar.organization=gabsw -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN \
 	-Dsonar.pullrequest.key=$PR_KEY -Dsonar.pullrequest.base=master
