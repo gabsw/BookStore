@@ -2,22 +2,18 @@ package tqs.group4.bestofbooks.controller;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Any;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import tqs.group4.bestofbooks.dto.UserDto;
 import tqs.group4.bestofbooks.exception.LoginFailedException;
-import tqs.group4.bestofbooks.exception.UserNotFoundException;
-import tqs.group4.bestofbooks.model.Buyer;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -39,7 +35,7 @@ public class SessionControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private LoginServices loginService;
+    private LoginService loginService;
 
     @AfterEach
     public void after() {

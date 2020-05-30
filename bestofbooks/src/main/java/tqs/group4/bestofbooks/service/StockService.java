@@ -31,7 +31,7 @@ public class StockService {
     private BookRepository bookRepository;
 	
 	@Autowired
-	private LoginServices loginService;
+	private LoginService loginService;
 	
 	private static String forbiddenUserMessage = "User not allowed.";
 	private static String repeatedIsbnMessage = "Tried to add book with repeated isbn.";

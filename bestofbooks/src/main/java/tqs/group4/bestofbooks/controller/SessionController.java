@@ -23,7 +23,7 @@ import tqs.group4.bestofbooks.exception.RegistrationFailedException;
 import tqs.group4.bestofbooks.exception.RepeatedPublisherNameException;
 import tqs.group4.bestofbooks.exception.RepeatedUsernameException;
 import tqs.group4.bestofbooks.exception.UserNotFoundException;
-import tqs.group4.bestofbooks.service.LoginServices;
+import tqs.group4.bestofbooks.service.LoginService;
 
 @CrossOrigin(exposedHeaders = "x-auth-token")
 @RestController
@@ -31,7 +31,9 @@ import tqs.group4.bestofbooks.service.LoginServices;
 public class SessionController {
 
 	@Autowired
-	private LoginServices loginService;
+	private LoginService loginService;
+	
+	private static String badAuthHeaderMessage = "Bad authorization header.";
 	
 	private static String badAuthHeaderMessage = "Bad authorization header.";
 	
