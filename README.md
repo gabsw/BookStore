@@ -1,4 +1,4 @@
-![Master Tests on Push](https://github.com/gabsw/BookStore/workflows/Master%20Tests%20on%20Push/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gabsw_BookStore&metric=alert_status)](https://sonarcloud.io/dashboard?id=gabsw_BookStore)
+![Master Tests on Push](https://github.com/gabsw/BookStore/workflows/Master%20Tests%20on%20Push/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DiogoSilveira6300_BookStore&metric=alert_status)](https://sonarcloud.io/dashboard?id=DiogoSilveira6300_BookStore)
 
 # BookStore
 ## Abstract
