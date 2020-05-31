@@ -22,22 +22,22 @@ import static java.util.Collections.singletonList;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    private final static String token = "x-auth-token";
+    private final static String X_AUTH_TOKEN = "x-auth-token";
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .securitySchemes(Lists.newArrayList(
-                        new ApiKey(token, token, HEADER.name()),
+                        new ApiKey(X_AUTH_TOKEN, X_AUTH_TOKEN, HEADER.name()),
                         basicAuthScheme()))
                 .securityContexts(Lists.newArrayList(
                         SecurityContext.builder()
                                        .securityReferences(
                                                singletonList(SecurityReference.builder()
-                                                                              .reference(token)
+                                                                              .reference(X_AUTH_TOKEN)
                                                                               .scopes(new AuthorizationScope[0])
                                                                               .build()))
-                                       .forPaths(paths())
+                                       .forPaths(pathsApiKey())
                                        .build(),
                         securityContext()))
                 .select()
@@ -49,8 +49,13 @@ public class SwaggerConfig {
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                               .securityReferences(Arrays.asList(basicAuthReference()))
-                              .forPaths(PathSelectors.ant("/api/session/login"))
+                              .forPaths(pathsBasicAuth())
                               .build();
+    }
+
+    private Predicate<String> pathsBasicAuth() {
+        return s -> PathSelectors.ant("/api/session/login").test(s)
+                || PathSelectors.ant("/api/session/register").test(s);
     }
 
     private SecurityScheme basicAuthScheme() {
@@ -61,7 +66,7 @@ public class SwaggerConfig {
         return new SecurityReference("basicAuth", new AuthorizationScope[0]);
     }
 
-    private Predicate<String> paths() {
+    private Predicate<String> pathsApiKey() {
         return s -> PathSelectors.ant("/api/publisher/**").test(s)
                 || PathSelectors.ant("/api/admin/**").test(s)
                 || PathSelectors.ant("/api/buyer/**").test(s)
