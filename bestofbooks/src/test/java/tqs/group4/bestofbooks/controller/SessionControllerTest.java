@@ -18,7 +18,7 @@ import tqs.group4.bestofbooks.service.LoginService;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static tqs.group4.bestofbooks.utils.Json.toJson;
@@ -120,7 +120,7 @@ public class SessionControllerTest {
     }
     
     @Test
-    void givenInvalidAuthorizationHeaderNoSeparationUsernamePasswrod_whenLogin_thenHttpStatusForbidden() throws Exception {
+    void givenInvalidAuthorizationHeaderNoSeparationUsernamePassword_whenLogin_thenHttpStatusForbidden() throws Exception {
     	String url = "/api/session/login";
 
     	String auth = "usernamepassword";
@@ -138,7 +138,7 @@ public class SessionControllerTest {
     }
     
     @Test
-    void givenSuccessfullLoginToken_whenGetUserInfo_thenReturnUserDto() throws JsonProcessingException, Exception {
+    void givenSuccessfulLoginToken_whenGetUserInfo_thenReturnUserDto() throws JsonProcessingException, Exception {
        	String url = "/api/session/user-info";
     	
     	UserDto dto = new UserDto("username", "Buyer");
@@ -175,7 +175,7 @@ public class SessionControllerTest {
 	
     @Test
     void givenValidUserDtoAndAuthHeader_whenRegister_thenReturnUserDto() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
     	
     	UserDto dto = new UserDto("username", "Buyer");
     	String body = toJson(dto);
@@ -187,7 +187,7 @@ public class SessionControllerTest {
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header ="Basic " +new String( encodedAuth );
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -200,7 +200,7 @@ public class SessionControllerTest {
     
     @Test
     void givenValidUserDtoAndAuthHeaderInconsistentUsername_whenRegister_thenHttpStatusBadRequest() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
     	
     	UserDto dto = new UserDto("username123", "Buyer");
     	String body = toJson(dto);
@@ -212,7 +212,7 @@ public class SessionControllerTest {
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header ="Basic " +new String( encodedAuth );
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -224,7 +224,7 @@ public class SessionControllerTest {
     
     @Test
     void givenInvalidAuthorizationHeader_whenRegister_thenHttpStatusBadRequest() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
 
     	UserDto dto = new UserDto("username", "Buyer");
     	String body = toJson(dto);
@@ -234,7 +234,7 @@ public class SessionControllerTest {
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header = new String( encodedAuth );
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -246,7 +246,7 @@ public class SessionControllerTest {
     
     @Test
     void givenInvalidAuthorizationHeaderNotBasic_whenRegister_thenHttpStatusBadRequest() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
     	
     	UserDto dto = new UserDto("username", "Buyer");
     	String body = toJson(dto);
@@ -256,7 +256,7 @@ public class SessionControllerTest {
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header ="NotBasic " +new String( encodedAuth );
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
@@ -268,7 +268,7 @@ public class SessionControllerTest {
     
     @Test
     void givenInvalidAuthorizationHeaderNoSeparationUsernamePasswrod_whenRegister_thenHttpStatusBadRequest() throws Exception {
-    	String url = "/api/session/login";
+    	String url = "/api/session/register";
     	
     	UserDto dto = new UserDto("username", "Buyer");
     	String body = toJson(dto);
@@ -278,7 +278,7 @@ public class SessionControllerTest {
                 auth.getBytes(Charset.forName("US-ASCII")));
     	String header ="Basic " +new String( encodedAuth );
     	
-    	mvc.perform(put(url)
+    	mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", header)
                 .content(body)
