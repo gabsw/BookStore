@@ -28,10 +28,11 @@ atributes = function changeAttr() {
 
 
 function registerUser(authenticationHeader,body_text) {
-    fetch(url + 'session/login', {
-        method: 'put',
+    fetch(url + 'session/register', {
+        method: 'post',
         headers: {
             'Content-Type': 'application/json',
+            'mode' : 'no-cors',
             'Authorization': authenticationHeader
         },
         body : body_text
