@@ -5,13 +5,12 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Books")
-public class Book implements Serializable{
+public class Book {
     @Id
     @NaturalId
     @Column(name = "isbn", nullable = false)

@@ -49,12 +49,9 @@ public class BookListDTO implements Serializable{
 			return false;
 		BookListDTO other = (BookListDTO) obj;
 		if (books == null) {
-			if (other.books != null)
-				return false;
+			return other.books == null;
 		}
-		else if (!books.equals(other.books))
-			return false;
-		return true;
+		else return books.equals(other.books);
 	}
 	
 	
