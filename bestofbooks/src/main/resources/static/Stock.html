@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="ISO-8859-1">
@@ -7,8 +7,8 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/index.css" rel="stylesheet">
-    <script src="jscript/publisherRevenue.js"></script>
     <script src="jscript/config.js"></script>
+    <script src="jscript/getStock.js"></script>
 
 </head>
 <body>
@@ -27,6 +27,7 @@
                     <div aria-labelledby="name" class="dropdown-menu">
                         <a class="dropdown-item" href="Stock.html">See Stock</a>
                         <a class="dropdown-item" href="addBook.html">Add Book</a>
+
                         <a class="dropdown-item" href="updateStock.html">Update Stock</a>
                         <a class="dropdown-item" href="publisherIndex.html">Revenues</a>
                         <a class="dropdown-item" onclick="clearUser()"  href="login.html">LogOut</a>
@@ -40,7 +41,7 @@
 
 
 <div class="container py-5">
-    <div class="text-center"><h1>Revenue</h1></div>
+    <div class="text-center"><h1>Your Stock</h1></div>
     <p></p>
     <p></p>
     <div class="row" >
@@ -95,9 +96,7 @@
 <script type="text/javascript">
     function start() {
         getUserInfo();
-        let name = getPubName() ;
-        getRevenues(name);
-        getRevenuesTotal(name);
+        getStock();
     }
     document.onload = start();
 

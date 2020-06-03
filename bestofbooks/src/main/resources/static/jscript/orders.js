@@ -1,5 +1,10 @@
 function find() {
-    fetch(url + 'buyer/' + getUserName()+'/orders')
+    fetch(url + 'buyer/' + getUserName()+'/orders',{
+        method: 'get',
+        headers: {
+            'x-auth-token': getCurrentUser()
+        }
+    })
         .then(res => res.json())
         .then((data) => {
             let output = '';
