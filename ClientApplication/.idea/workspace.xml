@@ -2,44 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec2e187d-4486-43e3-9f0d-05d7a55aa388" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/cart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/end-user.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/Cart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/OrderDetails.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/Stock.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/addBook.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/adminIndex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/clientIndex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/details.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/images/Logo-removebg-preview.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/images/generic.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/adminCommission.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/cart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/clientIndex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/createBook.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/details.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/getStock.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/orderDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/orders.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/publisherRevenue.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/updateStock.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/orders.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/publisherIndex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/updateStock.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/client/application/enduser/EndUserApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/client/application/enduser/selenium/SearchBookTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/client/application/enduser/selenium/TotalcommissionsTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/end-user.iml" beforeDir="false" afterPath="$PROJECT_DIR$/end-user.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,9 +39,12 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bestofbooks" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -83,7 +56,84 @@
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.RegisterTestIT">
+    <configuration name="LoginTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.LoginTestIT" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginTestIT.loginSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.LoginTestIT" />
+      <option name="METHOD_NAME" value="loginSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginTestIT.loginUndefinedUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.LoginTestIT" />
+      <option name="METHOD_NAME" value="loginUndefinedUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegisterTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.RegisterTestIT" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchBookIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.SearchBookIT" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EndUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="end-user" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.client.application.enduser.EndUserApplication" />
@@ -91,6 +141,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RegisterTestIT" />
+        <item itemvalue="JUnit.LoginTestIT.loginSuccess" />
+        <item itemvalue="JUnit.LoginTestIT.loginUndefinedUser" />
+        <item itemvalue="JUnit.LoginTestIT" />
+        <item itemvalue="JUnit.SearchBookIT" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -109,6 +168,8 @@
       <workItem from="1591102398248" duration="606000" />
       <workItem from="1591117873887" duration="1472000" />
       <workItem from="1591174490990" duration="710000" />
+      <workItem from="1591188845099" duration="2574000" />
+      <workItem from="1591197776827" duration="9948000" />
     </task>
     <servers />
   </component>
@@ -132,37 +193,41 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1591174544116" />
-    <state width="1248" height="171" key="GridCell.Tab.0.bottom" timestamp="1591174646788">
+    <state x="502" y="155" width="424" height="491" key="FileChooserDialogImpl" timestamp="1591192462235">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591174646788" />
-    <state width="1248" height="171" key="GridCell.Tab.0.center" timestamp="1591174646776">
+    <state x="502" y="155" width="424" height="491" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1591192462235" />
+    <state width="1248" height="171" key="GridCell.Tab.0.bottom" timestamp="1591208245052">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1591174646776" />
-    <state width="1248" height="171" key="GridCell.Tab.0.left" timestamp="1591174646775">
+    <state width="1248" height="171" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591208245052" />
+    <state width="1248" height="171" key="GridCell.Tab.0.center" timestamp="1591208245051">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1591174646775" />
-    <state width="1248" height="171" key="GridCell.Tab.0.right" timestamp="1591174646777">
+    <state width="1248" height="171" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1591208245051" />
+    <state width="1248" height="171" key="GridCell.Tab.0.left" timestamp="1591208245050">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1591174646777" />
-    <state width="1248" height="171" key="GridCell.Tab.1.bottom" timestamp="1591174646791">
+    <state width="1248" height="171" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1591208245050" />
+    <state width="1248" height="171" key="GridCell.Tab.0.right" timestamp="1591208245051">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591174646791" />
-    <state width="1248" height="171" key="GridCell.Tab.1.center" timestamp="1591174646790">
+    <state width="1248" height="171" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1591208245051" />
+    <state width="1248" height="171" key="GridCell.Tab.1.bottom" timestamp="1591207765013">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1591174646790" />
-    <state width="1248" height="171" key="GridCell.Tab.1.left" timestamp="1591174646790">
+    <state width="1248" height="171" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591207765013" />
+    <state width="1248" height="171" key="GridCell.Tab.1.center" timestamp="1591207765012">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1591174646790" />
-    <state width="1248" height="171" key="GridCell.Tab.1.right" timestamp="1591174646790">
+    <state width="1248" height="171" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1591207765012" />
+    <state width="1248" height="171" key="GridCell.Tab.1.left" timestamp="1591207765012">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1591174646790" />
+    <state width="1248" height="171" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1591207765012" />
+    <state width="1248" height="171" key="GridCell.Tab.1.right" timestamp="1591207765013">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1248" height="171" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1591207765013" />
   </component>
 </project>
