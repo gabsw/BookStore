@@ -20,5 +20,5 @@ The promoter will make money from all the transactions that are being conducted 
 
 
 ## Resources
-[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2447537)
-[BookStore External Publisher Repository](https://github.com/gabsw/book_store_external_publisher)
+* [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2447537)
+* [BookStore External Publisher Repository](https://github.com/gabsw/book_store_external_publisher)
