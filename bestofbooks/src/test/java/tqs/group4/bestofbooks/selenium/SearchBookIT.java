@@ -36,7 +36,6 @@ public class SearchBookIT {
     js = (JavascriptExecutor) driver;
     vars = new HashMap<>();
     driver.get("http://localhost:8080/");
-//    driver.manage().window().setSize(new Dimension(1848, 1053));
   }
   @After
   public void tearDown() {
