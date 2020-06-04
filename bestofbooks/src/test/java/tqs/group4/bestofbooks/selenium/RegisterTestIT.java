@@ -59,12 +59,12 @@ public class RegisterTestIT {
   @Test
   public void registerAlreadyInUse() {
     driver.findElement(By.id("inputUsername")).click();
-    driver.findElement(By.id("inputUsername")).sendKeys("Buyer1");
+    driver.findElement(By.id("inputUsername")).sendKeys("buyer1");
     driver.findElement(By.id("inputPassword")).click();
     driver.findElement(By.id("inputPassword")).sendKeys("pw");
     driver.findElement(By.id("createAccount")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 10);
+      WebDriverWait wait = new WebDriverWait(driver, 30);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Could not create, User either exists or missing an input!"));

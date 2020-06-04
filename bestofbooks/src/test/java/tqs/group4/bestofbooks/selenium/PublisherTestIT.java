@@ -43,7 +43,7 @@ public class PublisherTestIT {
     driver.quit();
   }
 
- @Test
+/* @Test
   public void seeStock() {
     driver.findElement(By.id("name")).click();
     driver.findElement(By.id("seeStock")).click();
@@ -52,7 +52,7 @@ public class PublisherTestIT {
    driver.findElement(By.cssSelector("h1")).click();
     assertThat(driver.findElement(By.cssSelector("h1")).getText(), is("Your Stock"));
   }
-
+*/
   @Test
   public void revenues() {
     driver.findElement(By.cssSelector("h1")).click();
