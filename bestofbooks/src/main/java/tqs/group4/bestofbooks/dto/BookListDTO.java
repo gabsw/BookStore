@@ -1,12 +1,11 @@
 package tqs.group4.bestofbooks.dto;
 
-import java.io.Serializable;
+import tqs.group4.bestofbooks.model.Book;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import tqs.group4.bestofbooks.model.Book;
-
-public class BookListDTO implements Serializable{
+public class BookListDTO {
 	
 	private List<Book> books;
 
@@ -49,12 +48,9 @@ public class BookListDTO implements Serializable{
 			return false;
 		BookListDTO other = (BookListDTO) obj;
 		if (books == null) {
-			if (other.books != null)
-				return false;
+			return other.books == null;
 		}
-		else if (!books.equals(other.books))
-			return false;
-		return true;
+		else return books.equals(other.books);
 	}
 	
 	

@@ -44,7 +44,7 @@ function registerUser(authenticationHeader,body_text) {
             }))
             .then((data) => {
                 if (data.status === 201) {
-                    alert("Created! ");
+                    alert("Created!");
                 } else if (data.status === 400 ) {
                     alert("Could not create, User either exists or missing an input!");
                 }

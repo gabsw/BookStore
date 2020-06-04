@@ -6,16 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="bestofbooks" />
         <module name="ClientApplication" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="bestofbooks" target="1.8" />
+      <module name="bookstore" target="1.8" />
       <module name="ClientApplication" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ClientApplication" options="-parameters" />
+      <module name="bestofbooks" options="-parameters" />
     </option>
   </component>
 </project>

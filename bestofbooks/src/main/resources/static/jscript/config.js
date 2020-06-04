@@ -1,5 +1,4 @@
-//let url = 'http://localhost:8080/api/';
-let url = "https://bookstore-tqs.herokuapp.com/api/";
+let url = "/api/";
 
 
 function getCurrentUser() {
