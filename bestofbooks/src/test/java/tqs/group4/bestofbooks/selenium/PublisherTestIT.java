@@ -157,7 +157,7 @@ public class PublisherTestIT {
     driver.findElement(By.id("inputPassword")).sendKeys("pw");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 5);
+      WebDriverWait wait = new WebDriverWait(driver, 10);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       alert.accept();
