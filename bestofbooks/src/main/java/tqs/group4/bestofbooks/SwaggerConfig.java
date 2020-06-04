@@ -22,7 +22,7 @@ import static java.util.Collections.singletonList;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    private final static String X_AUTH_TOKEN = "x-auth-token";
+    private static final String X_AUTH_TOKEN = "x-auth-token";
 
     @Bean
     public Docket api() {

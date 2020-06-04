@@ -1,5 +1,5 @@
 //let url = 'http://localhost:8080/api/';
-let url = 'http://localhost:8080/api/';
+let url = '/api/';
 
 
 function getCurrentUser() {

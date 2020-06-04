@@ -11,7 +11,7 @@ public class RevenueDTO {
     private Integer orderId;
     private String isbn;
 
-    public RevenueDTO(Integer id, double amount, String publisherName, Integer orderId, String isbn) {
+    private RevenueDTO(Integer id, double amount, String publisherName, Integer orderId, String isbn) {
         this.id = id;
         this.amount = amount;
         this.publisherName = publisherName;
@@ -37,6 +37,10 @@ public class RevenueDTO {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public static RevenueDTO fromRevenue(Revenue revenue) {
