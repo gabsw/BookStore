@@ -26,7 +26,7 @@ function createNewBook () {
                 console.log(status)
                 if (status === 201) {
                     alert("Book Created");
-                }
+                }else {alert("Something is Missing! Did not Create")}
             }))
 
 
