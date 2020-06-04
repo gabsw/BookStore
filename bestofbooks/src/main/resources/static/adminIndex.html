@@ -21,7 +21,7 @@
             </ul>
             <div class="pull-right">
                 <ul class="nav pull-right">                 
-                    <li class="dropdown">
+                    <li class="dropdown dropleft">
                         <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
                         </button>
                         <div aria-labelledby="name" class="dropdown-menu">
@@ -36,7 +36,7 @@
 
 
     <div class="container py-5">
-        <div class="text-center"><h1>Your Comissions</h1></div>
+        <div class="text-center"><h1 id="commissionTitle">Your Comissions</h1></div>
         <p></p>
         <p></p>
         <div class="row" >
@@ -50,12 +50,12 @@
                                     <dt><h5 class="mt-0 font-weight-bold mb-2">Filters</h5></dt>
                                     <dd>
                                         <div class="dropdown">
-                                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" type="button">
                                                 Filter By:
                                             </button>
                                             <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Lowest to Highest Price</a>
-                                                <a class="dropdown-item" href="#">Highest to Lowest Price</a>
+                                                <button class="dropdown-item" type="button" onclick="lowestAmount()" >Lowest to Highest Price</button>
+                                                <button class="dropdown-item" type="button" onclick="highestAmount()">Highest to Lowest Price</button>
                                             </div>
                                         </div>
                                     </dd>

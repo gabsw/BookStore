@@ -7,31 +7,30 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/index.css" rel="stylesheet">
-    <script src="jscript/clientIndex.js"></script>
     <script src="jscript/config.js"></script>
+    <script src="jscript/getStock.js"></script>
 
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="clientIndex.html">
-        <img alt="" src="images/Logo-removebg-preview.png" width="100"/>
+    <a class="navbar-brand" href="publisherIndex.html">
+        <img src="images/Logo-removebg-preview.png" width="100"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
         <div class="pull-right">
             <ul class="nav pull-right">
-                <li class="nav-item" id="cart_nav">
-                    <a class="nav-link" id="goToCart" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
-                </li>
                 <li class="dropdown dropleft">
                     <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
-
                     </button>
                     <div aria-labelledby="name" class="dropdown-menu">
-                        <a class="dropdown-item" id="menuCart" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
-                        <a class="dropdown-item" id="menuOrders" href="orders.html">Your Orders</a>
-                        <a class="dropdown-item"  onclick="clearUser()" href="login.html">LogOut</a>
+                        <a class="dropdown-item" id="seeStock" href="Stock.html">See Stock</a>
+                        <a class="dropdown-item" id="addBook" href="addBook.html">Add Book</a>
+
+                        <a class="dropdown-item" id="updateStock" href="updateStock.html">Update Stock</a>
+                        <a class="dropdown-item" id="seeRevenue" href="publisherIndex.html">Revenues</a>
+                        <a class="dropdown-item" onclick="clearUser()"  href="login.html">LogOut</a>
                     </div>
                 </li>
 
@@ -42,35 +41,12 @@
 
 
 <div class="container py-5">
-    <div class="text-center"><h1> Explore Our Books</h1></div>
+    <div class="text-center"><h1>Your Stock</h1></div>
     <p></p>
-    <div class="row">
-        <div class="input-group">
-            <input aria-label="Search" class="form-control" id="findBook" placeholder="Ex:Book Title" type="search">
-
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="book_title" value="option1">
-                <label class="form-check-label" for="book_title">Title</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="book_author" value="option2">
-                <label class="form-check-label" for="book_author">Author</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="book_category" value="option2">
-                <label class="form-check-label" for="book_category">Category</label>
-            </div>
-        </div>
-
-        <button class="btn-save btn btn-primary " id="search_book" onclick="searchBooks()">Search</button>
-
-    </div>
-        <!--end of col-->
-
     <p></p>
-    <div class="row">
+    <div class="row" >
         <div class="col-lg-2 mx-auto">
-            <ul class="list-group shadow">
+            <ul class="list-group shadow" >
                 <!-- list group item-->
                 <li class="list-group-item">
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
@@ -79,17 +55,18 @@
                                 <dt><h5 class="mt-0 font-weight-bold mb-2">Filters</h5></dt>
                                 <dd>
                                     <div class="dropdown">
-                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" type="button">
+                                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
                                             Filter By:
                                         </button>
                                         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                                            <button class="dropdown-item" type="button" onclick="lowest()" >Lowest to Highest Price</button>
-                                            <button class="dropdown-item" type="button" onclick="highest()">Highest to Lowest Price</button>
+                                            <a class="dropdown-item" href="#">Lowest to Highest Price</a>
+                                            <a class="dropdown-item" href="#">Highest to Lowest Price</a>
                                         </div>
                                     </div>
                                 </dd>
-
                             </dl>
+
+
                         </div>
                     </div>
                 </li>
@@ -98,7 +75,8 @@
         </div>
 
         <div class="col-lg-8 mx-auto">
-
+            <p></p>
+            <h2 id="finalPrice" align="right"> </h2>
             <!-- List group-->
             <ul class="list-group shadow" id="output">
 
@@ -109,22 +87,19 @@
     </div>
 </div>
 
-<p></p>
-
-
 
 <script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script crossorigin="anonymous" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+
 <script type="text/javascript">
     function start() {
         getUserInfo();
-        getBooks();
+        getStock();
     }
- document.onload = start();
+    document.onload = start();
 
 </script>
-
 </body>
 </html>
