@@ -74,7 +74,7 @@ public class RegisterTestIT {
     }
   }
 
-  @Test
+ /* @Test
   public void registerSuccess() {
     driver.findElement(By.id("inputUsername")).click();
     driver.findElement(By.id("inputUsername")).sendKeys("newUser");
@@ -91,5 +91,5 @@ public class RegisterTestIT {
       System.err.println(e);
     }
 
-  }
+  }*/
 }

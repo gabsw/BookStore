@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec2e187d-4486-43e3-9f0d-05d7a55aa388" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/end-user.iml" beforeDir="false" afterPath="$PROJECT_DIR$/end-user.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/selenium/BuyerTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/BuyerTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/selenium/RegisterTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/RegisterTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/selenium/BuyerTestIT.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/selenium/BuyerTestIT.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +53,38 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.RegisterTestIT">
+    <configuration name="BuyerTestIT.bookDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.BuyerTestIT" />
+      <option name="METHOD_NAME" value="bookDetails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BuyerTestIT.bookToCart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.BuyerTestIT" />
+      <option name="METHOD_NAME" value="bookToCart" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LoginTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="end-user" />
       <extension name="coverage">
@@ -88,22 +116,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginTestIT.loginUndefinedUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="end-user" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="selenium.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="selenium" />
-      <option name="MAIN_CLASS_NAME" value="selenium.LoginTestIT" />
-      <option name="METHOD_NAME" value="loginUndefinedUser" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RegisterTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="end-user" />
       <extension name="coverage">
@@ -119,21 +131,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SearchBookIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="end-user" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="selenium.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="selenium" />
-      <option name="MAIN_CLASS_NAME" value="selenium.SearchBookIT" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="EndUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="end-user" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.client.application.enduser.EndUserApplication" />
@@ -144,10 +141,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RegisterTestIT" />
-        <item itemvalue="JUnit.LoginTestIT.loginSuccess" />
-        <item itemvalue="JUnit.LoginTestIT.loginUndefinedUser" />
         <item itemvalue="JUnit.LoginTestIT" />
-        <item itemvalue="JUnit.SearchBookIT" />
+        <item itemvalue="JUnit.BuyerTestIT.bookToCart" />
+        <item itemvalue="JUnit.BuyerTestIT.bookDetails" />
+        <item itemvalue="JUnit.LoginTestIT.loginSuccess" />
       </list>
     </recent_temporary>
   </component>
@@ -169,7 +166,7 @@
       <workItem from="1591117873887" duration="1472000" />
       <workItem from="1591174490990" duration="710000" />
       <workItem from="1591188845099" duration="2574000" />
-      <workItem from="1591197776827" duration="9948000" />
+      <workItem from="1591197776827" duration="12237000" />
     </task>
     <servers />
   </component>
@@ -197,37 +194,53 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="502" y="155" width="424" height="491" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1591192462235" />
-    <state width="1248" height="171" key="GridCell.Tab.0.bottom" timestamp="1591208245052">
+    <state width="1248" height="171" key="GridCell.Tab.0.bottom" timestamp="1591263629774">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591208245052" />
-    <state width="1248" height="171" key="GridCell.Tab.0.center" timestamp="1591208245051">
+    <state width="1248" height="171" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591263629774" />
+    <state width="1248" height="171" key="GridCell.Tab.0.center" timestamp="1591263629773">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1591208245051" />
-    <state width="1248" height="171" key="GridCell.Tab.0.left" timestamp="1591208245050">
+    <state width="1248" height="171" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1591263629773" />
+    <state width="1248" height="171" key="GridCell.Tab.0.left" timestamp="1591263629773">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1591208245050" />
-    <state width="1248" height="171" key="GridCell.Tab.0.right" timestamp="1591208245051">
+    <state width="1248" height="171" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1591263629772" />
+    <state width="1248" height="171" key="GridCell.Tab.0.right" timestamp="1591263629773">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1591208245051" />
-    <state width="1248" height="171" key="GridCell.Tab.1.bottom" timestamp="1591207765013">
+    <state width="1248" height="171" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1591263629773" />
+    <state width="1248" height="171" key="GridCell.Tab.1.bottom" timestamp="1591210351745">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591207765013" />
-    <state width="1248" height="171" key="GridCell.Tab.1.center" timestamp="1591207765012">
+    <state width="1248" height="171" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591210351745" />
+    <state width="1248" height="171" key="GridCell.Tab.1.center" timestamp="1591210351744">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1591207765012" />
-    <state width="1248" height="171" key="GridCell.Tab.1.left" timestamp="1591207765012">
+    <state width="1248" height="171" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1591210351744" />
+    <state width="1248" height="171" key="GridCell.Tab.1.left" timestamp="1591210351744">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1591207765012" />
-    <state width="1248" height="171" key="GridCell.Tab.1.right" timestamp="1591207765013">
+    <state width="1248" height="171" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1591210351744" />
+    <state width="1248" height="171" key="GridCell.Tab.1.right" timestamp="1591210351745">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="171" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1591207765013" />
+    <state width="1248" height="171" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1591210351745" />
+    <state width="1248" height="215" key="GridCell.Tab.2.bottom" timestamp="1591210104641">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1248" height="215" key="GridCell.Tab.2.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591210104641" />
+    <state width="1248" height="215" key="GridCell.Tab.2.center" timestamp="1591210104640">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1248" height="215" key="GridCell.Tab.2.center/72.27.1294.741@72.27.1294.741" timestamp="1591210104640" />
+    <state width="1248" height="215" key="GridCell.Tab.2.left" timestamp="1591210104640">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1248" height="215" key="GridCell.Tab.2.left/72.27.1294.741@72.27.1294.741" timestamp="1591210104640" />
+    <state width="1248" height="215" key="GridCell.Tab.2.right" timestamp="1591210104640">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1248" height="215" key="GridCell.Tab.2.right/72.27.1294.741@72.27.1294.741" timestamp="1591210104640" />
   </component>
 </project>
