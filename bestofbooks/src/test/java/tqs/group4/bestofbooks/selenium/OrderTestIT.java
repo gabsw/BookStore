@@ -1,7 +1,6 @@
 package tqs.group4.bestofbooks.selenium;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,79 +19,64 @@ import tqs.group4.bestofbooks.BestofbooksApplication;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = BestofbooksApplication.class)
-public class LoginTestIT {
+public class OrderTestIT {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
 
-
   @Before
-  public void setUp() {
-	ChromeOptions options = new ChromeOptions();
+  public void setUp() throws InterruptedException {
+    ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless", "--disable-gpu");
     driver = new ChromeDriver(options);
     js = (JavascriptExecutor) driver;
     vars = new HashMap<>();
     driver.get("http://localhost:8080/login.html");
-
+    logIN();
   }
+
   @After
   public void tearDown() {
     driver.quit();
   }
 
   @Test
-  public void loginSuccess() {
+  public void seeOrderAndItsDetails() {
+    driver.findElement(By.id("name")).click();
+    driver.findElement(By.id("menuOrders")).click();
+    driver.findElement(By.cssSelector("h1")).click();
+    assertThat(driver.findElement(By.cssSelector("h1")).getText(), is("Your Orders"));
+    driver.findElement(By.id("order_1")).click();
+    assertThat(driver.findElement(By.id("order_1")).getText(), is("Order 1"));
+    driver.findElement(By.linkText("Details/Invoice")).click();
+    WebDriverWait wait = new WebDriverWait(driver, 30);
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("order_id")));
+   assertThat(driver.findElement(By.id("order_id")).getText(), containsString("Order"));
+  }
+
+  public void logIN() throws InterruptedException {
     driver.findElement(By.id("inputUsername")).click();
     driver.findElement(By.id("inputUsername")).sendKeys("buyer1");
-    driver.findElement(By.id("inputPassword")).click();
     driver.findElement(By.id("inputPassword")).sendKeys("pw");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
+      WebDriverWait wait = new WebDriverWait(driver, 30);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
-      Assert.assertTrue(alert.getText().contains("Logged in!"));
       alert.accept();
-      } catch (Exception e) {
-       System.err.println(e);
-      }
+    } catch (Exception e) {
+      System.err.println(e);
+    }
+    Thread.sleep(1000);
     driver.findElement(By.id("signIn")).click();
+  }
 
-    }
-  @Test
-  public void loginNotFound() {
-    driver.findElement(By.id("inputUsername")).click();
-    driver.findElement(By.id("inputUsername")).sendKeys("l");
-    driver.findElement(By.id("signIn")).click();
-    try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
-      wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      Assert.assertTrue(alert.getText().contains("Did not input either Username or Password!"));
-      alert.accept();
-    } catch (Exception e) {
-      System.err.println(e);
-    }
-  }
-  @Test
-  public void loginUndefinedUser() {
-    driver.findElement(By.id("inputUsername")).click();
-    driver.findElement(By.id("inputUsername")).sendKeys("w");
-    driver.findElement(By.id("inputPassword")).click();
-    driver.findElement(By.id("inputPassword")).sendKeys("w");
-    driver.findElement(By.id("signIn")).click();
-    try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
-      wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      System.out.println(alert.getText());
-      Assert.assertTrue(alert.getText().contains("User not Found!"));
-      alert.accept();
-    } catch (Exception e) {
-      System.err.println(e);
-    }
-  }
+
+
 }

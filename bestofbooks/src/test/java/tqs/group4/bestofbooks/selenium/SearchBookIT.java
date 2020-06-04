@@ -4,7 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +15,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tqs.group4.bestofbooks.BestofbooksApplication;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +75,7 @@ public class SearchBookIT {
     driver.findElement(By.id("findBook")).sendKeys("someauthor");
     driver.findElement(By.id("book_author")).click();
     driver.findElement(By.id("search_book")).click();
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver, 30);
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_author_1")));
     selectPollutant.click();
     assertThat(driver.findElement(By.id("book_author_1")).getText(), containsString("someauthor"));

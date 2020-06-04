@@ -59,9 +59,9 @@ public class RegisterTestIT {
   @Test
   public void registerAlreadyInUse() {
     driver.findElement(By.id("inputUsername")).click();
-    driver.findElement(By.id("inputUsername")).sendKeys("buyer1");
+    driver.findElement(By.id("inputUsername")).sendKeys("l");
     driver.findElement(By.id("inputPassword")).click();
-    driver.findElement(By.id("inputPassword")).sendKeys("pw");
+    driver.findElement(By.id("inputPassword")).sendKeys("l");
     driver.findElement(By.id("createAccount")).click();
     try {
       WebDriverWait wait = new WebDriverWait(driver, 10);
