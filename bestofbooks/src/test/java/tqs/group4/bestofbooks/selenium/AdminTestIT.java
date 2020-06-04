@@ -67,11 +67,11 @@ public class AdminTestIT {
     assertThat(driver.findElement(By.id("commission_order_1")).getText(), containsString("Order ID:"));
   }
 
-  @Test
+ /* @Test
   public void total() {
       List<WebElement> elements = driver.findElements(By.id("finalPrice"));
       assert(elements.size() > 0);
-  }
+  }*/
 
 
 
