@@ -18,9 +18,23 @@ function makeAPIcall(mapas) {
         },
         body:  mapas
     })
-        .then(function (res) {
-            return res.json();
-        })
+        .then(res => res.json().then(json => ({
+            headers: res.headers,
+            status: res.status,
+            json
+        }))
+            .then(({ headers, status, json }) => {
+                if (JSON.stringify(json).includes("Quantity cannot not be less than 1")) {
+                    alert("Quantity cannot not be less than 1")
+                }
+                else if (JSON.stringify(json).includes("must match")) {
+                    alert("ISBN does not exists in this context");
+                }
+                else{
+                    alert("Updated")
+                }
+
+            }))
 
 }
 

@@ -1,21 +1,24 @@
 package tqs.group4.bestofbooks.selenium;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
-
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tqs.group4.bestofbooks.BestofbooksApplication;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = BestofbooksApplication.class)
@@ -48,7 +51,7 @@ public class LoginTestIT {
     driver.findElement(By.id("inputPassword")).sendKeys("pw");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 10);
+      WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Logged in!"));
@@ -65,7 +68,7 @@ public class LoginTestIT {
     driver.findElement(By.id("inputUsername")).sendKeys("l");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 10);
+      WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Did not input either Username or Password!"));
@@ -82,7 +85,7 @@ public class LoginTestIT {
     driver.findElement(By.id("inputPassword")).sendKeys("w");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 10);
+      WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       System.out.println(alert.getText());
