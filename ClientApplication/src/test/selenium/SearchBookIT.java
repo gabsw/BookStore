@@ -64,7 +64,7 @@ public class SearchBookIT {
     WebDriverWait wait = new WebDriverWait(driver, 30);
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_category_1")));
     selectPollutant.click();
-    assertThat(driver.findElement(By.id("book_category_1")).getText(), containsString("SciFi"));
+    assertThat(driver.findElement(By.id("book_category_1")).getText(), containsString("horror"));
   }
 
   @Test
@@ -74,9 +74,9 @@ public class SearchBookIT {
     driver.findElement(By.id("book_author")).click();
     driver.findElement(By.id("search_book")).click();
     WebDriverWait wait = new WebDriverWait(driver, 30);
-    WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_author 1")));
+    WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_author_1")));
     selectPollutant.click();
-    assertThat(driver.findElement(By.id("book_author 1")).getText(), containsString("someauthor"));
+    assertThat(driver.findElement(By.id("book_author_1")).getText(), containsString("someauthor"));
   }
 
 

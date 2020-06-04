@@ -19,7 +19,7 @@ function find() {
                             <h5 class="mt-0 font-weight-bold mb-2" id="order_`+count+`">Order ${order.id}</h5>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" id="address_`+count+`">Shipping Address:  ${order.address}  </li>
-                                <li class="list-group-item" id="total_`+count+`">Total: ${order.finalPrice} $ </li>
+                                <li class="list-group-item" id="total_`+count+`">Total: ${order.finalPrice} &euro; </li>
                                 <li class="list-group-item" id="ref_`+count+`">Ref: ${order.paymentReference}  </li>
 
                             </ul>
@@ -40,3 +40,4 @@ function find() {
             console.log(error)
         })
 }
+

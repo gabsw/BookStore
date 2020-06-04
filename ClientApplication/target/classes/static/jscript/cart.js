@@ -70,7 +70,7 @@ function getBy(){
                     </div>
                     <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
                         <div class="col-6 col-sm-6 col-md-6 text-md-right" id="price" style="padding-top: 5px">
-                        <h6><strong>${data.price}  &euro<span class="text-muted">x</span></strong></h6>
+                        <h6><strong>${data.price}  &euro; <span class="text-muted">x</span></strong></h6>
                     </div>
                     <div class="col-3 col-sm-3 col-md-3">
                         <div class="quantity" style="padding-top: 5px">

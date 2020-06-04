@@ -52,18 +52,19 @@ public class BuyerTestIT {
   public void bookDetails() {
     findBook1();
     driver.findElement(By.linkText("More Details")).click();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement find_title = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_title")));
     find_title.click();
-    assertThat(find_title.getText(), containsString("Book 1")); // FIX THIS TEST
+    assertThat(find_title.getText(), containsString("Book1")); // FIX THIS TEST
   }
+
   @Test
   public void bookToCart()  {
     findBook1();
+    WebDriverWait wait = new WebDriverWait(driver, 5);
     driver.findElement(By.linkText("Add To Cart")).click();
     driver.findElement(By.cssSelector("#goToCart > .fa")).click();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
-    WebElement findCartOrder = wait.until(ExpectedConditions.elementToBeClickable(By.id("product-name_0")));
+    WebElement findCartOrder = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("product-name_0")));
     findCartOrder.click();
     assertThat(driver.findElement(By.id("product-name_0")).getText(), is("Book1"));
   }
@@ -88,7 +89,7 @@ public class BuyerTestIT {
   public void buySuccess()  {
     findBook1();
     driver.findElement(By.linkText("Add To Cart")).click();
-    driver.findElement(By.id("goToCart")).click();
+    driver.findElement(By.cssSelector("#goToCart > .fa")).click();
     driver.findElement(By.id("address")).click();
     driver.findElement(By.id("address")).sendKeys("123 Main ST");
     driver.findElement(By.cssSelector(".btn-success")).click();
@@ -124,9 +125,9 @@ public class BuyerTestIT {
   public void findBook1 (){
     driver.findElement(By.id("findBook")).click();
     driver.findElement(By.id("findBook")).sendKeys("Book1");
-    WebDriverWait wait = new WebDriverWait(driver, 30);
-
-    WebElement book_title = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_title_1")));
-    book_title.click();
+    driver.findElement(By.id("book_title")).click();
+    driver.findElement(By.id("search_book")).click();
+    WebDriverWait wait = new WebDriverWait(driver, 5);
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("book_title_1")));
   }
 }

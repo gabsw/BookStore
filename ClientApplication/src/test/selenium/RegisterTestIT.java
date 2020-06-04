@@ -47,7 +47,7 @@ public class RegisterTestIT {
     driver.findElement(By.id("inputUsername")).sendKeys("l");
     driver.findElement(By.id("createAccount")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
+      WebDriverWait wait = new WebDriverWait(driver, 10);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Could not create, User either exists or missing an input!"));
@@ -64,7 +64,7 @@ public class RegisterTestIT {
     driver.findElement(By.id("inputPassword")).sendKeys("l");
     driver.findElement(By.id("createAccount")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
+      WebDriverWait wait = new WebDriverWait(driver, 10);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Could not create, User either exists or missing an input!"));

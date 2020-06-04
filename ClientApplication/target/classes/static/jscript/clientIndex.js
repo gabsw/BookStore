@@ -257,7 +257,6 @@ function searchBooksNoLogin() {
 }
 
 function getBooksNoLogin() {
-    while (true) {
         fetch(url + 'books/available',)
             .then(res => res.json())
             .then((data) => {
@@ -297,7 +296,7 @@ function getBooksNoLogin() {
             .catch((error) => {
                 console.log(error)
             })
-    }
+
 }
 
 function getBooks(){
