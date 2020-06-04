@@ -66,7 +66,7 @@ public class OrderTestIT {
     driver.findElement(By.linkText("Details/Invoice")).click();
     WebDriverWait wait = new WebDriverWait(driver, 30);
     wait.until(ExpectedConditions.elementToBeClickable(By.id("order_id")));
-   assertThat(driver.findElement(By.id("order_id")).getText(), containsString("Order #1"));
+   assertThat(driver.findElement(By.id("order_id")).getText(), containsString("Order"));
   }
 
   public void logIN() throws InterruptedException {
