@@ -58,16 +58,7 @@ public class BuyerTestIT {
     assertThat(find_title.getText(), containsString("Book1")); // FIX THIS TEST
   }
 
-  @Test
-  public void bookToCart()  {
-    findBook1();
-    WebDriverWait wait = new WebDriverWait(driver, 5);
-    driver.findElement(By.linkText("Add To Cart")).click();
-    driver.findElement(By.cssSelector("#goToCart > .fa")).click();
-    WebElement findCartOrder = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("product-name_0")));
-    findCartOrder.click();
-    assertThat(driver.findElement(By.id("product-name_0")).getText(), is("Book1"));
-  }
+
   @Test
   public void buyWithoutAddress() {
     findBook1();

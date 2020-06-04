@@ -3,6 +3,8 @@ import com.client.application.enduser.EndUserApplication;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
@@ -46,30 +48,28 @@ public class OrderTestIT {
     vars = new HashMap<>();
     driver.get("http://localhost:8080/login.html");
     logIN();
-
   }
+
   @After
   public void tearDown() {
     driver.quit();
   }
+
   @Test
   public void seeOrderAndItsDetails() {
     driver.findElement(By.id("name")).click();
     driver.findElement(By.id("menuOrders")).click();
     driver.findElement(By.cssSelector("h1")).click();
-    assertThat(driver.getTitle(), is("Best Of Books"));
+    assertThat(driver.findElement(By.cssSelector("h1")).getText(), is("Your Orders"));
     driver.findElement(By.id("order_1")).click();
     assertThat(driver.findElement(By.id("order_1")).getText(), is("Order 1"));
-    driver.findElement(By.id("total_1")).click();
-    assertThat(driver.findElement(By.id("total_1")).getText(), is("Total: 95 €"));
-    driver.findElement(By.cssSelector(".media")).click();
     driver.findElement(By.linkText("Details/Invoice")).click();
     WebDriverWait wait = new WebDriverWait(driver, 30);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#total_price > strong")));
-    assertThat(driver.findElement(By.cssSelector("#total_price > strong")).getText(), is("95 €"));
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("order_id")));
+   assertThat(driver.findElement(By.id("order_id")).getText(), containsString("Order #1"));
   }
 
-  public void logIN () throws InterruptedException {
+  public void logIN() throws InterruptedException {
     driver.findElement(By.id("inputUsername")).click();
     driver.findElement(By.id("inputUsername")).sendKeys("buyer1");
     driver.findElement(By.id("inputPassword")).sendKeys("pw");
@@ -85,4 +85,7 @@ public class OrderTestIT {
     Thread.sleep(1000);
     driver.findElement(By.id("signIn")).click();
   }
+
+
+
 }

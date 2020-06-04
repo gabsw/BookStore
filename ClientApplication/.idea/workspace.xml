@@ -3,20 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ec2e187d-4486-43e3-9f0d-05d7a55aa388" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/end-user.iml" beforeDir="false" afterPath="$PROJECT_DIR$/end-user.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/adminIndex.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/adminIndex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/addBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/addBook.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/clientIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/clientIndex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/orders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/createBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/createBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/jscript/updateStock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/jscript/updateStock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/selenium/BuyerTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/BuyerTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/selenium/LoginTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/LoginTestIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/selenium/RegisterTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/RegisterTestIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/selenium/OrderTestIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/OrderTestIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/selenium/SearchBookIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/selenium/SearchBookIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/clientIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/jscript/clientIndex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/jscript/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/jscript/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/selenium/BuyerTestIT.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/selenium/BuyerTestIT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/selenium/RegisterTestIT.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/selenium/RegisterTestIT.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +46,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -64,7 +59,7 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.selenium in end-user">
-    <configuration name="AdminTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderTestIT.seeOrderAndItsDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="end-user" />
       <extension name="coverage">
         <pattern>
@@ -73,13 +68,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="selenium" />
-      <option name="MAIN_CLASS_NAME" value="selenium.AdminTestIT" />
+      <option name="MAIN_CLASS_NAME" value="selenium.OrderTestIT" />
+      <option name="METHOD_NAME" value="seeOrderAndItsDetails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PublisherTestIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="end-user" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selenium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selenium" />
+      <option name="MAIN_CLASS_NAME" value="selenium.PublisherTestIT" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminTestIT.commission" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PublisherTestIT.revenues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="end-user" />
       <extension name="coverage">
         <pattern>
@@ -88,14 +99,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="selenium" />
-      <option name="MAIN_CLASS_NAME" value="selenium.AdminTestIT" />
-      <option name="METHOD_NAME" value="commission" />
+      <option name="MAIN_CLASS_NAME" value="selenium.PublisherTestIT" />
+      <option name="METHOD_NAME" value="revenues" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminTestIT.filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PublisherTestIT.total" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="end-user" />
       <extension name="coverage">
         <pattern>
@@ -104,23 +115,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="selenium" />
-      <option name="MAIN_CLASS_NAME" value="selenium.AdminTestIT" />
-      <option name="METHOD_NAME" value="filter" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AdminTestIT.total" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="end-user" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="selenium.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="selenium" />
-      <option name="MAIN_CLASS_NAME" value="selenium.AdminTestIT" />
+      <option name="MAIN_CLASS_NAME" value="selenium.PublisherTestIT" />
       <option name="METHOD_NAME" value="total" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -151,10 +146,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.selenium in end-user" />
-        <item itemvalue="JUnit.AdminTestIT.filter" />
-        <item itemvalue="JUnit.AdminTestIT.total" />
-        <item itemvalue="JUnit.AdminTestIT.commission" />
-        <item itemvalue="JUnit.AdminTestIT" />
+        <item itemvalue="JUnit.PublisherTestIT.total" />
+        <item itemvalue="JUnit.OrderTestIT.seeOrderAndItsDetails" />
+        <item itemvalue="JUnit.PublisherTestIT" />
+        <item itemvalue="JUnit.PublisherTestIT.revenues" />
       </list>
     </recent_temporary>
   </component>
@@ -180,6 +175,7 @@
       <workItem from="1591276696867" duration="1882000" />
       <workItem from="1591279877971" duration="468000" />
       <workItem from="1591280802188" duration="6351000" />
+      <workItem from="1591295626637" duration="5546000" />
     </task>
     <servers />
   </component>
@@ -207,38 +203,38 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="502" y="155" width="424" height="491" key="FileChooserDialogImpl/72.27.1294.741@72.27.1294.741" timestamp="1591192462235" />
-    <state width="1248" height="551" key="GridCell.Tab.0.bottom" timestamp="1591290132586">
+    <state width="1248" height="177" key="GridCell.Tab.0.bottom" timestamp="1591302369363">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="551" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591290132586" />
-    <state width="1248" height="551" key="GridCell.Tab.0.center" timestamp="1591290132586">
+    <state width="1248" height="177" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591302369363" />
+    <state width="1248" height="177" key="GridCell.Tab.0.center" timestamp="1591302369361">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="551" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1591290132586" />
-    <state width="1248" height="551" key="GridCell.Tab.0.left" timestamp="1591290132584">
+    <state width="1248" height="177" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1591302369361" />
+    <state width="1248" height="177" key="GridCell.Tab.0.left" timestamp="1591302369360">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="551" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1591290132584" />
-    <state width="1248" height="551" key="GridCell.Tab.0.right" timestamp="1591290132586">
+    <state width="1248" height="177" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1591302369360" />
+    <state width="1248" height="177" key="GridCell.Tab.0.right" timestamp="1591302369361">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="551" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1591290132586" />
-    <state width="1248" height="215" key="GridCell.Tab.1.bottom" timestamp="1591288993156">
+    <state width="1248" height="177" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1591302369361" />
+    <state width="1248" height="215" key="GridCell.Tab.1.bottom" timestamp="1591302288964">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="215" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591288993156" />
-    <state width="1248" height="215" key="GridCell.Tab.1.center" timestamp="1591288993155">
+    <state width="1248" height="215" key="GridCell.Tab.1.bottom/72.27.1294.741@72.27.1294.741" timestamp="1591302288964" />
+    <state width="1248" height="215" key="GridCell.Tab.1.center" timestamp="1591302288963">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="215" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1591288993155" />
-    <state width="1248" height="215" key="GridCell.Tab.1.left" timestamp="1591288993155">
+    <state width="1248" height="215" key="GridCell.Tab.1.center/72.27.1294.741@72.27.1294.741" timestamp="1591302288963" />
+    <state width="1248" height="215" key="GridCell.Tab.1.left" timestamp="1591302288962">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="215" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1591288993155" />
-    <state width="1248" height="215" key="GridCell.Tab.1.right" timestamp="1591288993155">
+    <state width="1248" height="215" key="GridCell.Tab.1.left/72.27.1294.741@72.27.1294.741" timestamp="1591302288962" />
+    <state width="1248" height="215" key="GridCell.Tab.1.right" timestamp="1591302288963">
       <screen x="72" y="27" width="1294" height="741" />
     </state>
-    <state width="1248" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1591288993155" />
+    <state width="1248" height="215" key="GridCell.Tab.1.right/72.27.1294.741@72.27.1294.741" timestamp="1591302288963" />
     <state width="1248" height="215" key="GridCell.Tab.2.bottom" timestamp="1591277448931">
       <screen x="72" y="27" width="1294" height="741" />
     </state>

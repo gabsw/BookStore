@@ -48,7 +48,7 @@ public class SearchBookIT {
     driver.findElement(By.id("findBook")).sendKeys("Book1");
     driver.findElement(By.id("book_title")).click();
     driver.findElement(By.id("search_book")).click();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_title_1")));
     selectPollutant.click();
     assertThat(driver.findElement(By.id("book_title_1")).getText(), is("Book1"));
@@ -58,13 +58,13 @@ public class SearchBookIT {
   @Test
   public void searchBookCategory() {
     driver.findElement(By.id("findBook")).click();
-    driver.findElement(By.id("findBook")).sendKeys("horror");
+    driver.findElement(By.id("findBook")).sendKeys("SciFi");
     driver.findElement(By.id("book_category")).click();
     driver.findElement(By.id("search_book")).click();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_category_1")));
     selectPollutant.click();
-    assertThat(driver.findElement(By.id("book_category_1")).getText(), containsString("horror"));
+    assertThat(driver.findElement(By.id("book_category_1")).getText(), containsString("SciFi"));
   }
 
   @Test
@@ -85,7 +85,7 @@ public class SearchBookIT {
     driver.findElement(By.id("findBook")).click();
     driver.findElement(By.id("findBook")).sendKeys("nothing");
     driver.findElement(By.id("search_book")).click();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("undefined")));
     selectPollutant.click();
     assertThat(driver.findElement(By.id("undefined")).getText(), is("Nothing Found !"));
