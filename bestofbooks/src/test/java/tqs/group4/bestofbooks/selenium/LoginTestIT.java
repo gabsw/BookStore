@@ -48,7 +48,7 @@ public class LoginTestIT {
     driver.findElement(By.id("inputPassword")).sendKeys("pw");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
+      WebDriverWait wait = new WebDriverWait(driver, 10);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Logged in!"));
@@ -65,7 +65,7 @@ public class LoginTestIT {
     driver.findElement(By.id("inputUsername")).sendKeys("l");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
+      WebDriverWait wait = new WebDriverWait(driver, 10);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       Assert.assertTrue(alert.getText().contains("Did not input either Username or Password!"));
@@ -82,7 +82,7 @@ public class LoginTestIT {
     driver.findElement(By.id("inputPassword")).sendKeys("w");
     driver.findElement(By.id("signIn")).click();
     try {
-      WebDriverWait wait = new WebDriverWait(driver, 2);
+      WebDriverWait wait = new WebDriverWait(driver, 10);
       wait.until(ExpectedConditions.alertIsPresent());
       Alert alert = driver.switchTo().alert();
       System.out.println(alert.getText());
