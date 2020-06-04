@@ -58,13 +58,13 @@ public class SearchBookIT {
   @Test
   public void searchBookCategory() {
     driver.findElement(By.id("findBook")).click();
-    driver.findElement(By.id("findBook")).sendKeys("horror");
+    driver.findElement(By.id("findBook")).sendKeys("SciFi");
     driver.findElement(By.id("book_category")).click();
     driver.findElement(By.id("search_book")).click();
     WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement selectPollutant = wait.until(ExpectedConditions.elementToBeClickable(By.id("book_category_1")));
     selectPollutant.click();
-    assertThat(driver.findElement(By.id("book_category_1")).getText(), containsString("horror"));
+    assertThat(driver.findElement(By.id("book_category_1")).getText(), containsString("SciFi"));
   }
 
   @Test
