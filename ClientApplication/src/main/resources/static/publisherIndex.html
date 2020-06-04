@@ -11,7 +11,7 @@
     <script src="jscript/config.js"></script>
 
 </head>
-<body>
+<body onload="{getRevenues(getPubName()),getRevenuesTotal(getPubName())}">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="publisherIndex.html">
         <img src="images/Logo-removebg-preview.png" width="100"/>
@@ -25,10 +25,11 @@
                     <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
                     </button>
                     <div aria-labelledby="name" class="dropdown-menu">
-                        <a class="dropdown-item" href="Stock.html">See Stock</a>
-                        <a class="dropdown-item" href="addBook.html">Add Book</a>
-                        <a class="dropdown-item" href="updateStock.html">Update Stock</a>
-                        <a class="dropdown-item" href="publisherIndex.html">Revenues</a>
+                        <a class="dropdown-item" id="seeStock" href="Stock.html">See Stock</a>
+                        <a class="dropdown-item" id="addBook" href="addBook.html">Add Book</a>
+
+                        <a class="dropdown-item" id="updateStock" href="updateStock.html">Update Stock</a>
+                        <a class="dropdown-item" id="seeRevenue" href="publisherIndex.html">Revenues</a>
                         <a class="dropdown-item" onclick="clearUser()"  href="login.html">LogOut</a>
                     </div>
                 </li>
@@ -93,14 +94,7 @@
 
 
 <script type="text/javascript">
-    function start() {
-        getUserInfo();
-        let name = getPubName() ;
-        getRevenues(name);
-        getRevenuesTotal(name);
-    }
-    document.onload = start();
-
+    getUserInfo();
 </script>
 </body>
 </html>
