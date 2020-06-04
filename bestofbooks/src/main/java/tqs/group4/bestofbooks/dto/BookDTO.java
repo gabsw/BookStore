@@ -1,6 +1,7 @@
 package tqs.group4.bestofbooks.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -128,66 +129,15 @@ public class BookDTO implements Serializable{
 
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + quantity;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		BookDTO bookDTO = (BookDTO) o;
+		return Objects.equals(isbn, bookDTO.isbn);
 	}
-
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BookDTO other = (BookDTO) obj;
-		if (author == null) {
-			if (other.author != null)
-				return false;
-		}
-		else if (!author.equals(other.author))
-			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		}
-		else if (!category.equals(other.category))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		}
-		else if (!description.equals(other.description))
-			return false;
-		if (isbn == null) {
-			if (other.isbn != null)
-				return false;
-		}
-		else if (!isbn.equals(other.isbn))
-			return false;
-		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-			return false;
-		if (quantity != other.quantity)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		}
-		else if (!title.equals(other.title))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(isbn);
 	}
-
 }

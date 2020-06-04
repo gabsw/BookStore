@@ -21,22 +21,6 @@ public class BookTests {
                 "Postmodernism", "Little, Brown");
     }
 
-    // TODO: One of these tests is affecting the others. Why?
-
-//    @Test
-//    void checkEquals() {
-//        EqualsVerifier.forClass(Book.class).usingGetClass().suppress(Warning.NONFINAL_FIELDS)
-//                      .withPrefabValues(BookOrder.class, BookOrderMocks.bookOrder1, BookOrderMocks.bookOrder2).verify();
-//    }
-//
-//    @Test
-//    void checkHashCode() {
-//        assertAll("hashCode",
-//                () -> assertEquals(BookMocks.infiniteJest.hashCode(), equalBook.hashCode()),
-//                () -> assertNotEquals(BookMocks.infiniteJest.hashCode(), BookMocks.onTheRoad.hashCode())
-//        );
-//    }
-
     @Test
     void checkGetIsbn() {
         assertEquals("9780316921176", BookMocks.infiniteJest.getIsbn());

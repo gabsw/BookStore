@@ -1,5 +1,5 @@
 function account() {
-    let basicAuth = document.getElementById("inputEmail").value + ':'+ document.getElementById("inputPassword").value ;
+    let basicAuth = document.getElementById("inputUsername").value + ':'+ document.getElementById("inputPassword").value ;
     let encoded = btoa(basicAuth);
     let authenticationHeader = 'Basic ' + encoded ;
     askUser(authenticationHeader);
@@ -19,15 +19,19 @@ function askUser(authenticationHeader) {
             json
         }))
             .then(({ headers, status, json }) => {
-                if (status == 200) {
-                    alert("Logged in! ")
+                if (status === 200) {
+                    alert("Logged in!");
                     getUser(json);
                     setCurrentToken(headers.get('x-auth-token'));
                 }
-               // console.log(headers.get('x-auth-token'))
+                else if (status === 404) {
+                    alert("User not Found!");
+                }
+                else if (status === 403) {
+                    alert("Did not input either Username or Password!");
+                }
             }))
 }
-//   return arr;
 
 function getUser(json) {
     console.log('JSON format :' + JSON.stringify(json));
@@ -43,13 +47,4 @@ function getUser(json) {
     else {
         alert("Not defined!");
     }
-}
-
-function wait(ms) {
-    var d = new Date();
-    var d2 = null;
-    do {
-        d2 = new Date();
-    }
-    while (d2 - d < ms);
 }

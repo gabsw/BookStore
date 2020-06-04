@@ -11,9 +11,9 @@
     <script src="jscript/config.js"></script>
 
 </head>
-<body>
+<body onload="{getRevenues(getPubName()),getRevenuesTotal(getPubName())}">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="adminIndex.html">
+    <a class="navbar-brand" href="publisherIndex.html">
         <img src="images/Logo-removebg-preview.png" width="100"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,12 +21,15 @@
         </ul>
         <div class="pull-right">
             <ul class="nav pull-right">
-                <li class="dropdown">
+                <li class="dropdown dropleft">
                     <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
                     </button>
                     <div aria-labelledby="name" class="dropdown-menu">
-                        <a class="dropdown-item" href="createStock.html"> <i class="fa fa-plus"></i> Create Order</a>
-                        <a class="dropdown-item" href="publisherIndex.html"> All Orders</a>
+                        <a class="dropdown-item" id="seeStock" href="Stock.html">See Stock</a>
+                        <a class="dropdown-item" id="addBook" href="addBook.html">Add Book</a>
+
+                        <a class="dropdown-item" id="updateStock" href="updateStock.html">Update Stock</a>
+                        <a class="dropdown-item" id="seeRevenue" href="publisherIndex.html">Revenues</a>
                         <a class="dropdown-item" onclick="clearUser()"  href="login.html">LogOut</a>
                     </div>
                 </li>
@@ -38,7 +41,7 @@
 
 
 <div class="container py-5">
-    <div class="text-center"><h1>Your Comissions</h1></div>
+    <div class="text-center"><h1>Revenue</h1></div>
     <p></p>
     <p></p>
     <div class="row" >
@@ -83,19 +86,7 @@
         </div>
     </div>
 </div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-</nav>
+
 
 <script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -103,13 +94,7 @@
 
 
 <script type="text/javascript">
-    function start() {
-        getUserInfo();
-        getRevenues();
-        getRevenuesTotal();
-    }
-    document.onload = start();
-
+    getUserInfo();
 </script>
 </body>
 </html>

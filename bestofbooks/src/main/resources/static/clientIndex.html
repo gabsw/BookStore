@@ -21,17 +21,17 @@
         </ul>
         <div class="pull-right">
             <ul class="nav pull-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
+                <li class="nav-item" id="cart_nav">
+                    <a class="nav-link" id="goToCart" href="Cart.html"><i class="fa fa-shopping-cart"></i></a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown dropleft">
                     <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="name" type="button">
 
                     </button>
                     <div aria-labelledby="name" class="dropdown-menu">
-                        <a class="dropdown-item" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
-                        <a class="dropdown-item" href="orders.html">Your Orders</a>
-                        <a class="dropdown-item" onclick="clearUser()" href="login.html">LogOut</a>
+                        <a class="dropdown-item" id="menuCart" href="Cart.html"><i class="fa fa-shopping-cart"></i> Your Cart</a>
+                        <a class="dropdown-item" id="menuOrders" href="orders.html">Your Orders</a>
+                        <a class="dropdown-item"  onclick="clearUser()" href="login.html">LogOut</a>
                     </div>
                 </li>
 
@@ -42,7 +42,7 @@
 
 
 <div class="container py-5">
-    <div class="text-center"><h1>Explore Our Books</h1></div>
+    <div class="text-center"><h1> Explore Our Books</h1></div>
     <p></p>
     <div class="row">
         <div class="input-group">
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <button class="btn-save btn btn-primary " onclick="searchBooks()">Search</button>
+        <button class="btn-save btn btn-primary " id="search_book" onclick="searchBooks()">Search</button>
 
     </div>
         <!--end of col-->
@@ -110,19 +110,7 @@
 </div>
 
 <p></p>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-</nav>
+
 
 
 <script crossorigin="anonymous" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>

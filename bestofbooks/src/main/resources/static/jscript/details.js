@@ -17,7 +17,7 @@ window.onload = function getByIsbn(){
                 document.getElementById('editor').innerHTML = "Editor: " + editor;
                 document.getElementById('category').innerHTML = "Category: " + category;
                 document.getElementById('author').innerHTML = "Author: " + author;
-                document.getElementById('price').innerHTML = "Price: " + price;
+                document.getElementById('price').innerHTML = "Price: " + price + ' &euro;';
                 document.getElementById('book_title').innerHTML = book_title;
                 document.getElementById('description').innerHTML = book_description;
 
