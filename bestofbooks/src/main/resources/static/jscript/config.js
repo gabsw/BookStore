@@ -1,4 +1,4 @@
-let url = "http://192.168.160.70:8080/api/";
+let url = "/api/";
 
 
 function getCurrentUser() {
