@@ -25,8 +25,6 @@ public class Order {
     private Buyer buyer;
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<BookOrder> bookOrders;
-//    @OneToMany(mappedBy = "ordersByOrderId", fetch = FetchType.LAZY)
-//    private Collection<Commission> commissionsById;
 
     public Order() {
     }
@@ -70,8 +68,4 @@ public class Order {
     public void addBookOrder(BookOrder bookOrder) {
         this.bookOrders.add(bookOrder);
     }
-
-//    public Collection<Commission> getCommissionsById() {
-//        return commissionsById;
-//    }
 }
