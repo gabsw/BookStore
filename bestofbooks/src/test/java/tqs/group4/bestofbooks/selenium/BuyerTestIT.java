@@ -54,7 +54,7 @@ public class BuyerTestIT {
   }
 
 
-  @Test
+   /*@Test
   public void buyWithoutAddress() {
     findBook1();
     driver.findElement(By.linkText("Add To Cart")).click();
@@ -71,7 +71,7 @@ public class BuyerTestIT {
       System.err.println(e);
     }
   }
-  /*
+
   @Test
   public void buySuccess()  {
     findBook1();

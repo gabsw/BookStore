@@ -43,13 +43,16 @@ public class PublisherTestIT {
     driver.quit();
   }
 
-/*  @Test
+ @Test
   public void seeStock() {
     driver.findElement(By.id("name")).click();
     driver.findElement(By.id("seeStock")).click();
-    driver.findElement(By.cssSelector("h1")).click();
+   WebDriverWait wait = new WebDriverWait(driver, 10);
+   wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("h1")));
+   driver.findElement(By.cssSelector("h1")).click();
     assertThat(driver.findElement(By.cssSelector("h1")).getText(), is("Your Stock"));
-  }*/
+  }
+
   @Test
   public void revenues() {
     driver.findElement(By.cssSelector("h1")).click();
@@ -111,7 +114,7 @@ public class PublisherTestIT {
    } catch (Exception e) {
      System.err.println(e);
    }
- }*/
+ }
   @Test
   public void badUpdate() {
     driver.findElement(By.id("name")).click();
@@ -149,7 +152,7 @@ public class PublisherTestIT {
     } catch (Exception e) {
       System.err.println(e);
     }
-  }
+  }*/
 
   public void logIN () throws InterruptedException {
     driver.findElement(By.id("inputUsername")).click();
